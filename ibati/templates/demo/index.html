@@ -1,98 +1,474 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>西安交通大学 生物医学分析技术与仪器研究所</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta charset="utf-8">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='py.png') }}">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>西安交通大学生物医学分析技术与仪器研究所</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
 
-    <link href="../../static/semantic-ui/semantic.css" rel="stylesheet" type="text/css">
-</head>
-<body>
-    
+        <link rel="stylesheet" href="../../static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../static/css/icomoon-social.css">
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,600,800' rel='stylesheet' type='text/css'>
 
-    <div class="ui page centered grid">
+        <link rel="stylesheet" href="../../static/css/leaflet.css" />
+		<!--[if lte IE 8]>
+		    <link rel="stylesheet" href="../../static/css/leaflet.ie.css" />
+		<![endif]-->
+		<link rel="stylesheet" href="../../static/css/main.css">
 
-        <div class="ui centered large leaderboard test ad" data-text="Large Leaderboard"></div>
-
-        <div class="row">
-            <div class="ui inverted menu">
-                <a class="active item">首页</a>
-                <a class="item">新闻</a>
-                <a class="item">通知公告</a>
-                <a class="item">学术报告</a>
-                <a class="item">研究方向</a>
-                <a class="item">成员组成</a>
-
-                <div class="ui dropdown item">研究成果<i class="dropdown icon"></i>
-                    <div class="menu">
-                        <a class="item">承担项目</a>
-                        <a class="item">文章</a>
-                        <a class="item">专利</a>
-                    </div>
-                </div>
-
-                <a class="item">国际合作</a>
-                <a class="item">教学工作</a>
-                <a class="item">相关链接</a>
-                <a class="item">联系我们</a>
-
-            </div>
-        </div>
-
-        <div class="six wide column">
-            <div class="ui raised segment">
-                
-                <h5>中心简介</h5>
-                <p>生物医学分析技术及仪器研究所是根据国家十一五发展规划和生命科学与技术学院整体发展需要，通过学院整合于2007年6月15日成立。目标是充分发挥学科交叉的作用，在生物医学分析技术与仪器的基础理论研究、应用研究、人才培养、促进相应技术转化为生产力等方面取得显著进展。该所现有教职工12人，其中教授5人，副教授3 人和高级工程师1人，讲师3位。目前承担和完成了国家自然科学基金近30项（包括重点项目、国际合作）、国家科技部863项目、国家重大科学仪器设备开发项目、陕西省自然科学基金项目、西安市科技攻关项目、横向课题数十项等。目前的研究方向有生物医学光子学影像与光谱分析技术、基于多信息融合的生物荧光探针和光学传感器、先进敏感分析技术及仪器等。目前研究的重点项目包括有：基于多光谱荧光成像的在体三维光学标测系统、基于新型光穿孔技术的纳米尺度细胞膜微手术研究、金纳米棒靶向的激光细胞微手术及其机理研究、纳米材料的界观和微观效应及机理、基于纳米金探针的肿瘤细胞示踪等研究。研究所现有博士和硕士研究生80多名。</p>
-            </div>
-        </div>
-        <div class="six wide column">
-            <div class="ui segment">
-                <a class="ui right ribbon label">Label</a>
-                <p></p>
-                <a class="ui teal right ribbon label">Label</a>
-                <p></p>
-            </div>
-        </div>
-        <div class="four wide column"></div>
-
-        <hr />
-
-        <div class="row">
-            <div class="ui horizontal divided link list">
-              <a class="item">Link1</a>
-              <a class="item">Link2</a>
-              <a class="item">Link3</a>
-              <a class="item">Link4</a>
-            </div>
-        </div>
-        <div class="sixteen wide column">
-            <div class="ui center aligned basic segment">
-                <p>&copy; 2015 ibati.xjtu.edu.cn, all rights reserved</p>
-            </div>
-            
-        </div>
-      
-    </div>
-
+        <script src="../../static/js/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
         
 
-</div>
+        <!-- Navigation & Logo-->
+        <div class="mainmenu-wrapper">
+	        <div class="container">
+	        	<div class="menuextras">
+					<div class="extras">
+						<ul>
+							<li class="shopping-cart-items"><i class="glyphicon glyphicon-shopping-cart icon-white"></i> <a href="page-shopping-cart.html"><b>3 items</b></a></li>
+							<li>
+								<div class="dropdown choose-country">
+									<a class="#" data-toggle="dropdown" href="#"><img src="../../static/img/flags/gb.png" alt="Great Britain"> UK</a>
+									<ul class="dropdown-menu" role="menu">
+										<li role="menuitem"><a href="#"><img src="../../static/img/flags/us.png" alt="United States"> US</a></li>
+										<li role="menuitem"><a href="#"><img src="../../static/img/flags/de.png" alt="Germany"> DE</a></li>
+										<li role="menuitem"><a href="#"><img src="../../static/img/flags/es.png" alt="Spain"> ES</a></li>
+									</ul>
+								</div>
+							</li>
+			        		<li><a href="page-login.html">管理员入口</a></li>
+			        	</ul>
+					</div>
+		        </div>
+		        <nav id="mainmenu" class="mainmenu">
+					<ul>
+						<li class="logo-wrapper"><a href="index.html"><img src="../../static/img/demo/201212281455451010.png" alt="西安交通大学生物医学分析技术与仪器研究所"></a></li>
+						<li class="active">
+							<a href="index.html">首页</a>
+						</li>
+						<li>
+                            <a href="page-team.html">成员组成</a>
+                        </li>
+                        <li>
+                            <a href="features.html">相关链接</a>
+                        </li>
+                        <li>
+                            <a href="page-contact-us.html">联系我们</a>
+                        </li>
+						<li class="has-submenu">
+							<a href="#">Pages +</a>
+							<div class="mainmenu-submenu">
+								<div class="mainmenu-submenu-inner"> 
+									<div>
+										<h4>Homepage</h4>
+										<ul>
+											<li><a href="index.html">Homepage (Sample 1)</a></li>
+											<li><a href="page-homepage-sample.html">Homepage (Sample 2)</a></li>
+										</ul>
+										<h4>Services & Pricing</h4>
+										<ul>
+											<li><a href="page-services-1-column.html">Services/Features (Rows)</a></li>
+											<li><a href="page-services-3-columns.html">Services/Features (3 Columns)</a></li>
+											<li><a href="page-services-4-columns.html">Services/Features (4 Columns)</a></li>
+											<li><a href="page-pricing.html">Pricing Table</a></li>
+										</ul>
+										<h4>Team & Open Vacancies</h4>
+										<ul>
+											<li><a href="page-team.html">Our Team</a></li>
+											<li><a href="page-vacancies.html">Open Vacancies (List)</a></li>
+											<li><a href="page-job-details.html">Open Vacancies (Job Details)</a></li>
+										</ul>
+									</div>
+									<div>
+										<h4>Our Work (Portfolio)</h4>
+										<ul>
+											<li><a href="page-portfolio-2-columns-1.html">Portfolio (2 Columns, Option 1)</a></li>
+											<li><a href="page-portfolio-2-columns-2.html">Portfolio (2 Columns, Option 2)</a></li>
+											<li><a href="page-portfolio-3-columns-1.html">Portfolio (3 Columns, Option 1)</a></li>
+											<li><a href="page-portfolio-3-columns-2.html">Portfolio (3 Columns, Option 2)</a></li>
+											<li><a href="page-portfolio-item.html">Portfolio Item (Project) Description</a></li>
+										</ul>
+										<h4>General Pages</h4>
+										<ul>
+											<li><a href="page-about-us.html">About Us</a></li>
+											<li><a href="page-contact-us.html">Contact Us</a></li>
+											<li><a href="page-faq.html">Frequently Asked Questions</a></li>
+											<li><a href="page-testimonials-clients.html">Testimonials & Clients</a></li>
+											<li><a href="page-events.html">Events</a></li>
+											<li><a href="page-404.html">404 Page</a></li>
+											<li><a href="page-sitemap.html">Sitemap</a></li>
+											<li><a href="page-login.html">Login</a></li>
+											<li><a href="page-register.html">Register</a></li>
+											<li><a href="page-password-reset.html">Password Reset</a></li>
+											<li><a href="page-terms-privacy.html">Terms & Privacy</a></li>
+											<li><a href="page-coming-soon.html">Coming Soon</a></li>
+										</ul>
+									</div>
+									<div>
+										<h4>eShop</h4>
+										<ul>
+											<li><a href="page-products-3-columns.html">Products listing (3 Columns)</a></li>
+											<li><a href="page-products-4-columns.html">Products listing (4 Columns)</a></li>
+											<li><a href="page-products-slider.html">Products Slider</a></li>
+											<li><a href="page-product-details.html">Product Details</a></li>
+											<li><a href="page-shopping-cart.html">Shopping Cart</a></li>
+										</ul>
+										<h4>Blog</h4>
+										<ul>
+											<li><a href="page-blog-posts.html">Blog Posts (List)</a></li>
+											<li><a href="page-blog-post-right-sidebar.html">Blog Single Post (Right Sidebar)</a></li>
+											<li><a href="page-blog-post-left-sidebar.html">Blog Single Post (Left Sidebar)</a></li>
+											<li><a href="page-news.html">Latest & Featured News</a></li>
+										</ul>
+									</div>
+								</div><!-- /mainmenu-submenu-inner -->
+							</div><!-- /mainmenu-submenu -->
+						</li>
+						<li>
+							<a href="credits.html">Credits</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+		</div>
 
+        <!-- Homepage Slider -->
+        <div class="homepage-slider">
+        	<div id="sequence">
+				<ul class="sequence-canvas">
+					<!-- Slide 1 -->
+					<li class="bg4">
+						<!-- Slide Title -->
+						<h2 class="title">心肌细胞实验</h2>
+						<!-- Slide Text -->
+						<h3 class="subtitle">心脏主要有心肌细胞和间质细胞构成，心肌细胞体积大（约占心脏体积3/4）但数量少（约占心脏细胞数量），而剩余心脏空间几乎由间质细胞填补；心室的心肌细胞接受来自窦房结的兴奋，会引起心肌细胞内膜电位的变化，产导致心肌细胞钙离子浓度变化；心肌细胞钙离子浓度变化又会影响心肌细胞收缩力的改变。这样心肌细胞电学特性和力学特性就耦合起来。但由于心血管疾病会改变力学或电学特性，因此这就很有研究的价值。</h3>
+						<!-- Slide Image -->
+						<img class="slide-img" src="../../static/img/demo/20134210431480357.jpg" alt="心肌细胞实验" />
+                        <!-- <img class="slide-img" src="../../static/img/homepage-slider/slide1.png" alt="Slide 1" /> -->
+					</li>
+					<!-- End Slide 1 -->
+					<!-- Slide 2 -->
+					<li class="bg3">
+						<!-- Slide Title -->
+						<h2 class="title">皮肤热疼痛实验</h2>
+						<!-- Slide Text -->
+						<h3 class="subtitle"> 皮肤、牙齿等生物组织具有类似于工程复合材料的非均质多层微结构， 始终处于热-力环境之中， 外界的热-力刺激通过其微结构变化和疼痛等电生理行为影响其功能。深入研究外界伤害性热-力刺激诱发组织疼痛的机理及其量化一直是该领域的热点和难题。我们团队首次发现热刺激下组织的疼痛水平不仅取决于温度变化，而且受温度变化诱发的热应力的影响，力学因素在组织疼痛中发挥着关键作用，由此建立了热-力-电（疼痛）多场耦合行为理论，为有效指导激光、微波等临床热疗技术及镇痛方案提供了理论依据。</h3>
+						<!-- Slide Image -->
+						<img class="slide-img" src="../../static/img/demo/201342121154745276.png" alt="皮肤热疼痛实验" />
+                        <!-- <img class="slide-img" src="../../static/img/homepage-slider/slide2.png" alt="Slide 2" /> -->
+					</li>
+					<!-- End Slide 2 -->
+					<!-- Slide 3 -->
+					<li class="bg1">
+						<!-- Slide Title -->
+						<h2 class="title">Feature Rich</h2>
+						<!-- Slide Text -->
+						<h3 class="subtitle">Huge amount of components and over 30 sample pages!</h3>
+						<!-- Slide Image -->
+						<img class="slide-img" src="../../static/img/homepage-slider/slide3.png" alt="Slide 3" />
+					</li>
+					<!-- End Slide 3 -->
+				</ul>
+				<div class="sequence-pagination-wrapper">
+					<ul class="sequence-pagination">
+						<li>1</li>
+						<li>2</li>
+						<li>3</li>
+					</ul>
+				</div>
+			</div>
+        </div>
+        <!-- End Homepage Slider -->
 
-<script src="../../static/jquery/jquery.js"></script>
-<script src="../../static/semantic-ui/semantic.js"></script>
+		<!-- Press Coverage -->
+        <div class="section">
+	    	<div class="container">
+				<div class="row">
+					<div class="col-md-4 col-sm-6">
+						<div class="in-press press-wired">
+							<a href="#">Morbi eleifend congue elit nec sagittis. Praesent aliquam lobortis tellus, nec consequat vitae</a>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="in-press press-mashable">
+							<a href="#">Morbi eleifend congue elit nec sagittis. Praesent aliquam lobortis tellus, nec consequat vitae</a>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<div class="in-press press-techcrunch">
+							<a href="#">Morbi eleifend congue elit nec sagittis. Praesent aliquam lobortis tellus, nec consequat vitae</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Press Coverage -->
 
-<!--[if lt IE 9]>
-<script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
-<![endif]-->
+		<!-- Services -->
+        <div class="section">
+	        <div class="container">
+	        	<div class="row">
+	        		<div class="col-md-4 col-sm-6">
+	        			<div class="service-wrapper">
+		        			<img src="../../static/img/service-icon/diamond.png" alt="Service 1">
+		        			<h3>Aliquam in adipiscing</h3>
+		        			<p>Praesent rhoncus mauris ac sollicitudin vehicula. Nam fringilla turpis turpis, at posuere turpis aliquet sit amet condimentum</p>
+		        			<a href="#" class="btn">Read more</a>
+		        		</div>
+	        		</div>
+	        		<div class="col-md-4 col-sm-6">
+	        			<div class="service-wrapper">
+		        			<img src="../../static/img/service-icon/ruler.png" alt="Service 2">
+		        			<h3>Curabitur mollis</h3>
+		        			<p>Suspendisse eget libero mi. Fusce ligula orci, vulputate nec elit ultrices, ornare faucibus orci. Aenean lectus sapien, vehicula</p>
+		        			<a href="#" class="btn">Read more</a>
+		        		</div>
+	        		</div>
+	        		<div class="col-md-4 col-sm-6">
+	        			<div class="service-wrapper">
+		        			<img src="../../static/img/service-icon/box.png" alt="Service 3">
+		        			<h3>Vivamus mattis</h3>
+		        			<p>Phasellus posuere et nisl ac commodo. Nulla facilisi. Sed tincidunt bibendum cursus. Aenean vulputate aliquam risus rutrum scelerisque</p>
+		        			<a href="#" class="btn">Read more</a>
+		        		</div>
+	        		</div>
+	        	</div>
+	        </div>
+	    </div>
+	    <!-- End Services -->
 
-<script>
-    $('.ui.dropdown').dropdown();
-</script>
+		<!-- Call to Action Bar -->
+	    <div class="section section-white">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="calltoaction-wrapper">
+							<h3>It's a free multipurpose Bootstrap 3 template!</h3> <a href="http://www.dragdropsite.com" class="btn btn-orange">Download here!</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- End Call to Action Bar -->
 
-</body>
+		<!-- Testimonials -->
+	    <div class="section">
+			<div class="container">
+				<h2>Testimonials</h2>
+				<div class="row">
+					<!-- Testimonial -->
+					<div class="testimonial col-md-4 col-sm-6">
+						<!-- Author Photo -->
+						<div class="author-photo">
+							<img src="../../static/img/user1.jpg" alt="Author 1">
+						</div>
+						<div class="testimonial-bubble">
+							<blockquote>
+								<!-- Quote -->
+								<p class="quote">
+		                            "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut."
+                        		</p>
+                        		<!-- Author Info -->
+                        		<cite class="author-info">
+                        			- Name Surname,<br>Managing Director at <a href="#">Some Company</a>
+                        		</cite>
+                        	</blockquote>
+                        	<div class="sprite arrow-speech-bubble"></div>
+                        </div>
+                    </div>
+                    <!-- End Testimonial -->
+                    <div class="testimonial col-md-4 col-sm-6">
+						<div class="author-photo">
+							<img src="../../static/img/user5.jpg" alt="Author 2">
+						</div>
+						<div class="testimonial-bubble">
+							<blockquote>
+								<p class="quote">
+		                            "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo."
+                        		</p>
+                        		<cite class="author-info">
+                        			- Name Surname,<br>Managing Director at <a href="#">Some Company</a>
+                        		</cite>
+                        	</blockquote>
+                        	<div class="sprite arrow-speech-bubble"></div>
+                        </div>
+                    </div>
+					<div class="testimonial col-md-4 col-sm-6">
+						<div class="author-photo">
+							<img src="../../static/img/user2.jpg" alt="Author 3">
+						</div>
+						<div class="testimonial-bubble">
+							<blockquote>
+								<p class="quote">
+		                            "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+                        		</p>
+                        		<cite class="author-info">
+                        			- Name Surname,<br>Managing Director at <a href="#">Some Company</a>
+                        		</cite>
+                        	</blockquote>
+                        	<div class="sprite arrow-speech-bubble"></div>
+                        </div>
+                    </div>
+				</div>
+			</div>
+	    </div>
+	    <!-- End Testimonials -->
+
+		<!-- Pricing Table -->
+	    <div class="section">
+	    	<div class="container">
+	    		<h2>Pricing</h2>
+	        	<div class="row">
+	        		<!-- Pricing Plans Wrapper -->
+	        		<div class="pricing-wrapper col-md-12">
+        				<!-- Pricing Plan -->
+						<div class="pricing-plan">
+							<!-- Pricing Plan Ribbon -->
+							<div class="ribbon-wrapper">
+								<div class="price-ribbon ribbon-red">Popular</div>
+							</div>
+							<h2 class="pricing-plan-title">Starter</h2>
+							<p class="pricing-plan-price">FREE</p>
+							<!-- Pricing Plan Features -->
+							<ul class="pricing-plan-features">
+								<li><strong>1</strong> user</li>
+								<li><strong>Unlimited</strong> projects</li>
+								<li><strong>2GB</strong> storage</li>
+							</ul>
+							<a href="index.html" class="btn">Order Now</a>
+						</div>
+						<!-- End Pricing Plan -->
+					    <div class="pricing-plan">
+							<h2 class="pricing-plan-title">Advanced</h2>
+							<p class="pricing-plan-price">$49<span>/mo</span></p>
+								<ul class="pricing-plan-features">
+									<li><strong>10</strong> users</li>
+									<li><strong>Unlimited</strong> projects</li>
+									<li><strong>20GB</strong> storage</li>
+								</ul>
+							<a href="index.html" class="btn">Order Now</a>
+					    </div>
+					    <!-- Promoted Pricing Plan -->
+					    <div class="pricing-plan pricing-plan-promote">
+								<h2 class="pricing-plan-title">Premium</h2>
+								<p class="pricing-plan-price">$99<span>/mo</span></p>
+								<ul class="pricing-plan-features">
+									<li><strong>Unlimited</strong> users</li>
+									<li><strong>Unlimited</strong> projects</li>
+									<li><strong>100GB</strong> storage</li>
+								</ul>
+							<a href="index.html" class="btn">Order Now</a>
+					    </div>
+					    <div class="pricing-plan">
+					    	<!-- Pricing Plan Ribbon -->
+							<div class="ribbon-wrapper">
+								<div class="price-ribbon ribbon-green">New</div>
+							</div>
+							<h2 class="pricing-plan-title">Mega</h2>
+							<p class="pricing-plan-price">$199<span>/mo</span></p>
+								<ul class="pricing-plan-features">
+									<li><strong>Unlimited</strong> users</li>
+									<li><strong>Unlimited</strong> projects</li>
+									<li><strong>100GB</strong> storage</li>
+								</ul>
+							<a href="index.html" class="btn">Order Now</a>
+					    </div>
+	        		</div>
+	        		<!-- End Pricing Plans Wrapper -->
+	        	</div>
+	    	</div>
+	    </div>
+	    <!-- End Pricing Table -->
+
+		<!-- Our Clients -->
+	    <div class="section">
+	    	<div class="container">
+	    		<h2>Our Clients</h2>
+				<div class="clients-logo-wrapper text-center row">
+					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="../../static/img/logos/canon.png" alt="Client Name"></a></div>
+					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="../../static/img/logos/cisco.png" alt="Client Name"></a></div>
+					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="../../static/img/logos/dell.png" alt="Client Name"></a></div>
+					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="../../static/img/logos/ea.png" alt="Client Name"></a></div>
+					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="../../static/img/logos/ebay.png" alt="Client Name"></a></div>
+					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="../../static/img/logos/facebook.png" alt="Client Name"></a></div>
+					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="../../static/img/logos/google.png" alt="Client Name"></a></div>
+					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="../../static/img/logos/hp.png" alt="Client Name"></a></div>
+					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="../../static/img/logos/microsoft.png" alt="Client Name"></a></div>
+					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="../../static/img/logos/mysql.png" alt="Client Name"></a></div>
+					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="../../static/img/logos/sony.png" alt="Client Name"></a></div>
+					<div class="col-lg-1 col-md-1 col-sm-3 col-xs-6"><a href="#"><img src="../../static/img/logos/yahoo.png" alt="Client Name"></a></div>
+				</div>
+			</div>
+	    </div>
+	    <!-- End Our Clients -->
+
+	    <!-- Footer -->
+	    <div class="footer">
+	    	<div class="container">
+		    	<div class="row">
+		    		<div class="col-footer col-md-3 col-xs-6">
+		    			<h3>Our Latest Work</h3>
+		    			<div class="portfolio-item">
+							<div class="portfolio-image">
+								<a href="page-portfolio-item.html"><img src="../../static/img/portfolio6.jpg" alt="Project Name"></a>
+							</div>
+						</div>
+		    		</div>
+		    		<div class="col-footer col-md-3 col-xs-6">
+		    			<h3>Navigate</h3>
+		    			<ul class="no-list-style footer-navigate-section">
+		    				<li><a href="page-blog-posts.html">Blog</a></li>
+		    				<li><a href="page-portfolio-3-columns-2.html">Portfolio</a></li>
+		    				<li><a href="page-products-3-columns.html">eShop</a></li>
+		    				<li><a href="page-services-3-columns.html">Services</a></li>
+		    				<li><a href="page-pricing.html">Pricing</a></li>
+		    				<li><a href="page-faq.html">FAQ</a></li>
+		    			</ul>
+		    		</div>
+		    		
+		    		<div class="col-footer col-md-4 col-xs-6">
+		    			<h3>联系方式</h3>
+                        <p class="contact-us-details">
+                            <b>地址：</b>陕西省西安市咸宁西路28号<br/>
+                            <b>电话：</b>+86 0000000000<br/>
+                            <b>邮箱：</b><a href="mailto:getintoutch@yourcompanydomain.com">getintoutch@yourcompanydomain.com</a>
+                        </p>
+		    		</div>
+		    		<div class="col-footer col-md-2 col-xs-6">
+		    			<h3>Stay Connected</h3>
+		    			<ul class="footer-stay-connected no-list-style">
+		    				<li><a href="#" class="facebook"></a></li>
+		    				<li><a href="#" class="twitter"></a></li>
+		    				<li><a href="#" class="googleplus"></a></li>
+		    			</ul>
+		    		</div>
+		    	</div>
+		    	<div class="row">
+		    		<div class="col-md-12">
+                        <div class="footer-copyright">&copy; 2015 Institute of Biomedical Analytical Technology and Instrumentation. All rights reserved.</div>
+                    </div>
+		    	</div>
+		    </div>
+	    </div>
+
+        <!-- Javascripts -->
+        <script src="../../static/js/jquery-1.9.1.min.js"></script>
+        <script src="../../static/js/bootstrap.min.js"></script>
+        <script src="http://cdn.leafletjs.com/leaflet-0.5.1/leaflet.js"></script>
+        <script src="../../static/js/jquery.fitvids.js"></script>
+        <script src="../../static/js/jquery.sequence-min.js"></script>
+        <script src="../../static/js/jquery.bxslider.js"></script>
+        <script src="../../static/js/main-menu.js"></script>
+        <script src="../../static/js/template.js"></script>
+
+    </body>
 </html>

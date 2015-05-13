@@ -29,6 +29,11 @@
                         <li{% if active == 'index' %} class="active"{% endif %}>
                             <a href="{{ url_for('home.index') }}">首页</a>
                         </li>
+                        {% for category in categories %}
+                        <li{% if active == category.name %} class="active"{% endif %}>
+                            <a href="{{ url_for('post.index', category=category.name) }}">{{ category.cname }}</a>
+                        </li>
+                        {% endfor %}
                         <li{% if active == 'member' %} class="active"{% endif %}>
                             <a href="{{ url_for('member.index') }}">成员组成</a>
                         </li>
@@ -40,9 +45,6 @@
                         </li>
                         <li{% if active == 'contact_us' %} class="active"{% endif %}>
                             <a href="{{ url_for('home.contact_us') }}">联系我们</a>
-                        </li>
-                        <li{% if active == 'news' %} class="active"{% endif %}>
-                            <a href="{{ url_for('post.news') }}">新闻中心</a>
                         </li>
                         <li class="has-submenu">
                             <a href="#">Pages +</a>

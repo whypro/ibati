@@ -13,8 +13,8 @@ def create_app(config=None):
 
     # blueprint
     app.register_blueprint(views.home)
-    #app.register_blueprint(views.machine)
-    #app.register_blueprint(views.log)
+    app.register_blueprint(views.post)
+    app.register_blueprint(views.member)
     #app.register_blueprint(views.admin)
     #app.register_blueprint(views.error_log)
     #app.register_blueprint(views.error_log_status)

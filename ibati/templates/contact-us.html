@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}西安交通大学生物医学分析技术与仪器研究所{% endblock %}
+{% block content %}
+        <!-- Page Title -->
+		<div class="section section-breadcrumbs">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<h1>联系我们</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+        
+        <div class="section">
+	    	<div class="container">
+	        	<div class="row">
+	        		<div class="col-sm-7">
+	        			<!-- Map -->
+	        			<div id="contact-us-map">
+
+	        			</div>
+	        			<!-- End Map -->
+	        			<!-- Contact Info -->
+	        			<p class="contact-us-details">
+	        				<b>地址：</b>陕西省西安市咸宁西路28号<br/>
+	        				<b>电话：</b>+86 0000000000<br/>
+	        				<b>邮箱：</b><a href="mailto:getintoutch@yourcompanydomain.com">getintoutch@yourcompanydomain.com</a>
+	        			</p>
+	        			<!-- End Contact Info -->
+	        		</div>
+	        		<div class="col-sm-5">
+	        			<!-- Contact Form -->
+	        			<h3>给我们留言</h3>
+	        			<div class="contact-form-wrapper">
+		        			<form class="form-horizontal" role="form">
+		        				 <div class="form-group">
+		        				 	<label for="Name" class="col-sm-3 control-label"><b>您的姓名</b></label>
+		        				 	<div class="col-sm-9">
+										<input class="form-control" id="Name" type="text" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="contact-email" class="col-sm-3 control-label"><b>您的邮箱</b></label>
+									<div class="col-sm-9">
+										<input class="form-control" id="contact-email" type="text" placeholder="">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="contact-message" class="col-sm-3 control-label"><b>选择主题</b></label>
+									<div class="col-sm-9">
+										<select class="form-control" id="prependedInput">
+											<option>请选择一个主题……</option>
+											<option>普通</option>
+											<option>服务</option>
+											<option>订单</option>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="contact-message" class="col-sm-3 control-label"><b>留言内容</b></label>
+									<div class="col-sm-9">
+										<textarea class="form-control" rows="5" id="contact-message"></textarea>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<button type="submit" class="btn pull-right">发送</button>
+									</div>
+								</div>
+		        			</form>
+		        		</div>
+		        		<!-- End Contact Info -->
+	        		</div>
+	        	</div>
+	    	</div>
+	    </div>
+{% endblock %}

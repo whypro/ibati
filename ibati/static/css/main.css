@@ -533,7 +533,7 @@ a:hover {
 .blog-post {
   background: #FFF;
   position: relative;
-  margin: 20px 0;
+  margin: 0;
   border: 7px solid #FFF;
   -webkit-border-radius: 5px;
   -webkit-background-clip: padding-box;

@@ -8,6 +8,8 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
     cname = db.Column(db.Unicode(20))
+    parent_id = db.Column(db.Integer, db.ForeignKey('ibati_category.id'))
+    parent = db.relationship('Category', backref='children', remote_side=[id])
     order = db.Column(db.Integer)
 
 

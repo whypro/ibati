@@ -17,94 +17,28 @@
 				<div class="row">
 					<div class="col-sm-3">
 						<ul class="nav nav-pills nav-stacked">
-							<li class="active"><a href="#">中心主任</a></li>
-							<li><a href="#">骨干教师</a></li>
-							<li><a href="#">客座教授</a></li>
-							<li><a href="#">访问学者</a></li>
-							<li><a href="#">博士后</a></li>
-							<li><a href="#">博士生</a></li>
-							<li><a href="#">硕士生</a></li>
-							<li><a href="#">本科生</a></li>
-							<li><a href="#">高中生</a></li>
-							<li><a href="#">已毕业学生</a></li>
-							<li><a href="#">科研生活秀</a></li>
+							{% for job_title in job_titles %}
+							<li{%if job_title_active == job_title.name %} class="active"{% endif %}><a href="{{ url_for('member.index', job_title=job_title.name) }}">{{ job_title.name }}</a></li>
+							{% endfor %}
 						</ul>
 					</div>
 					<div class="col-sm-9">
+						{% for member in members %}
 						<!-- Team Member -->
 						<div class="col-sm-4">
 							<div class="team-member">
 								<!-- Team Member Photo -->
-								<div class="team-member-image"><img src="../../static/img/team1.jpg" alt="Name Surname"></div>
+								<div class="team-member-image"><img src="../../static/img/team1.jpg" alt="{{ member.name }}"></div>
 								<div class="team-member-info">
 									<ul>
 										<!-- Team Member Info & Social Links -->
-										<li class="team-member-name"><a href="1">王浩宇</a></li>
-										<li>教授</li>
+										<li class="team-member-name"><a href="{{ url_for('member.detail', id=member.id) }}">{{ member.name }}</a></li>
+										<li>{{ member.job_title.name }}</li>
 									</ul>
 								</div>
 							</div>
 						</div>
-						<!-- End Team Member -->
-						<div class="col-sm-4">
-							<div class="team-member">
-								<div class="team-member-image"><img src="../../static/img/team2.jpg" alt="Name Surname"></div>
-								<div class="team-member-info">
-									<ul>
-										<li class="team-member-name">唐天琪</li>
-										<li>副教授</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="team-member">
-								<div class="team-member-image"><img src="../../static/img/team3.jpg" alt="Name Surname"></div>
-								<div class="team-member-info">
-									<ul>
-										<li class="team-member-name">张三</li>
-										<li>副教授</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="team-member">
-								<div class="team-member-image"><img src="../../static/img/team4.jpg" alt="Name Surname"></div>
-								<div class="team-member-info">
-									<ul>
-										<li class="team-member-name">李四</li>
-										<li>讲师</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="team-member">
-								<div class="team-member-image"><img src="../../static/img/team5.jpg" alt="Name Surname"></div>
-								<div class="team-member-info">
-									<ul>
-										<li class="team-member-name">
-											Name Surname
-										</li>
-										<li>UX Designer</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="col-sm-4">
-							<div class="team-member">
-								<div class="team-member-image"><img src="../../static/img/team6.jpg" alt="Name Surname"></div>
-								<div class="team-member-info">
-									<ul>
-										<li class="team-member-name">
-											Name Surname
-										</li>
-										<li>Systems Analyst</li>
-									</ul>
-								</div>
-							</div>
-						</div>
+						{% endfor %}
 					</div>
 				</div>
 			</div>

@@ -8,14 +8,21 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
     cname = db.Column(db.Unicode(20))
-    parent_id = db.Column(db.Integer, db.ForeignKey('ibati_category.id'))
-    parent = db.relationship('Category', backref='children', remote_side=[id])
     order = db.Column(db.Integer)
 
+class Label(db.Model):
+    __tablename__ = 'ibati_label'
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(20))
+    cname = db.Column(db.Unicode(20))
+    category_id = db.Column(db.Integer, db.ForeignKey('ibati_category.id'))
+    category = db.relationship('Category', backref='labels')
+    order = db.Column(db.Integer)
 
 class Post(db.Model):
 
-    __tablename__ = 'ibati_posts'
+    __tablename__ = 'ibati_post'
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.Unicode(255))
@@ -27,4 +34,7 @@ class Post(db.Model):
 
     category_id = db.Column(db.Integer, db.ForeignKey('ibati_category.id'))
     category = db.relationship('Category', backref='posts')
+
+    label_id = db.Column(db.Integer, db.ForeignKey('ibati_label.id'))
+    label = db.relationship('Label', backref='posts')
 

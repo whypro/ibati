@@ -1,4 +1,4 @@
-#!venv/bin/python
+#!/usr/bin/python
 #  -*- coding: utf-8 -*-
 from ibati import create_app
 

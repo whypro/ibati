@@ -49,5 +49,5 @@ def init_app_context(app):
 
     @app.context_processor
     def inject_categories():
-        categories = Category.query.filter(Category.parent==None).order_by(Category.order.asc()).all()
+        categories = Category.query.order_by(Category.order.asc()).all()
         return dict(categories=categories)

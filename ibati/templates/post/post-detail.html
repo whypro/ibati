@@ -28,35 +28,30 @@
 						</form>
 						<hr />
 						<ul class="nav nav-pills nav-stacked">
-							<li class="active"><a href="#">简讯</a></li>
-							<li><a href="#">最新动态</a></li>
-							<li><a href="#">客座教授</a></li>
-							<li><a href="#">通知公告</a></li>
-							<li><a href="#">科学抢鲜看</a></li>
+							{% for label in category.labels %}
+                            <li{% if label_active == label.name %} class="active"{% endif %}><a href="{{ url_for('post.index', category=category.name, label=label.name) }}">{{ label.cname }}</a></li>
+                            {% endfor %}
 						</ul>
 					</div>
 					<!-- End Sidebar -->
 					<div class="col-sm-9">
 						<div class="blog-post blog-single-post">
 							<div class="single-post-title">
-								<h3>赵昕博士来我中心访问并做相关报告</h3>
+								<h3>{{ post.title }}</h3>
 							</div>
 							<div class="single-post-info">
 								<i class="glyphicon glyphicon-time"></i>2015-05-12&emsp;
 								<a href="#" title="Show Comments"><i class="glyphicon glyphicon-comment"></i>11</a>
 							</div>
+							{#
 							<div class="single-post-image">
 								<img src="../../static/img/blog-large.jpg" alt="Post Title">
 							</div>
+							#}
 							<div class="single-post-content">
-								<p>
-									应仿生工程与生物力学中心邀请，哈佛大学博士后赵昕博士来我中心做访问交流，并于2015年5月12日上午在生命学院308报告厅作了名为“基于生物材料的转化医学研究”的学术报告。报告内容基于生物材料的转化医学研究，即研究材料、细胞与药物之间的相互作用，去满足不同的临床需求。本次报告主要涉及了四个基于生物材料的转化医学研究，包括可注射复合材料骨水泥、可光交联皮肤修复水凝胶、电纺纤维防肌腱粘连膜和长药释放载体用于肿瘤治疗。报告紧贴中心人员科研课题内容，赵昕博士的讲述生动形象，会场学术氛围浓郁。最后赵昕博士耐心回答了大家的提问，并给出自己的建议。
-								</p>
-								<img src="../../static/img/blog-large.jpg" alt="Post Title" />
-								<p>
-									赵昕，博士，现在美国哈佛大学从事博士后研究工作。2010年，毕业于英国伦敦大学大学学院生物材料与组织工程专业，获博士学位。长期致力于生物材料与组织工程，药物释放等交叉学科的研究工作。在博士和博士后期间独立主持“可注射可降解复合材料骨水泥构建及其药物和基因释放的研究”(该项目2007年获英国工程与自然科学研究学会(EPSRC)42万英镑资助)；作为重要参与人协助导师申请并完成2项科研项目，分别为“可活体携载细胞的可注射光交联水凝胶组织工程支架构建及其人工皮肤构建研究以及水凝胶基软体纳米纤维合成和三维组织支架构建及皮肤修复研究”(该项目2012年获美国创新研究协会(EFRI)200万美金资助）和“微流控技术构建携载干细胞的水凝胶微球及体内体外诱导干细胞分化”(该项目2014年获美国国家科学基金NSF）1000万美金资助)。赵昕博士已在Biomaterials,Small,Acta Biomateria,Journal of Material Chemistry B, Advanced Healthcare Material,Materials Today等国际知名学术期刊发表SCI收录学术论文20余篇，其中第一作者发表15篇（影响因子总和75），另有已投稿论文6篇（其中第一作者5篇）；著有英文专著章节5部。本人多次参加国际重大学术会议并做口头报告，长期担任Acta Biomateria等知名学术期刊审稿人。
-								</p>
+								{{ post.content }}
 							</div>
+							{#
 							<!-- Comments -->
 							<div class="post-coments">
 								<h4>Comments (53)</h4>
@@ -151,6 +146,7 @@
 								<!-- End Comment Form -->
 							</div>
 							<!-- End Comments -->
+							#}
 						</div>
 					</div>
 					<!-- End Blog Post -->

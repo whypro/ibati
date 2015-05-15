@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <nav id="mainmenu" class="mainmenu">
-                    <ul><li class="logo-wrapper"><a href="{{ url_for('home.index') }}"><img src="../../static/img/demo/201212281455451010.png" alt="西安交通大学生物医学分析技术与仪器研究所"></a></li></ul>
+                    <ul><li class="logo-wrapper"><a href="{{ url_for('home.index') }}"><img src="{{ url_for('static', filename='img/demo/201212281455451010.png') }}" alt="西安交通大学生物医学分析技术与仪器研究所"></a></li></ul>
                     <ul>
                         <li{% if active == 'index' %} class="active"{% endif %}>
                             <a href="{{ url_for('home.index') }}">首页</a>

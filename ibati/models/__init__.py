@@ -1,1 +1,1 @@
-from .post import Category, Post
+from .post import Category, Label, Post

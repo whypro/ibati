@@ -6,7 +6,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-md-12">
-						<h1>Events</h1>
+						<h1>{{ category.cname }}</h1>
 					</div>
 				</div>
 			</div>
@@ -17,69 +17,24 @@
 	    		<div class="row">
 	    			<div class="col-md-3">
 						<ul class="nav nav-pills nav-stacked">
-							<li class="active"><a href="#">分类1</a></li>
-							<li><a href="#">分类2</a></li>
-							<li><a href="#">分类3</a></li>
-							<li><a href="#">分类4</a></li>
+                            {% for label in category.labels %}
+                            <li{% if label_active == label.name %} class="active"{% endif %}><a href="{{ url_for('post.index', category=category.name, label=label.name) }}">{{ label.cname }}</a></li>
+                            {% endfor %}
 						</ul>
 					</div>
 	    			<div class="col-md-9">
 	    				<table class="events-list">
+                            {% for post in posts %}
 	    					<tr>
 	    						<td>
-	    							<div class="event-date">
-	    								2015-02-01
-	    							</div>
+	    							<div class="event-date">{{ post.create_date }}</div>
 	    						</td>
 	    						<td>
-	    							<a href="./1">赵昕博士来我中心访问并做相关报告</a>
+	    							<a href="{{ url_for('post.detail', id=post.id) }}">{{ post.title }}</a>
 	    						</td>
-	    						<td class="event-author hidden-xs"><i class="icon-map-marker"></i>王浩宇</td>
+	    						<!-- <td class="event-author hidden-xs"><i class="icon-map-marker"></i>{{ post.author }}</td> -->
 	    					</tr>
-	    					<tr>
-	    						<td>
-	    							<div class="event-date">
-	    								2015-02-01
-	    							</div>
-	    						</td>
-	    						<td>
-	    							<a>赵昕博士来我中心访问并做相关报告</a>
-	    						</td>
-	    						<td class="event-author hidden-xs"><i class="icon-map-marker"></i>王浩宇</td>
-	    					</tr>
-	    					<tr>
-	    						<td>
-	    							<div class="event-date">
-	    								2015-02-01
-	    							</div>
-	    						</td>
-	    						<td>
-	    							<a>赵昕博士来我中心访问并做相关报告</a>
-	    						</td>
-	    						<td class="event-author hidden-xs"><i class="icon-map-marker"></i>王浩宇</td>
-	    					</tr>
-	    					<tr>
-	    						<td>
-	    							<div class="event-date">
-	    								2015-02-01
-	    							</div>
-	    						</td>
-	    						<td>
-	    							<a>赵昕博士来我中心访问并做相关报告</a>
-	    						</td>
-	    						<td class="event-author hidden-xs"><i class="icon-map-marker"></i>王浩宇</td>
-	    					</tr>
-	    					<tr>
-	    						<td>
-	    							<div class="event-date">
-	    								2015-02-01
-	    							</div>
-	    						</td>
-	    						<td>
-	    							<a>赵昕博士来我中心访问并做相关报告</a>
-	    						</td>
-	    						<td class="event-author hidden-xs"><i class="icon-map-marker"></i>王浩宇</td>
-	    					</tr>
+                            {% endfor %}
 	    				</table>
 	    			</div>
 	    		</div>

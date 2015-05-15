@@ -2,22 +2,29 @@
 
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort
 
-from ibati.models import Category, Post
+from ibati.models import Category, Label, Post
 
 post = Blueprint('post', __name__, url_prefix='/post')
 
 
 
 @post.route('/<category>/')
-def index(category):
-    result = Category.query.filter(Category.name==category).one()
-    return render_template('post/posts.html', active=category, category=result)
+@post.route('/<category>/<label>/')
+def index(category, label=None):
+    cat = Category.query.filter(Category.name==category).one()
+
+    qry = Post.query.filter(Post.category_id==cat.id)
+    if label:
+        lab = Label.query.filter(Label.name==label).one()
+        qry = qry.filter(Post.label_id==lab.id)
+    posts = qry.all()
+    return render_template('post/posts.html', active=cat.name, label_active=label, category=cat, posts=posts)
 
 
 @post.route('/<int:id>/')
 def detail(id):
-    result = Post.query.get_or_404(id)
-    return render_template('post/post-left-sidebar.html', active=result.category.name, post=result)
+    p = Post.query.get_or_404(id)
+    return render_template('post/post-detail.html', category=p.category, post=p)
 
 
 @post.route('/add/', methods=['GET', 'POST'])

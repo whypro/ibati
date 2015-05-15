@@ -10,18 +10,3 @@ def get_client_ip():
         ip = request.remote_addr
     return ip
 
-
-# 取样
-# slice step，因为数据量可能过大，因此设置一个步长来减少返回的数据量
-def sample(data):
-    if current_app.config['DISABLE_SAMPLE']:
-        return data
-    step = int(len(data) / current_app.config['SAMPLE_POINT'])
-    if step == 0: step = 1
-    new_data = data[::step]
-    return new_data
-
-
-
-
-

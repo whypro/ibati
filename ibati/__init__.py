@@ -26,6 +26,7 @@ def create_app(config=None):
     # logger
     init_app_logger(app)
 
+    # app context
     init_app_context(app)
 
     return app

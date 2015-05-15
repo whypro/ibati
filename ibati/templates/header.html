@@ -37,15 +37,16 @@
                         <li{% if active == 'member' %} class="active"{% endif %}>
                             <a href="{{ url_for('member.index') }}">成员组成</a>
                         </li>
+                        <li{% if active == 'contact_us' %} class="active"{% endif %}>
+                            <a href="{{ url_for('home.contact_us') }}">联系我们</a>
+                        </li>
                         <li{% if active == 'links' %} class="active"{% endif %}>
                             <a href="{{ url_for('home.links') }}">相关链接</a>
                         </li>
                         <li{% if active == 'about_us' %} class="active"{% endif %}>
                             <a href="{{ url_for('home.about_us') }}">关于</a>
                         </li>
-                        <li{% if active == 'contact_us' %} class="active"{% endif %}>
-                            <a href="{{ url_for('home.contact_us') }}">联系我们</a>
-                        </li>
+                        {#
                         <li class="has-submenu">
                             <a href="#">Pages +</a>
                             <div class="mainmenu-submenu">
@@ -118,6 +119,7 @@
                         <li>
                             <a href="credits.html">Credits</a>
                         </li>
+                        #}
                     </ul>
                 </nav>
             </div>

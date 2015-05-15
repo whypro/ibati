@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort
-
+from ibati.models import Slider
 
 
 home = Blueprint('home', __name__)
@@ -9,7 +9,8 @@ home = Blueprint('home', __name__)
 
 @home.route('/')
 def index():
-    return render_template('index.html', active='index')
+    sliders = Slider.query.order_by(Slider.order.asc()).all()
+    return render_template('index.html', active='index', sliders=sliders)
     # return render_template('index.html')
 
 @home.route('/about-us/')

@@ -28,7 +28,7 @@
 						<div class="col-sm-4">
 							<div class="team-member">
 								<!-- Team Member Photo -->
-								<div class="team-member-image"><img src="../../static/img/team1.jpg" alt="{{ member.name }}"></div>
+								<div class="team-member-image"><img src="{{ url_for('static', filename=member.photo) }}" alt="{{ member.name }}"></div>
 								<div class="team-member-info">
 									<ul>
 										<!-- Team Member Info & Social Links -->

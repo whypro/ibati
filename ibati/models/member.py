@@ -19,3 +19,5 @@ class Member(db.Model):
     job_title_id = db.Column(db.Integer, db.ForeignKey('ibati_job_title.id'))
     job_title = db.relationship('JobTitle', backref='members')
     intro = db.Column(db.UnicodeText)
+    photo = db.Column(db.String(255))
+

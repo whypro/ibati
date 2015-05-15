@@ -3,7 +3,7 @@
 from ibati import create_app
 
 
-app = create_app('ibati.config')
+app = create_app('ibati.config.Config')
 
 
 import subprocess

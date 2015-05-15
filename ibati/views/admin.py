@@ -62,13 +62,19 @@ def init_post(session):
 
 def init_member(session):
 
-    job_title_teacher = JobTitle(name='教师')
-    session.add(job_title_teacher)
+    teacher = JobTitle(name='教师')
+    session.add(teacher)
 
-    job_title_student = JobTitle(name='学生')
-    session.add(job_title_student)
+    student = JobTitle(name='学生')
+    session.add(student)
 
-    haoyuwang = Member(name='王浩宇', job_title=job_title_student, intro='西安交通大学软件学院学生')
-    session.add(haoyuwang)
+    zhaolinger = Member(name='赵灵儿', job_title=student, intro='西安交通大学软件学院学生', photo='uploads/200800000006.jpg')
+    session.add(zhaolinger)
+    linyueru = Member(name='林月如', job_title=student, intro='西安交通大学软件学院学生', photo='uploads/200800000012.jpg')
+    session.add(linyueru)
+    anu = Member(name='阿奴', job_title=student, intro='西安交通大学软件学院学生', photo='uploads/200800000020.jpg')
+    session.add(anu)
+    wuhou = Member(name='巫后', job_title=teacher, intro='西安交通大学软件学院老师', photo='uploads/200800000123.jpg')
+    session.add(wuhou)
 
     session.commit()

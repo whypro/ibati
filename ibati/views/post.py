@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import unicode_literals
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort
 
+from ibati.db import sadb as db
 from ibati.models import Category, Label, Post
 
-post = Blueprint('post', __name__, url_prefix='/post')
+post = Blueprint('post', __name__)
 
 
 
@@ -17,8 +18,13 @@ def index(category, label=None):
     if label:
         lab = Label.query.filter(Label.name==label).one()
         qry = qry.filter(Post.label_id==lab.id)
+    else:
+        lab = None
     posts = qry.all()
-    return render_template('post/posts.html', active=cat.name, label_active=label, category=cat, posts=posts)
+    return render_template(
+        'post/posts.html', 
+        active=cat.name, label_active=label, category=cat, label=lab, posts=posts
+    )
 
 
 @post.route('/<int:id>/')
@@ -37,5 +43,9 @@ def add():
 
 @post.route('/<int:id>/delete/')
 def delete(id):
-    pass
+    p = Post.query.get_or_404(id)
+    db.session.delete(p)
+    db.session.commit()
+
+    return '删除成功'
 

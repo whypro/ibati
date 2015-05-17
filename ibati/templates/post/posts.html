@@ -1,6 +1,174 @@
 {% extends 'base.html' %}
 {% block title %}西安交通大学生物医学分析技术与仪器研究所{% endblock %}
 {% block content %}
+		<div class="banner" style="margin-top:6px"><img src="/template/CN/images/ban7.jpg" width="1002" height="122" /></div>
+
+		<div class="aboutz">
+			<div class="aboutzleft">
+    			<div class="aboutzleftdao">
+        			<table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+            			<tr>
+              				<td width="6%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
+              				<td width="94%">{{ category.cname }} <font class="wen3">{{ category.name.capitalize() }}</font></td>
+          				</tr>
+          			</table>
+          		</div>
+          		<div class="aboutzleftmeun">
+          			<ul>         
+          				{% for label in category.labels %}
+                        <li{% if label_active == label.name %} class="active"{% endif %}><a title="{{ label.name }}" href="{{ url_for('post.index', category=category.name, label=label.name) }}">{{ label.cname }}</a></li>
+                        {% endfor %}
+                	</ul>
+          		</div>
+          		{#
+				<div class="zhongxialeft" style=" width:220px; margin-top:12px">
+    				<div class="zhongxialeftdao" style=" width:220px">
+    	  				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+           	 				<tr>
+				              	<td width="6%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
+				              	<td width="78%"><img src="{{ url_for('static', filename='images/souz.jpg') }}" width="58" height="15" /></td>
+				              	<td width="16%">&nbsp;</td>
+            				</tr>
+          				</table>
+    				</div>
+        			<div class="zxnei" style="width:218px;">
+        				<table width="86%" border="0" cellspacing="0" cellpadding="0" align="center">
+  							<tr>
+    							<td>支持卡型</td>
+  							</tr>
+  							<tr>
+    							<td>
+								    <select class="querysel" name="model" id="model">
+								    	 <option value="仅Mifare S50/S70">仅Mifare S50/S70</option>
+								            <option value="ISO14443A 标准">ISO14443A 标准</option>
+								            <option value="ISO15693标准">ISO15693标准</option>
+								            <option value="ISO14443A/B,15693全协议">ISO14443A/B,15693全协议</option>
+								            <option value="EM ID卡">EM ID卡</option>
+								            <option value="ISO7816接触IC卡">ISO7816接触IC卡</option>
+								            <option value="第二代身份证">第二代身份证</option>
+								            <option value="接触卡+射频卡支持">接触卡+射频卡支持</option>
+								            <option value="磁条卡+接触卡+感应卡支持">磁条卡+接触卡+感应卡支持</option>
+								            <option value="磁条卡+接触卡+感应卡+二代证支持">磁条卡+接触卡+感应卡+二代证支持</option>
+								            <option value="超高频芯片18000-6B/6C标准">超高频芯片18000-6B/6C标准</option>
+								    </select>
+								</td>
+  							</tr>
+  							<tr>
+    							<td>通讯方式</td>
+  							</tr>
+  							<tr>
+    							<td>
+    								<select class="querysel" name="commu" id="commu">       		
+							            <option value="USB通讯">USB通讯</option>		
+							            <option value="RS232通讯">RS232通讯</option>			
+							            <option value="TCP/IP通讯">TCP/IP通讯</option>		
+							            <option value="GPRS/CDMA无线通讯">GPRS/CDMA无线通讯</option>			
+							            <option value="RS485通讯">RS485通讯</option>			
+							            <option value="Wifi无线通讯">Wifi无线通讯</option>			
+							            <option value="TTL通讯">TTL通讯</option>			
+							            <option value="SPI/I2C通讯">SPI/I2C通讯</option>		
+							            <option value="PS2键盘口通讯">PS2键盘口通讯</option>		
+							            <option value="WG26/34通讯">WG26/34通讯</option>
+							            <option value="蓝牙通讯">蓝牙通讯</option>
+            						</select>
+            					</td>
+  							</tr>
+						  	<tr>
+						    	<td>使用方式</td>
+						  	</tr>
+	  						<tr>
+							    <td>
+								    <select class="querysel" name="use" id="use">
+								        <option value="固定式读写器">固定式读写器</option>
+							            <option value="手持式读写器">手持式读写器</option>
+							            <option value="嵌入式读写器">嵌入式读写器</option>
+							            <option value="通道式">通道式</option>
+							            <option value="移动式读写器">移动式读写器</option>
+								    </select>
+								</td>
+	  						</tr>
+		  					<tr>
+		    					<td align="right"><input type="submit" value=""  style="background: url(/template/EN/images/cbtn.jpg) no-repeat;  width:53px; height:23px; border:0px; margin-top:10px; margin-bottom:10px"/  onClick="urltest()"></td>
+		  					</tr>
+						</table>
+      				</div>
+    			</div>
+    			#}
+    		</div>
+    		<!--left-->
+		    <div class="aboutrig">
+		    	<div class="aboutrigdao">
+		        	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  						<tr>
+						    <td width="2%">
+                                {% if label %}
+                                <img src="{{ url_for('static', filename='images/li2.jpg') }}" width="11" height="11" />
+                                {% endif %}
+                            </td>
+						    <td width="36%">
+                                {% if label %}
+                                <font class="wen4">{{ label.cname }}</font>
+                                {% endif %}
+                            </td>
+						    <td width="62%" align="right">
+						    	<div align="right" class="wz004">
+                                    <img src="{{ url_for('static', filename='images/index_21.jpg') }}" /> 您的位置：<a href="{{ url_for('home.index') }}">首页</a>
+                                    <img src="{{ url_for('static', filename='images/jiao.gif') }}" /><a href="{{ url_for('post.index', category=category.name) }}">{{ category.cname }}</a>
+                                    {% if label %}
+                                    <img src="{{ url_for('static', filename='images/jiao.gif') }}" />{{ label.cname }}</div>
+                                    {% endif %}
+							</td>
+  						</tr>
+					</table>
+
+        		</div>
+        		<div class="left"><img src="{{ url_for('static', filename='images/rigxian.jpg') }}" /></div>
+        		<div class=" aboutrignei">
+        
+
+    
+ <table width="100%" border="0" cellspacing="0" cellpadding="10">  <tr>    <td width="15%"><a href="news_show.aspx?NewsId=130"><img src="/Upload/股票页面-09482678882.jpg" width="135" height="88"  style=" padding:2px;border:1px #dfdfdf solid;"></a></td>    <td width="85%" valign="top"><p style="font-weight:bold; ">&nbsp;&nbsp;标题：<a href="news_show.aspx?NewsId=130" style="color:#666666;">德卡科技成功挂牌“新三板”</a></p><p style="height:50px;">&nbsp;&nbsp;2015年5月7日，深圳市德卡科技股份有限公司成功在全国中小企业股份转让系统（新三板）挂牌上市，证券简称“德卡科技”，股票代码为832423。德卡科技作为国内智能卡读写机具的领军企业，一直引领着国内智能身份识别终端和电子支付终端应用…</p><p style="float:right; margin-right:5px;"><a href="news_show.aspx?NewsId=130" style="color:#f47900;">[查看详情]</a></p></td>  </tr></table><p style="border-top:1px solid #dfdfdf; margin-top:15px; margin-bottom:15px;"></p>     <table width="100%" border="0" cellspacing="0" cellpadding="10">  <tr>    <td width="15%"><a href="news_show.aspx?NewsId=129"><img src="/Upload/新闻/6-10460893467.jpg" width="135" height="88"  style=" padding:2px;border:1px #dfdfdf solid;"></a></td>    <td width="85%" valign="top"><p style="font-weight:bold; ">&nbsp;&nbsp;标题：<a href="news_show.aspx?NewsId=129" style="color:#666666;">德卡助力拉萨金融IC卡综合服务平台及公交应用项目启动</a></p><p style="height:50px;">&nbsp;&nbsp;  恰逢阳春三月，万里晴空。  3月31日，银联金融IC卡综合服务平台暨拉萨公共交通金融IC卡应用项目启动仪式隆重举行。出席启动仪式的领导有拉萨市林生副市长、银联西藏分公司领导、拉萨市公交集团领导、深圳德卡董事长孙永战及其他相关人…</p><p style="float:right; margin-right:5px;"><a href="news_show.aspx?NewsId=129" style="color:#f47900;">[查看详情]</a></p></td>  </tr></table><p style="border-top:1px solid #dfdfdf; margin-top:15px; margin-bottom:15px;"></p>     <table width="100%" border="0" cellspacing="0" cellpadding="10">  <tr>    <td width="15%"><a href="news_show.aspx?NewsId=127"><img src="/Upload/P19居民健康卡-13254968685.jpg" width="135" height="88"  style=" padding:2px;border:1px #dfdfdf solid;"></a></td>    <td width="85%" valign="top"><p style="font-weight:bold; ">&nbsp;&nbsp;标题：<a href="news_show.aspx?NewsId=127" style="color:#666666;">石家庄市居民健康卡建设实施方案 明确时间表</a></p><p style="height:50px;">&nbsp;&nbsp;石家庄市居民健康卡建设实施方案　　为进一步加快国家居民健康卡试点工作的建设进程，保障试点建设任务有效落实，根据国家、省卫生计生委有关要求，结合石家庄市卫生计生工作实际，制订本实施方案。　　一、建设背景　　居民健康卡建设是…</p><p style="float:right; margin-right:5px;"><a href="news_show.aspx?NewsId=127" style="color:#f47900;">[查看详情]</a></p></td>  </tr></table><p style="border-top:1px solid #dfdfdf; margin-top:15px; margin-bottom:15px;"></p>     <table width="100%" border="0" cellspacing="0" cellpadding="10">  <tr>    <td width="15%"><a href="news_show.aspx?NewsId=128"><img src="/Upload/P19居民健康卡-13254968685.jpg" width="135" height="88"  style=" padding:2px;border:1px #dfdfdf solid;"></a></td>    <td width="85%" valign="top"><p style="font-weight:bold; ">&nbsp;&nbsp;标题：<a href="news_show.aspx?NewsId=128" style="color:#666666;">石家庄市卫计委关于加快居民健康卡建设的通知</a></p><p style="height:50px;">&nbsp;&nbsp;石卫规划〔2015〕2号　　石家庄市卫生计生委关于加快居民健康卡建设的通知　　各县(市)卫生局(卫生计生局)、鹿泉区卫生局、栾城区卫生局、藁城区卫生局、委直属各单位：　　发行应用国家居民健康卡，是深化医改、推进京津冀协同发展的重…</p><p style="float:right; margin-right:5px;"><a href="news_show.aspx?NewsId=128" style="color:#f47900;">[查看详情]</a></p></td>  </tr></table><p style="border-top:1px solid #dfdfdf; margin-top:15px; margin-bottom:15px;"></p>    
+
+
+
+
+                <p align="center">
+<style>
+<!--
+#dcms_pager .pages {border:none;text-transform:uppercase;font-size:12px;margin:10px 0 10px 0;padding:0;height:20px;clear:both;text-align:center;}
+#dcms_pager .pages a {border:1px solid #ccc;text-decoration:none;margin:0 5px 0 0;padding:0 3px 0 3px;font-size:12px;height:16px;line-height:16px;}
+#dcms_pager .pages a:hover {border:1px solid #aeaeae;}
+#dcms_pager .pages .pgempty {border:1px solid #eee;color:#eee;}
+#dcms_pager .pages .pgcurrent {border:1px solid #aeaeae;color:#000;font-weight:bold;background-color:#eee;}
+-->
+</style>
+<div id="dcms_pager"  align="center">
+  <div class=pages><a class=pgnext>first</a><a class=pgnext>prev</a><a>1</a><a>2</a><a>3</a><a>4</a><a class="page-number pgcurrent">5</a><a>6</a><a>7</a><a>8</a><a>9</a><a class=pgnext>next</a><a class=pgnext>last</a></div>
+</div>
+<script>renderDcmsPager('首页','上一页','下一页','尾页');</script>
+
+</p>
+        	
+
+        
+        </div>
+    </div>
+    
+    
+    <div class="both"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+		{#
         <!-- Page Title -->
 		<div class="section section-breadcrumbs">
 			<div class="container">
@@ -40,4 +208,11 @@
 	    		</div>
 			</div>
 		</div>
+		#}
+
+<script language="javascript" type="text/javascript">
+		function urltest() {
+  		window.location.href = 'search.aspx?model=' + escape($("#model").val()) + "&commu=" + escape($("#commu").val()) + "&use=" + escape($("#use").val());
+	}
+	</script>
 {% endblock %}

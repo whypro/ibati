@@ -1,0 +1,705 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+    margin: 0px;
+    padding: 0px;
+    font-size: 12px;
+    color: #6d6d6f;
+    font-family: Arial, Helvetica, sans-serif;
+    background: url("../images/allb.jpg")/*tpa=http://www.decard.com/template/CN/images/allb.jpg*/ repeat-x;
+    background-color: #FFFFFF;
+}
+
+form,p,ul,li,table,input,h1,h2,h3,h4,div,td,tr {
+    margin: 0px;
+    padding: 0px;
+    list-style: none outside;
+}
+
+img {
+    border: none;
+    margin: 0px;
+    padding: 0px
+}
+
+.left {
+    float: left
+}
+
+.right {
+    float: right
+}
+
+.both {
+    margin: 0px;
+    padding: 0px;
+    clear: both;
+    font-size: 0px;
+    line-height: 0px;
+}
+/*全局定义*/
+a {
+    color: #6d6d6f;
+    text-decoration: none
+}
+
+a:hover {
+    color: #065f95;
+    text-decoration: underline;
+}
+
+a.wen1 {
+    color: #065f95;
+    text-decoration: none
+}
+
+a.wen1:hover {
+    color: #e98d2a;
+    text-decoration: underline;
+}
+
+a.wen2 {
+    color: #939393;
+    text-decoration: none
+}
+
+a.wen2:hover {
+    color: #065f95;
+    text-decoration: underline
+}
+
+a.wen22 {
+    color: #065f95;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 40px
+}
+
+a.wen22:hover {
+    color: #e98d2a;
+    text-decoration: underline;
+    font-weight: bold;
+    line-height: 40px
+}
+
+.wen33 {
+    line-height: 18px
+}
+
+.wz004 {
+    color: #939393;
+}
+
+.wz004 a {
+    color: #939393;
+    text-decoration: none
+}
+
+.wz004 a:hover {
+    color: #939393;
+    text-decoration: underline
+}
+
+.top {
+    width: 1002px;
+    margin: auto;
+    height: 98px;
+}
+
+.meun {
+    width: 1002px;
+    margin: auto;
+    height: 41px;
+    line-height: 41px;
+    border-top: 1px #979797 dotted
+}
+
+.meun1 {
+    height: 41px;
+    line-height: 41px;
+    font-size: 14px;
+}
+
+.yu {
+    width: 139px;
+    height: 21px;
+    background: #FFFFFF;
+    border: 1px #c6c6c6 solid;
+    line-height: 21px;
+    float: right;
+    text-align: center
+}
+
+.toplan {
+    width: 1002px;
+    background: #065f95;
+    margin: auto;
+    height: 34px
+}
+
+.banner {
+    width: 1002px;
+    margin: auto
+}
+
+.zhongc {
+    width: 1006px;
+    margin: auto;
+    margin-top: 12px
+}
+
+.zhongcli {
+    width: 196px;
+    height: 167px;
+    border: 1px #cfd8e1 solid
+}
+
+.zhongxia {
+    width: 1002px;
+    margin: auto;
+    margin-top: 12px;
+}
+
+.zhongxialeft {
+    width: 247px;
+    float: left;
+}
+
+.zhongxialeftdao {
+    width: 247px;
+    float: left;
+    border-bottom: 3px #99D4E2 solid;
+    height: 30px;
+    line-height: 30px
+}
+
+.zxnei {
+    width: 245px;
+    border: 1px #d7d7d7 solid;
+    margin-top: 11px;
+    float: left;
+    line-height: 24px
+}
+
+.querysel {
+    width: 210px
+}
+
+.z_z {
+    width: 375px;
+    float: left;
+    margin-left: 40px;
+    display: inline
+}
+
+.z_zdao {
+    width: 375px;
+    float: left;
+    border-bottom: 3px #99D4E2 solid;
+    height: 30px;
+    line-height: 30px
+}
+
+.z_zimg {
+    width: 375px;
+    margin-top: 11px;
+    float: left
+}
+
+.z_znews {
+    width: 375px;
+    float: left;
+    margin-top: 8px
+}
+
+.z_znews ul {
+}
+
+.z_znews ul li {
+    line-height: 21px;
+}
+
+.tim {
+    font-size: 10px;
+    color: #e98d2a
+}
+
+.z_rig {
+    width: 300px;
+    float: right
+}
+
+.z_rigdao {
+    width: 300px;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 3px #99D4E2 solid;
+}
+
+.z_rigimg {
+    width: 300px;
+    float: left;
+    margin-top: 11px;
+}
+
+.z_rignei {
+    width: 300px;
+    float: left
+}
+
+.z_rignei ul {
+}
+
+.z_rignei ul li {
+    float: left
+}
+
+.down {
+    width: 1002px;
+    margin: auto;
+    border: 1px #CFD8E1 solid;
+    border-left: 0px;
+    border-right: 0px;
+    height: 29px;
+    line-height: 29px;
+    margin-top: 12px;
+    color: #939393
+}
+
+.down2 {
+    width: 1002px;
+    margin: auto;
+    margin-top: 11px;
+    padding-bottom: 15px;
+    color: #939393
+}
+
+.aboutz {
+    width: 1002px;
+    margin: auto;
+    margin-top: 12px;
+}
+
+.aboutzleft {
+    width: 220px;
+    float: left
+}
+
+.aboutzleftdao {
+    width: 220px;
+    float: left;
+    line-height: 30px;
+    border-bottom: 3px #99D4E2 solid;
+    font-size: 14px;
+    font-weight: bold;
+    font-family: "微软雅黑"
+}
+
+.wen3 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 11px;
+    color: #999999;
+    font-weight: 100
+}
+
+.aboutzleftmeun {
+    margin-top: 12px;
+    float: left;
+    width: 220px;
+}
+
+.aboutzleftmeun ul {
+}
+
+.aboutzleftmeun ul li {
+}
+
+.aboutzleftmeun ul li a {
+    float: left;
+    width: 190px;
+    height: 36px;
+    background: url("../images/meunout.jpg")/*tpa=http://www.decard.com/template/CN/images/meunout.jpg*/ no-repeat;
+    line-height: 36px;
+    padding-left: 30px;
+    margin-bottom: 1px
+}
+
+.aboutzleftmeun ul li a:hover {
+    float: left;
+    background: url("../images/meunon.jpg")/*tpa=http://www.decard.com/template/CN/images/meunon.jpg*/ no-repeat;
+    width: 190px;
+    height: 36px;
+    line-height: 36px;
+    padding-left: 30px;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-decoration: none
+}
+
+.aboutrig {
+    width: 760px;
+    float: right
+}
+
+.aboutrigdao {
+    width: 760px;
+    float: left;
+    height: 20px;
+    line-height: 30px;
+    height: 30px
+}
+
+.aboutrignei {
+    width: 760px;
+    line-height: 26px;
+    margin-top: 12px;
+    float: left;
+    padding-bottom: 30px
+}
+
+.wen4 {
+    font-size: 14px;
+    color: #f47900;
+    font-weight: bold;
+    font-family: "微软雅黑"
+}
+
+.newsbo {
+    width: 760px;
+    line-height: 36px;
+    float: left
+}
+
+.newsbo ul {
+    line-height: 26px;
+    height: 26px;
+    width: 760px;
+    padding-bottom: 3px;
+    padding-top: 3px;
+    border-bottom: 1px #ccc dotted
+}
+
+.newsbo ul:hover {
+    line-height: 26px;
+    height: 26px;
+    width: 760px;
+    background: #f2f2f2;
+    padding-bottom: 3px;
+    padding-top: 3px
+}
+
+.newsbo ul li {
+    float: left;
+    line-height: 26px;
+}
+
+.newsbo ul li a {
+    color: #6d6d6f;
+    text-decoration: none
+}
+
+.newsbo ul li a:hover {
+    color: #333;
+    text-decoration: none
+}
+
+.newsbotitle {
+    text-indent: 1em;
+    width: 70%;
+    float: left;
+    background: url("../images/index_22.jpg")/*tpa=http://www.decard.com/template/CN/images/index_22.jpg*/ no-repeat;
+    background-position: 10px center;
+    text-indent: 1.8em
+}
+
+.newsbotitle1 {
+    text-indent: 1em;
+    width: 90%;
+    float: left;
+    background: url("../images/index_23.jpg")/*tpa=http://www.decard.com/template/CN/images/index_23.jpg*/ no-repeat;
+    background-position: 10px center;
+    text-indent: 2.8em
+}
+
+.newsbotime1 {
+    width: 10%;
+    text-align: right;
+    float: left;
+    font-size: 10px;
+    color: #e98d2a
+}
+
+.ser {
+    width: 760px;
+    float: left;
+}
+
+.ser ul {
+    border: 1px #E0E0E0 solid;
+    height: 130px;
+    margin-bottom: 8px
+}
+
+.ser ul li {
+    float: left
+}
+
+.serpic {
+    width: 120px;
+    height: 120px;
+    margin: 4px;
+    display: inline;
+    float: left
+}
+
+.serpic img {
+    width: 120px;
+    height: 120px
+}
+
+.sertitle {
+    width: 600px;
+    float: left;
+    margin-left: 10px;
+    display: inline
+}
+
+
+
+/*#nav {
+	Z-INDEX: 1000000; LINE-HEIGHT: 41px; LIST-STYLE-TYPE: none; width:810px; z-index:100000; position: relative
+}
+#nav A {
+	TEXT-ALIGN: center; WIDTH: 120px; DISPLAY: block;z-index:100000
+}
+#nav A:link {
+	COLOR: #6d6d6f; MARGIN-LEFT: 0px; TEXT-DECORATION: none;z-index:100000
+}
+#nav A:visited {
+	COLOR: #6d6d6f; TEXT-DECORATION: none;z-index:100000
+}
+#nav A:hover {
+	COLOR: #065f95; FONT-WEIGHT: bold; TEXT-DECORATION: none;z-index:100000
+}
+#nav LI {
+	Z-INDEX: 1000000; WIDTH: 120px; FLOAT: left; font-size:14px; font-weight:bold;z-index:100000
+}
+#nav LI A:hover {
+	Z-INDEX: 1000000; COLOR: #065f95; font-size:14px; font-weight:bold;z-index:100000; text-decoration:underline
+}
+#nav LI UL {
+	Z-INDEX: 1000000; POSITION: absolute; TEXT-ALIGN: left; FILTER: Alpha(opacity=100); LINE-HEIGHT: 24px; LIST-STYLE-TYPE: none; WIDTH: 120px; LEFT: -999em; float:left;z-index:100000
+}
+#nav LI UL LI {
+	Z-INDEX: 1000000; WIDTH: 120px; BACKGROUND: #f2f2f2; FLOAT: left;  font-weight:100; font-size:12px; font-family:Arial, Helvetica, sans-serif;z-index:100000
+}
+
+
+
+
+
+#nav LI UL A {
+	Z-INDEX: 1000000; TEXT-ALIGN: center; WIDTH: 120px; DISPLAY: block; COLOR: #6d6d6f;z-index:100000
+}
+#nav LI UL A:link {
+	Z-INDEX: 1000000; COLOR: #6d6d6f; TEXT-DECORATION: none;
+}
+#nav LI UL A:visited {
+	Z-INDEX: 1000000; COLOR: #6d6d6f; TEXT-DECORATION: none;
+}
+#nav LI UL A:hover {
+	Z-INDEX: 1000000; BACKGROUND: #999999; COLOR: #f3f3f3; FONT-WEIGHT: normal; TEXT-DECORATION: none;z-index:100000;font-size:12px;
+}
+#nav LI:hover UL {
+	LEFT: auto
+}
+#nav LI.sfhover UL {
+	LEFT: auto
+}
+*/
+
+.zhong_zftop {
+    width: 100%;
+    height: 30px;
+    position: relative;
+    float: left;
+    margin-bottom: 20px;
+    border-bottom: 1px #e98d2a solid;
+}
+
+.menubgon {
+    width: 150px;
+    text-align: center;
+    line-height: 28px;
+    height: 28px;
+    border: 1px #e98d2a solid;
+    float: left;
+    margin-right: 5px;
+    z-index: 1000;
+    cursor: pointer;
+    color: #e98d2a;
+    font-weight: bold;
+    margin-top: 1px;
+    border: 1px #e98d2a solid;
+    border-bottom: 1px #f8f8f8 solid;
+}
+
+.menubgout {
+    width: 150px;
+    text-align: center;
+    line-height: 28px;
+    height: 28px;
+    border: 1px #CCCCCC solid;
+    border-bottom: 1px #e98d2a solid;
+    float: left;
+    margin-right: 5px;
+    margin-top: 1px;
+    cursor: pointer;
+    color: #333333
+}
+
+.zhong_zfz {
+    width: 100%;
+    margin-top: 15px;
+    text-align: left;
+    color: #333
+}
+
+.suckerdiv {
+    float: left;
+    margin-top: 12px
+}
+
+.suckerdiv ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    width: 220px;
+    float: left;
+  /* Width of Menu Items */
+}
+
+.suckerdiv ul li {
+    position: relative;
+}
+	
+/*1st level sub menu style */
+.suckerdiv ul li ul {
+    left: 220px;
+ /* Parent menu width - 1*/
+    position: absolute;
+    width: 220px;
+ /*sub menu width*/
+    top: 0;
+    display: none;
+}
+
+/*All subsequent sub menu levels offset */
+.suckerdiv ul li ul li ul {
+    left: 220px;
+ /* Parent menu width - 1*/
+}
+
+
+
+/* menu links style */
+.suckerdiv ul li a {
+    display: block;
+    height: 36px;
+    background: url("../images/meunout.jpg")/*tpa=http://www.decard.com/template/CN/images/meunout.jpg*/ no-repeat;
+    line-height: 36px;
+    padding-left: 30px;
+    width: 190px;
+    height: 36px;
+}
+
+.suckerdiv ul li a:hover {
+    background: url("../images/meunon.jpg")/*tpa=http://www.decard.com/template/CN/images/meunon.jpg*/ no-repeat;
+    width: 190px;
+    height: 36px;
+    line-height: 36px;
+    padding-left: 30px;
+    color: #FFFFFF;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+
+
+	
+/* Holly Hack for IE \*/
+* html .suckerdiv ul li {
+    float: left;
+    height: 1%;
+}
+
+* html .suckerdiv ul li a {
+    height: 1%;
+}
+/* End */
+
+
+
+.job TABLE TH {
+    BORDER-BOTTOM: #ddd 1px solid;
+    BORDER-LEFT: #ddd 1px solid;
+    BACKGROUND: url("../images/bg20.png")/*tpa=http://www.decard.com/template/CN/images/bg20.png*/ repeat-x;
+    HEIGHT: 30px;
+    COLOR: #898989;
+    BORDER-TOP: #ddd 1px solid;
+    BORDER-RIGHT: #ddd 1px solid
+}
+
+.job TABLE TD {
+    BORDER-BOTTOM: #f2f2f2 1px solid;
+    BORDER-LEFT: #f2f2f2 1px solid;
+    HEIGHT: 30px;
+    COLOR: #898989;
+    BORDER-TOP: #f2f2f2 1px solid;
+    BORDER-RIGHT: #f2f2f2 1px solid
+}
+
+.job TABLE TD.job_td_title {
+    TEXT-ALIGN: left;
+    PADDING-BOTTOM: 0px;
+    PADDING-LEFT: 10px;
+    PADDING-RIGHT: 0px;
+    CURSOR: pointer;
+    PADDING-TOP: 0px
+}
+
+.job TABLE TD.job_td_title IMG {
+    MARGIN: 0px 9px 0px 0px
+}
+
+.job TABLE TD.job_td_title1 A {
+    DISPLAY: inline-block;
+    COLOR: #5b9dca !important
+}
+
+.job TABLE TD.job_td_title1 A:hover {
+    TEXT-DECORATION: underline
+}
+
+.job TABLE TD.job_td_title1 IMG {
+    MARGIN: 0px 7px 0px 0px
+}
+
+.job_txt {
+    TEXT-ALIGN: left;
+    PADDING-BOTTOM: 15px;
+    LINE-HEIGHT: 22px;
+    PADDING-LEFT: 20px;
+    PADDING-RIGHT: 0px;
+    PADDING-TOP: 15px
+}
+
+.job_txt_tr {
+    DISPLAY: none
+}
+
+.job_td_ico2 {
+    DISPLAY: none
+}
+

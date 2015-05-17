@@ -5,7 +5,7 @@ from flask import Blueprint, render_template, request, jsonify, redirect, url_fo
 from ibati.db import sadb as db
 from ibati.models import Category, Label, Post
 
-post = Blueprint('post', __name__)
+post = Blueprint('post', __name__, url_prefix='/post')
 
 
 

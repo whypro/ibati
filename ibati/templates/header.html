@@ -19,6 +19,11 @@
                         {% for category in categories %}
                         <li{% if active == category.name %} class="active"{% endif %}>
                             <a href="{{ url_for('post.index', category=category.name) }}">{{ category.cname }}</a>
+                            <ul>
+                                {% for label in category.labels %}
+                                <li><a href="{{ url_for('post.index', category=category.name, label=label.name) }}">{{ label.cname }}</a></li>
+                                {% endfor %}
+                            </ul>
                         </li>
                         {% endfor %}
                         <li{% if active == 'member' %} class="active"{% endif %}>

@@ -1,14 +1,17 @@
-from flask import Flask
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+from flask import Flask, flash, redirect, url_for
+from flask.ext.login import LoginManager, current_user
 import logging
 from logging import FileHandler, Formatter
 
 from ibati import views
 from ibati.db import sadb as db
-from ibati.models import Category
+from ibati.models import Category, User
 
 def create_app(config=None):
     app = Flask(__name__)
-    
+
     # config
     app.config.from_object(config)
 
@@ -28,6 +31,9 @@ def create_app(config=None):
 
     # app context
     init_app_context(app)
+
+    # flask-login
+    configure_flasklogin(app)
 
     return app
 
@@ -52,3 +58,18 @@ def init_app_context(app):
     def inject_categories():
         categories = Category.query.order_by(Category.order.asc()).all()
         return dict(categories=categories)
+
+
+def configure_flasklogin(app):
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        print user_id
+        return User.query.get(user_id)
+
+    @login_manager.unauthorized_handler
+    def unauthorized():
+        flash('请先登录', 'warning')
+        return '请先登录'

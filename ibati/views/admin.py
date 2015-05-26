@@ -8,7 +8,13 @@ from ibati.models import Category, Label, Post, JobTitle, Member, Slider
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
 
-@admin.route('/init')
+
+@admin.route('/')
+def index():
+    return render_template('admin/index.html')
+
+
+@admin.route('/init/')
 def create_all():
     db.drop_all()
     db.create_all()
@@ -82,15 +88,15 @@ def init_member(session):
 
 def init_home(session):
     slider_1 = Slider(
-        title='心肌细胞实验', 
-        subtitle='心肌细胞电学特性和力学特性就耦合起来。但由于心血管疾病会改变力学或电学特性，因此这就很有研究的价值。', 
+        title='心肌细胞实验',
+        subtitle='心肌细胞电学特性和力学特性就耦合起来。但由于心血管疾病会改变力学或电学特性，因此这就很有研究的价值。',
         image='img/demo/20134210431480357.jpg', order=100, enable=True
     )
     session.add(slider_1)
 
     slider_2 = Slider(
-        title='皮肤热疼痛实验', 
-        subtitle='我们团队首次发现热刺激下组织的疼痛水平不仅取决于温度变化，而且受温度变化诱发的热应力的影响，力学因素在组织疼痛中发挥着关键作用，由此建立了热-力-电（疼痛）多场耦合行为理论，为有效指导激光、微波等临床热疗技术及镇痛方案提供了理论依据。', 
+        title='皮肤热疼痛实验',
+        subtitle='我们团队首次发现热刺激下组织的疼痛水平不仅取决于温度变化，而且受温度变化诱发的热应力的影响，力学因素在组织疼痛中发挥着关键作用，由此建立了热-力-电（疼痛）多场耦合行为理论，为有效指导激光、微波等临床热疗技术及镇痛方案提供了理论依据。',
         image='img/demo/201342121154745276.png', order=200, enable=True
     )
     session.add(slider_2)

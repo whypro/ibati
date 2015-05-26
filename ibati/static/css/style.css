@@ -583,7 +583,7 @@ a.wen22:hover {
 .suckerdiv ul li {
     position: relative;
 }
-	
+
 /*1st level sub menu style */
 .suckerdiv ul li ul {
     left: 220px;
@@ -627,7 +627,7 @@ a.wen22:hover {
 
 
 
-	
+
 /* Holly Hack for IE \*/
 * html .suckerdiv ul li {
     float: left;
@@ -702,4 +702,3 @@ a.wen22:hover {
 .job_td_ico2 {
     DISPLAY: none
 }
-

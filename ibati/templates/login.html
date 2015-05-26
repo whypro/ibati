@@ -1,44 +1,66 @@
 {% extends 'base.html' %}
 {% block title %}西安交通大学生物医学分析技术与仪器研究所{% endblock %}
 {% block content %}
+        <div class="banner" style="margin-top:6px"><img src="/template/CN/images/ban7.jpg" width="1002" height="122" /></div>
 
-        <!-- Page Title -->
-		<div class="section section-breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<h1>管理员登录</h1>
-					</div>
-				</div>
-			</div>
-		</div>
-        
-        <div class="section">
-	    	<div class="container">
-				<div class="row">
-					<div class="col-sm-offset-3 col-sm-6">
-						<div class="basic-login">
-							<form role="form" role="form">
-								<div class="form-group">
-		        				 	<label for="login-username"><i class="icon-user"></i> <b>用户名或邮箱</b></label>
-									<input class="form-control" id="login-username" type="text" placeholder="">
-								</div>
-								<div class="form-group">
-		        				 	<label for="login-password"><i class="icon-lock"></i> <b>密码</b></label>
-									<input class="form-control" id="login-password" type="password" placeholder="">
-								</div>
-								<div class="form-group">
-									<label class="checkbox">
-										<input type="checkbox"> 记住我
-									</label>
-									<a href="page-password-reset.html" class="forgot-password">忘记密码？</a>
-									<button type="submit" class="btn pull-right">登录</button>
-									<div class="clearfix"></div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+        <div class="aboutz">
+            <div class="aboutzleft">
+                <div class="aboutzleftdao">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+                        <tr>
+                            <td width="6%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
+                            <td width="94%">登录<font class="wen3">Login</font></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="aboutzleftmeun">
+                    <ul>
+
+                    </ul>
+                </div>
+            </div>
+            <!--left-->
+            <div class="aboutrig">
+                <div class="aboutrigdao">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="2%">
+                                <img src="{{ url_for('static', filename='images/li2.jpg') }}" width="11" height="11" />
+                            </td>
+                            <td width="36%">
+                                <font class="wen4">登录</font>
+                            </td>
+                            <td width="62%" align="right">
+                                <div align="right" class="wz004">
+                                    <img src="{{ url_for('static', filename='images/index_21.jpg') }}" /> 您的位置：<a href="{{ url_for('home.index') }}">首页</a>
+                                    <img src="{{ url_for('static', filename='images/jiao.gif') }}" /><a href="">登录</a>
+
+                           </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="left"><img src="{{ url_for('static', filename='images/rigxian.jpg') }}" /></div>
+                <div class="aboutrignei">
+                    <form action="{{ url_for('home.login') }}" method="post">
+                        <div class="form-group">
+                            <label for="username"><i class="icon-user"></i> <b>用户名</b></label>
+                            <input class="form-control" id="username" name="username" type="text" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label for="password"><i class="icon-lock"></i> <b>密&emsp;码</b></label>
+                            <input class="form-control" id="password" name="password" type="password" placeholder="">
+                        </div>
+                        <div class="form-group">
+                            <label class="checkbox">
+                                <input type="checkbox"> 记住我
+                            </label>
+                            <a href="page-password-reset.html" class="forgot-password">忘记密码？</a>
+                            <button type="submit" class="btn pull-right">登录</button>
+                            <div class="clearfix"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="both"></div>
+        </div>
 {% endblock %}

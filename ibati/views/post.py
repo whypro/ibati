@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort
 
-from ibati.db import sadb as db
+from ibati.extensions import db
 from ibati.models import Category, Label, Post
 
 post = Blueprint('post', __name__, url_prefix='/post')

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ibati.db import sadb as db
+from ibati.extensions import db
 import datetime
 
 

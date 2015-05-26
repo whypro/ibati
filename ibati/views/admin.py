@@ -5,7 +5,7 @@ import hashlib
 from flask import Blueprint, render_template, request, redirect, url_for, abort, current_app, session, jsonify
 from flask.ext.login import login_user, logout_user, login_required, current_user
 
-from ibati.db import sadb as db, upload_set
+from ibati.extensions import db, upload_set
 from ibati.models import Category, Label, Post, JobTitle, Member, Slider, User
 
 

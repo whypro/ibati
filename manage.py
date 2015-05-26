@@ -10,7 +10,7 @@ import subprocess
 import os
 from flask.ext.script import Manager, Server
 from flask.ext.migrate import Migrate, MigrateCommand
-from ibati.db import sadb as db
+from ibati.extensions import db
 
 migrate = Migrate(app, db)
 manager = Manager(app)

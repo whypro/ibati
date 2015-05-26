@@ -7,7 +7,7 @@ import logging
 from logging import FileHandler, Formatter
 
 from ibati import views
-from ibati.db import sadb as db, upload_set
+from ibati.extensions import db, upload_set
 from ibati.models import Category, User
 
 

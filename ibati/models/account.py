@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # from __future__ import unicode_literals
 from flask.ext.login import UserMixin
-from ibati.db import sadb as db
+from ibati.extensions import db
 
 class User(db.Model, UserMixin):
     __tablename__ = 'ibati_user'

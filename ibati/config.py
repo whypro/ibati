@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import os
+
 
 class Config(object):
     SECRET_KEY = 'Institute of Biomedical Analytical Technology and Instrumentation'
@@ -14,11 +16,14 @@ class Config(object):
 
     # FLASK-SQLALCHEMY
     SQLALCHEMY_DATABASE_URI = 'mysql://{username}:{password}@{host}:{port}/{database}?charset=utf8'.format(
-        username=DB_USERNAME, 
+        username=DB_USERNAME,
         password=DB_PASSWORD,
-        host=DB_HOST, 
+        host=DB_HOST,
         port=DB_PORT,
         database=DB_DATABASE
     )
     # Flask-SQLAlchemy Debugging Option
     # SQLALCHEMY_ECHO = True
+
+    # Flask-Uploads
+    UPLOADS_DEFAULT_DEST = os.path.realpath('uploads')

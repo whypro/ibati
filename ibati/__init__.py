@@ -2,12 +2,14 @@
 from __future__ import unicode_literals
 from flask import Flask, flash, redirect, url_for
 from flask.ext.login import LoginManager, current_user
+from flask.ext.uploads import configure_uploads, patch_request_class
 import logging
 from logging import FileHandler, Formatter
 
 from ibati import views
-from ibati.db import sadb as db
+from ibati.db import sadb as db, upload_set
 from ibati.models import Category, User
+
 
 def create_app(config=None):
     app = Flask(__name__)
@@ -33,7 +35,11 @@ def create_app(config=None):
     init_app_context(app)
 
     # flask-login
-    configure_flasklogin(app)
+    configure_login(app)
+
+    # flask-uploads
+    configure_uploads(app, (upload_set, ))
+    patch_request_class(app)    # default 16M limit
 
     return app
 
@@ -60,7 +66,7 @@ def init_app_context(app):
         return dict(categories=categories)
 
 
-def configure_flasklogin(app):
+def configure_login(app):
     login_manager = LoginManager()
     login_manager.init_app(app)
 
@@ -71,5 +77,4 @@ def configure_flasklogin(app):
 
     @login_manager.unauthorized_handler
     def unauthorized():
-        flash('请先登录', 'warning')
-        return '请先登录'
+        return redirect(url_for('admin.login'))

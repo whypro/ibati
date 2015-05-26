@@ -1,17 +1,60 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from flask import Blueprint, render_template, request, redirect, url_for, abort, current_app, session, jsonify
+import hashlib
 
-from ibati.db import sadb as db
-from ibati.models import Category, Label, Post, JobTitle, Member, Slider
+from flask import Blueprint, render_template, request, redirect, url_for, abort, current_app, session, jsonify
+from flask.ext.login import login_user, logout_user, login_required, current_user
+
+from ibati.db import sadb as db, upload_set
+from ibati.models import Category, Label, Post, JobTitle, Member, Slider, User
 
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
 
 
 @admin.route('/')
+@login_required
 def index():
     return render_template('admin/index.html')
+
+
+@admin.route('/upload/', methods=['POST'])
+@login_required
+def upload():
+    # print request.form
+    # rint request.files['imgFile']
+    if 'imgFile' in request.files:
+        # TODO: 应该压缩一下图片
+        filename = upload_set.save(request.files['imgFile'])
+        # print upload_set.path(filename)
+        # print upload_set.url(filename)
+        return jsonify(error=0, url=upload_set.url(filename))
+    return jsonify(error=1, message='upload failed')
+
+
+@admin.route('/login/', methods=['GET', 'POST'])
+def login():
+    # 已登录用户则返回首页
+    if current_user.is_authenticated():
+        return redirect(url_for('home.index'))
+
+    if request.method == 'POST':
+        if 'username' in request.form and 'password' in request.form:
+            user = User.query.filter_by(
+                username=request.form['username'],
+                password=hashlib.md5(request.form['password']).hexdigest()
+            ).first()
+            if user:
+                login_user(user)
+                return redirect(url_for('home.index'))
+    return render_template('admin/login.html')
+
+
+@admin.route("/logout/")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('home.index'))
 
 
 @admin.route('/init/')

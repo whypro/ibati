@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 import hashlib
+import datetime
 
 from flask import Blueprint, render_template, request, redirect, url_for, abort, current_app, session, jsonify
 from flask.ext.login import login_user, logout_user, login_required, current_user
@@ -69,9 +70,21 @@ def post(page):
     )
 
 
-@admin.route('/post/<int:id>/edit/')
+@admin.route('/post/<int:id>/edit/', methods=['GET', 'POST'])
 def edit_post(id):
-    return render_template('admin/post-edit.html')
+    p = Post.query.get_or_404(id)
+
+    if request.method == 'POST':
+        title = request.form.get('title')
+        content = request.form.get('content')
+        p.title = title
+        p.content = content
+        p.update_date = datetime.datetime.now()
+
+        db.session.add(p)
+        db.session.commit()
+
+    return render_template('admin/post-edit.html', post=p)
 
 
 @admin.route('/init/')
@@ -170,6 +183,13 @@ def init_home(session):
         image='images/content/052210.jpg', order=200, enable=True
     )
     session.add(slider_2)
+
+    slider_3 = Slider(
+        title='标题3',
+        subtitle='',
+        image='images/content/051903.jpg', order=300, enable=True
+    )
+    session.add(slider_3)
 
     session.commit()
 

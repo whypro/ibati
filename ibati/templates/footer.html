@@ -1,7 +1,7 @@
         <div class="down">
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td><a href="index.aspx" class="wen1">点击回到首页>></a></td>
+                    <td><a href="{{ url_for('home.index') }}" class="wen1">点击回到首页>></a></td>
                     <td align="right"><a href="about.aspx" class="wen2">关于我们</a> | <a href="news.aspx" class="wen2">新闻资讯</a> | <a href="product.aspx" class="wen2">产品与解决方案</a> | <a href="service.aspx" class="wen2">服务与支持</a> |  <a href="about_view.aspx?cate_id=66" class="wen2">人才招聘</a> | <a href="contact.aspx" class="wen2">联系我们</a> | <a href="message.aspx" class="wen2">在线留言</a></td>
                 </tr>
             </table>
@@ -11,7 +11,9 @@
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td width="60%">&copy; 2015 Institute of Biomedical Analytical Technology and Instrumentation. All rights reserved.</td>
+                    {#
                     <td width="13%" align="right"><img src="{{ url_for('static', filename='images/xialogo.jpg') }}" /></td>
+                    #}
                     <td width="27%" align="right">地址：陕西省西安市咸宁西路28号</td>
                 </tr>
             </table>

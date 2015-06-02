@@ -2,16 +2,17 @@
 {% block title %}西安交通大学生物医学分析技术与仪器研究所{% endblock %}
 {% block content %}
         <div class="banner">
-        <!-- indexCon start -->
-        <div class="indexCon fl">
-            <div class="flashBanner">
-                <img class="bigImg" width="1002" height="339" />
+            <!-- indexCon start -->
+            <div class="indexCon fl">
+                <div class="flashBanner">
+                    <img class="bigImg" width="1002" height="339" />
                     <div class="mask">
                         {% for slider in sliders %}
                         <img src="{{ url_for('static', filename=slider.image) }}" uri="{{ url_for('static', filename=slider.image) }}" link="#"  width="60" height="22" style="border:2px #CCCCCC solid;" />
                         {% endfor %}
+                    </div>
                 </div>
             </div>
+            <!-- indexCon end -->
         </div>
-        <!-- indexCon end -->
 {% endblock %}

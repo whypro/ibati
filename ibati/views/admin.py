@@ -50,11 +50,28 @@ def login():
     return render_template('admin/login.html')
 
 
-@admin.route("/logout/")
+@admin.route('/logout/')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('home.index'))
+
+
+@admin.route('/post/', defaults={'page': 1})
+@admin.route('/post/<int:page>/')
+def post(page):
+    pagination = Post.query.paginate(page, per_page=current_app.config['POSTS_PER_PAGE'])
+    posts = pagination.items
+
+    return render_template(
+        'admin/posts.html',
+        active='admin', label_active='post', posts=posts, pagination=pagination
+    )
+
+
+@admin.route('/post/<int:id>/edit/')
+def edit_post(id):
+    return render_template('admin/post-edit.html')
 
 
 @admin.route('/init/')

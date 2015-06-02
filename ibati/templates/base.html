@@ -10,8 +10,12 @@
 
     <link href="{{ url_for('static', filename='css/index.css') }}" type="text/css" rel="stylesheet" />
 
+    {% block css %}{% endblock %}
+
     <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.4.4.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/lrtk.js') }}"></script>
+
+    {% block script %}{% endblock %}
 
     <body>
         <script type="text/javascript" src="{{ url_for('static', filename='js/javascript100.min.js') }}"></script>

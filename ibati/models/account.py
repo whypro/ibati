@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # from __future__ import unicode_literals
+import hashlib
 from flask.ext.login import UserMixin
 from ibati.extensions import db
 

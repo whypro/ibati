@@ -27,3 +27,5 @@ class Config(object):
 
     # Flask-Uploads
     UPLOADS_DEFAULT_DEST = os.path.realpath('uploads')
+
+    POSTS_PER_PAGE = 10

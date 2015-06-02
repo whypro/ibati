@@ -1,156 +1,61 @@
 {% extends 'base.html' %}
 {% block title %}西安交通大学生物医学分析技术与仪器研究所{% endblock %}
 {% block content %}
+	<div class="banner" style="margin-top:6px"><img src="{{ url_for('static', filename='images/ban6.jpg') }}" width="1002" height="122" /></div>
 
-        <!-- Page Title -->
-		<div class="section section-breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<h1>新闻</h1>
-					</div>
-				</div>
-			</div>
-		</div>
-        
-        <div class="section">
-	    	<div class="container">
-				<div class="row">
-					<!-- Sidebar -->
-					<div class="col-sm-3 blog-sidebar">
-						<form>
-							<div class="input-group">
-								<input class="form-control input-md" id="appendedInputButtons" type="text">
-								<span class="input-group-btn">
-									<button class="btn btn-md" type="button">搜索</button>
-								</span>
-							</div>
-						</form>
-						<hr />
-						<ul class="nav nav-pills nav-stacked">
-							{% for label in category.labels %}
-                            <li{% if label_active == label.name %} class="active"{% endif %}><a href="{{ url_for('post.index', category=category.name, label=label.name) }}">{{ label.cname }}</a></li>
-                            {% endfor %}
-						</ul>
-					</div>
-					<!-- End Sidebar -->
-					<div class="col-sm-9">
-						<div class="blog-post blog-single-post">
-							<div class="single-post-title">
-								<h3>{{ post.title }}</h3>
-							</div>
-							<div class="single-post-info">
-								<i class="glyphicon glyphicon-time"></i>2015-05-12&emsp;
-								<a href="#" title="Show Comments"><i class="glyphicon glyphicon-comment"></i>11</a>
-							</div>
-							{#
-							<div class="single-post-image">
-								<img src="../../static/img/blog-large.jpg" alt="Post Title">
-							</div>
-							#}
-							<div class="single-post-content">
-								{{ post.content }}
-							</div>
-							{#
-							<!-- Comments -->
-							<div class="post-coments">
-								<h4>Comments (53)</h4>
-								<ul class="post-comments">
-									<li>
-										<div class="comment-wrapper">
-											<div class="comment-author"><img src="../../static/img/user1.jpg" alt="User Name"> User Name</div>
-											<p>
-												Morbi eleifend congue elit nec sagittis. Praesent aliquam lobortis tellus, nec consequat massa ornare vitae. Ut fermentum justo vel venenatis eleifend. Fusce id magna eros. Interdum et malesuada fames ac ante ipsum primis in faucibus.
-											</p>
-											<!-- Comment Controls -->
-											<div class="comment-actions">
-												<span class="comment-date">June 10th, 2013 3:16 pm</span>
-												<a href="#" data-toggle="tooltip" data-original-title="Vote Up" class="show-tooltip"><i class="glyphicon glyphicon-thumbs-up"></i></a>
-												<a href="#" data-toggle="tooltip" data-original-title="Vote Down" class="show-tooltip"><i class="glyphicon glyphicon-thumbs-down"></i></a>
-												<span class="label label-success">+8</span>
-												<a href="#" class="btn btn-micro btn-grey comment-reply-btn"><i class="glyphicon glyphicon-share-alt"></i> Reply</a>
-											</div>
-										</div>
-									</li>
-									<li>
-										<ul>
-											<li>
-												<div class="comment-wrapper">
-													<div class="comment-author"><img src="../../static/img/user2.jpg" alt="User Name"> User Name</div>
-													<p>
-														Vivamus euismod elit ac libero facilisis tristique. Duis mollis non ligula vel tincidunt. Nulla consectetur libero id nunc ornare, vel vulputate tellus mollis. Sed quis nulla magna.
-													</p>
-													<!-- Comment Controls -->
-													<div class="comment-actions">
-														<span class="comment-date">June 10th, 2013 3:16 pm</span>
-														<a href="#" data-toggle="tooltip" data-original-title="Vote Up" class="show-tooltip"><i class="glyphicon glyphicon-thumbs-up"></i></a>
-														<a href="#" data-toggle="tooltip" data-original-title="Vote Down" class="show-tooltip"><i class="glyphicon glyphicon-thumbs-down"></i></a>
-														<span class="label label-danger">-2</span>
-														<a href="#" class="btn btn-micro btn-grey comment-reply-btn"><i class="glyphicon glyphicon-share-alt"></i> Reply</a>
-													</div>
-												</div>
-											</li>
-										</ul>
-									</li>
-									<li>
-										<div class="comment-wrapper">
-											<div class="comment-author"><img src="../../static/img/user5.jpg" alt="User Name"> User Name</div>
-											<p>
-												Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vel magna lectus.
-											</p>
-											<!-- Comment Controls -->
-											<div class="comment-actions">
-												<span class="comment-date">June 10th, 2013 3:16 pm</span>
-												<a href="#" data-toggle="tooltip" data-original-title="Vote Up" class="show-tooltip"><i class="glyphicon glyphicon-thumbs-up"></i></a>
-												<a href="#" data-toggle="tooltip" data-original-title="Vote Down" class="show-tooltip"><i class="glyphicon glyphicon-thumbs-down"></i></a>
-												<span class="label label-success">+8</span>
-												<a href="#" class="btn btn-micro btn-grey comment-reply-btn"><i class="glyphicon glyphicon-share-alt"></i> Reply</a>
-											</div>
-										</div>
-									</li>
-								</ul>
-								<!-- Pagination -->
-								<div class="pagination-wrapper ">
-									<ul class="pagination pagination-sm">
-										<li class="disabled"><a href="#">Previous</a></li>
-										<li class="active"><a href="#">1</a></li>
-										<li><a href="#">2</a></li>
-										<li><a href="#">3</a></li>
-										<li><a href="#">4</a></li>
-										<li><a href="#">5</a></li>
-										<li><a href="#">Next</a></li>
-									</ul>
-								</div>
-								<!-- Comments Form -->
-								<h4>Leave a Comment</h4>
-								<div class="comment-form-wrapper">
-									<form class="">
-				        				<div class="form-group">
-				        				 	<label for="comment-name"><i class="glyphicon glyphicon-user"></i> <b>Your name</b></label>
-											<input class="form-control" id="comment-name" type="text" placeholder="">
-										</div>
-										<div class="form-group">
-											<label for="comment-email"><i class="glyphicon glyphicon-envelope"></i> <b>Your Email</b></label>
-											<input class="form-control" id="comment-email" type="text" placeholder="">
-										</div>
-										<div class="form-group">
-											<label for="comment-message"><i class="glyphicon glyphicon-comment"></i> <b>Your Message</b></label>
-											<textarea class="form-control" rows="5" id="comment-message"></textarea>
-										</div>
-										<div class="form-group">
-											<button type="submit" class="btn btn-large pull-right">Send</button>
-										</div>
-										<div class="clearfix"></div>
-				        			</form>
-								</div>
-								<!-- End Comment Form -->
-							</div>
-							<!-- End Comments -->
-							#}
-						</div>
-					</div>
-					<!-- End Blog Post -->
-				</div>
-			</div>
-	    </div>
+    <div class="aboutz">
+        <div class="aboutzleft">
+            <div class="aboutzleftdao">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+                    <tr>
+                        <td width="6%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
+                        <td width="94%">{{ category.cname }} <font class="wen3">{{ category.name.capitalize() }}</font></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="aboutzleftmeun">
+                <ul>
+                    {% for label in category.labels %}
+                        <li{% if label_active == label.name %} class="active"{% endif %}><a title="{{ label.name }}" href="{{ url_for('post.index', category=category.name, label=label.name) }}">{{ label.cname }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <!--left-->
+        <div class="aboutrig">
+            <div class="aboutrigdao">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td width="2%">
+                            {% if label %}
+                            <img src="{{ url_for('static', filename='images/li2.jpg') }}" width="11" height="11" />
+                            {% endif %}
+                        </td>
+                        <td width="36%">
+                            {% if label %}
+                            <font class="wen4">{{ label.cname }}</font>
+                            {% endif %}
+                        </td>
+                        <td width="62%" align="right">
+                            <div align="right" class="wz004">
+                                <img src="{{ url_for('static', filename='images/index_21.jpg') }}" /> 您的位置：<a href="{{ url_for('home.index') }}">首页</a>
+                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" /><a href="{{ url_for('post.index', category=category.name) }}">{{ post.category.cname }}</a>
+                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" /><a href="{{ url_for('post.index', category=category.name, label=post.label.name) }}">{{ post.label.cname }}</a>
+                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" />详情
+                            </div>
+                       </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="left"><img src="{{ url_for('static', filename='images/rigxian.jpg') }}" /></div>
+            <div class="aboutrignei">
+            	<h4 style="text-align: center; line-height:40px; color:#dd2d20; font-size:20px">{{ post.title }}</h4>
+            	<div style="text-align: right;"><span>{{ post.create_date.strftime('%Y-%m-%d') }}</span></div>
+            	<div>
+            		{{ post.content|safe }}
+            	</div>
+        	</div>
+    	</div>
+    	<div class="both"></div>
+
 {% endblock %}

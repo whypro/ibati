@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort, current_app
 
 from ibati.extensions import db
 from ibati.models import Category, Label, Post
@@ -8,10 +8,11 @@ from ibati.models import Category, Label, Post
 post = Blueprint('post', __name__, url_prefix='/post')
 
 
-
-@post.route('/<category>/')
-@post.route('/<category>/<label>/')
-def index(category, label=None):
+@post.route('/<category>/', defaults={'page': 1})
+@post.route('/<category>/page/<int:page>/')
+@post.route('/<category>/<label>/', defaults={'page': 1})
+@post.route('/<category>/<label>/page/<int:page>/')
+def index(category, page, label=None):
     cat = Category.query.filter(Category.name==category).one()
 
     qry = Post.query.filter(Post.category_id==cat.id)
@@ -20,10 +21,13 @@ def index(category, label=None):
         qry = qry.filter(Post.label_id==lab.id)
     else:
         lab = None
-    posts = qry.all()
+
+    pagination = qry.paginate(page, per_page=current_app.config['POSTS_PER_PAGE'])
+    posts = pagination.items
+
     return render_template(
         'post/posts.html', 
-        active=cat.name, label_active=label, category=cat, label=lab, posts=posts
+        active=cat.name, label_active=label, category=cat, label=lab, posts=posts, pagination=pagination
     )
 
 

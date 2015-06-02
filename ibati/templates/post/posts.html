@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}西安交通大学生物医学分析技术与仪器研究所{% endblock %}
 {% block content %}
-    <div class="banner" style="margin-top:6px"><img src="/template/CN/images/ban7.jpg" width="1002" height="122" /></div>
+    <div class="banner" style="margin-top:6px"><img src="{{ url_for('static', filename='images/ban6.jpg') }}" width="1002" height="122" /></div>
 
     <div class="aboutz">
         <div class="aboutzleft">
@@ -68,86 +68,44 @@
                 {% endfor %}
 
                 <p align="center">
-<style>
-<!--
-#dcms_pager .pages {border:none;text-transform:uppercase;font-size:12px;margin:10px 0 10px 0;padding:0;height:20px;clear:both;text-align:center;}
-#dcms_pager .pages a {border:1px solid #ccc;text-decoration:none;margin:0 5px 0 0;padding:0 3px 0 3px;font-size:12px;height:16px;line-height:16px;}
-#dcms_pager .pages a:hover {border:1px solid #aeaeae;}
-#dcms_pager .pages .pgempty {border:1px solid #eee;color:#eee;}
-#dcms_pager .pages .pgcurrent {border:1px solid #aeaeae;color:#000;font-weight:bold;background-color:#eee;}
--->
-</style>
-<div id="dcms_pager"  align="center">
-  <div class=pages><a class=pgnext>first</a><a class=pgnext>prev</a><a>1</a><a>2</a><a>3</a><a>4</a><a class="page-number pgcurrent">5</a><a>6</a><a>7</a><a>8</a><a>9</a><a class=pgnext>next</a><a class=pgnext>last</a></div>
-</div>
-<script>renderDcmsPager('首页','上一页','下一页','尾页');</script>
 
-</p>
+                    <style>
+                        <!--
+                        #dcms_pager .pages {border:none;text-transform:uppercase;font-size:12px;margin:10px 0 10px 0;padding:0;height:20px;clear:both;text-align:center;}
+                        #dcms_pager .pages a {border:1px solid #ccc;text-decoration:none;margin:0 5px 0 0;padding:0 3px 0 3px;font-size:12px;height:16px;line-height:16px;}
+                        #dcms_pager .pages a:hover {border:1px solid #aeaeae;}
+                        #dcms_pager .pages .pgempty {border:1px solid #eee;color:#eee;}
+                        #dcms_pager .pages .pgcurrent {border:1px solid #aeaeae;color:#000;font-weight:bold;background-color:#eee;}
+                        -->
+                    </style>
+
+                    {% if pagination.pages < 2 %}
+                    {% else %}
+                        <div id="dcms_pager" align="center">
+                            <div class=pages>
+                                <a class=pgnext href="{{ url_for('post.index', category=active, label=label_active) }}">首页</a>
+                                <a class="pgnext"{%- if pagination.has_prev %} href="{{ url_for('post.index', category=active, label=label_active, page=pagination.page-1) }}"{% endif -%}>上一页</a>
+                                {% for page in pagination.iter_pages(2, 2, 2, 2) %}
+                                {% if page %}
+                                    <a{%- if page == pagination.page %} class="page-number pgcurrent"{%- endif %} href="{{ url_for('post.index', category=active, label=label_active, page=page) }}" >{{ page }}</a>
+                                {% else %}
+                                    ...
+                                {% endif %}
+                                {% endfor %}
+
+                                <a class=pgnext{%- if pagination.has_next %} href="{{ url_for('post.index', category=active, label=label_active, page=pagination.page+1) }}"{% endif -%}>下一页</a>
+                                <a class=pgnext href="{{ url_for('post.index', category=active, label=label_active, page=pagination.pages) }}">尾页</a>
+                            </div>
+                        </div>
 
 
+                    {% endif %}
 
+
+                </p>
+            </div>
         </div>
+        <div class="both"></div>
     </div>
 
-
-    <div class="both"></div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-		{#
-        <!-- Page Title -->
-		<div class="section section-breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<h1>{{ category.cname }}</h1>
-					</div>
-				</div>
-			</div>
-		</div>
-
-        <div class="section">
-	    	<div class="container">
-	    		<div class="row">
-	    			<div class="col-md-3">
-						<ul class="nav nav-pills nav-stacked">
-                            {% for label in category.labels %}
-                            <li{% if label_active == label.name %} class="active"{% endif %}><a href="{{ url_for('post.index', category=category.name, label=label.name) }}">{{ label.cname }}</a></li>
-                            {% endfor %}
-						</ul>
-					</div>
-	    			<div class="col-md-9">
-	    				<table class="events-list">
-                            {% for post in posts %}
-	    					<tr>
-	    						<td>
-	    							<div class="event-date">{{ post.create_date }}</div>
-	    						</td>
-	    						<td>
-	    							<a href="{{ url_for('post.detail', id=post.id) }}">{{ post.title }}</a>
-	    						</td>
-	    						<!-- <td class="event-author hidden-xs"><i class="icon-map-marker"></i>{{ post.author }}</td> -->
-	    					</tr>
-                            {% endfor %}
-	    				</table>
-	    			</div>
-	    		</div>
-			</div>
-		</div>
-		#}
-
-<script language="javascript" type="text/javascript">
-		function urltest() {
-  		window.location.href = 'search.aspx?model=' + escape($("#model").val()) + "&commu=" + escape($("#commu").val()) + "&use=" + escape($("#use").val());
-	}
-	</script>
 {% endblock %}

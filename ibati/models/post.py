@@ -39,4 +39,5 @@ class Post(db.Model):
     label = db.relationship('Label', backref='posts')
 
     thumbnail = db.Column(db.String(255))
+    click_count = db.Column(db.Integer, default=0)
 

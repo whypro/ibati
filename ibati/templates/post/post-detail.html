@@ -50,7 +50,10 @@
             <div class="left"><img src="{{ url_for('static', filename='images/rigxian.jpg') }}" /></div>
             <div class="aboutrignei">
             	<h4 style="text-align: center; line-height:40px; color:#dd2d20; font-size:20px">{{ post.title }}</h4>
-            	<div style="text-align: right;"><span>{{ post.create_date.strftime('%Y-%m-%d') }}</span></div>
+                <div style="text-align: center; color: #999;">
+                    发布时间：{{ post.create_date.strftime('%Y-%m-%d %H:%M') }}&emsp;&emsp;
+                    点击次数：{{ post.click_count }}
+                </div>
             	<div>
             		{{ post.content|safe }}
             	</div>

@@ -55,12 +55,12 @@
                     <tr>
                         <td width="15%">
                             <a href="news_show.aspx?NewsId=130">
-                                <img src="/Upload/股票页面-09482678882.jpg" width="135" height="88"  style=" padding:2px;border:1px #dfdfdf solid;">
+                                <img src="{{ post.thumbnail|d(url_for('static', filename='images/post_tb_default.jpg'), True) }}" width="135" height="88"  style=" padding:2px;border:1px #dfdfdf solid;">
                             </a>
                         </td>
                         <td width="85%" valign="top">
-                            <p style="font-weight:bold; ">&nbsp;&nbsp;标题：<a href="{{ url_for('post.detail', id=post.id) }}" style="color:#666666;">{{ post.title }}</a></p>
-                            <p style="height:50px;">&nbsp;&nbsp;2015年5月7日，深圳市德卡科技股份有限公司成功在全国中小企业股份转让系统（新三板）挂牌上市，证券简称“德卡科技”，股票代码为832423。德卡科技作为国内智能卡读写机具的领军企业，一直引领着国内智能身份识别终端和电子支付终端应用…</p>
+                            <p style="font-weight:bold; ">&emsp;&emsp;标题：<a href="{{ url_for('post.detail', id=post.id) }}" style="color:#666666;">{{ post.title }}</a></p>
+                            <p style="height:50px;">&emsp;&emsp;{{ post.content|striptags }}</p>
                             <p style="float:right; margin-right:5px;"><a href="{{ url_for('post.detail', id=post.id) }}" style="color:#f47900;">[查看详情]</a></p>
                         </td>
                     </tr>

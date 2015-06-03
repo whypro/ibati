@@ -38,3 +38,5 @@ class Post(db.Model):
     label_id = db.Column(db.Integer, db.ForeignKey('ibati_label.id'))
     label = db.relationship('Label', backref='posts')
 
+    thumbnail = db.Column(db.String(255))
+

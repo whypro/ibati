@@ -17,103 +17,91 @@
         </div>
 
 
-    <div class="zhongxia">
-	<div class="zhongxialeft">
-    	<div class="zhongxialeftdao">
-    	  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-            <tr>
-              <td width="6%"><img src="/template/CN/images/li.jpg" width="8" height="8" /></td>
-              <td width="78%"><img src="/template/CN/images/souz.jpg" width="58" height="15" /></td>
-              <td width="16%">&nbsp;</td>
-            </tr>
-          </table>
-    	</div>
-        <div class="zxnei">
-  <script language="javascript" type="text/javascript">
-   function urltest() {
-      window.location.href = 'search.aspx?model=' + escape($("#model").val()) + "&commu=" + escape($("#commu").val()) + "&use=" + escape($("#use").val());
-    }
-  </script>
+        <div class="zhongxia">
+            <div class="zhongxialeft">
+                <div class="zhongxialeftdao">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="6%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
+                            <td width="78%"><img src="{{ url_for('static', filename='images/souz.jpg') }}" width="58" height="15" /></td>
+                            <td width="16%">&nbsp;</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="zxnei">
+                    <table width="86%" border="0" cellspacing="0" cellpadding="0" align="center">
+                        <tr>
+                            <td>单位简介</td>
+                        </tr>
+                        <tr>
+                                <td>
+                                <select class="querysel" name="model" id="model">
+                                     <option value="仅Mifare S50/S70">仅Mifare S50/S70</option>
+                                        <option value="ISO14443A 标准">ISO14443A 标准</option>
+                                        <option value="ISO15693标准">ISO15693标准</option>
+                                        <option value="ISO14443A/B,15693全协议">ISO14443A/B,15693全协议</option>
+                                        <option value="EM ID卡">EM ID卡</option>
+                                        <option value="ISO7816接触IC卡">ISO7816接触IC卡</option>
+                                        <option value="第二代身份证">第二代身份证</option>
+                                        <option value="接触卡+射频卡支持">接触卡+射频卡支持</option>
+                                        <option value="磁条卡+接触卡+感应卡支持">磁条卡+接触卡+感应卡支持</option>
+                                        <option value="磁条卡+接触卡+感应卡+二代证支持">磁条卡+接触卡+感应卡+二代证支持</option>
+                                        <option value="超高频芯片18000-6B/6C标准">超高频芯片18000-6B/6C标准</option>
+                                </select></td>
+                              </tr>
+                              <tr>
+                                <td>通讯方式</td>
+                              </tr>
+                              <tr>
+                                <td><select class="querysel" name="commu" id="commu">
+                                        <option value="USB通讯">USB通讯</option>
+                                        <option value="RS232通讯">RS232通讯</option>
+                                        <option value="TCP/IP通讯">TCP/IP通讯</option>
+                                        <option value="GPRS/CDMA无线通讯">GPRS/CDMA无线通讯</option>
+                                        <option value="RS485通讯">RS485通讯</option>
+                                        <option value="Wifi无线通讯">Wifi无线通讯</option>
+                                        <option value="TTL通讯">TTL通讯</option>
+                                        <option value="SPI/I2C通讯">SPI/I2C通讯</option>
+                                        <option value="PS2键盘口通讯">PS2键盘口通讯</option>
+                                        <option value="WG26/34通讯">WG26/34通讯</option>
+                                        <option value="蓝牙通讯">蓝牙通讯</option>
+                                        </select></td>
+                              </tr>
+                              <tr>
+                                <td>使用方式</td>
+                              </tr>
+                              <tr>
+                                <td><select class="querysel" name="use" id="use">
+                                        <option value="固定式读写器">固定式读写器</option>
+                                        <option value="手持式读写器">手持式读写器</option>
+                                        <option value="嵌入式读写器">嵌入式读写器</option>
+                                        <option value="通道式">通道式</option>
+                                        <option value="移动式读写器">移动式读写器</option>
+                                        </select></td>
+                              </tr>
+                              <tr>
+                                <td align="right"><input type="submit" value=""  style="background: url(/template/CN/images/cbtn.jpg) no-repeat;  width:53px; height:23px; border:0px; margin-top:10px; margin-bottom:10px"/  onClick="urltest()"></td>
+                              </tr>
 
+                    </table>
+                </div>
+            </div>
 
-
-
-        	<table width="86%" border="0" cellspacing="0" cellpadding="0" align="center">
-  <tr>
-    <td>支持卡型</td>
-  </tr>
-  <tr>
-    <td>
-    <select class="querysel" name="model" id="model">
-    	 <option value="仅Mifare S50/S70">仅Mifare S50/S70</option>
-            <option value="ISO14443A 标准">ISO14443A 标准</option>
-            <option value="ISO15693标准">ISO15693标准</option>
-            <option value="ISO14443A/B,15693全协议">ISO14443A/B,15693全协议</option>
-            <option value="EM ID卡">EM ID卡</option>
-            <option value="ISO7816接触IC卡">ISO7816接触IC卡</option>
-            <option value="第二代身份证">第二代身份证</option>
-            <option value="接触卡+射频卡支持">接触卡+射频卡支持</option>
-            <option value="磁条卡+接触卡+感应卡支持">磁条卡+接触卡+感应卡支持</option>
-            <option value="磁条卡+接触卡+感应卡+二代证支持">磁条卡+接触卡+感应卡+二代证支持</option>
-            <option value="超高频芯片18000-6B/6C标准">超高频芯片18000-6B/6C标准</option>
-    </select></td>
-  </tr>
-  <tr>
-    <td>通讯方式</td>
-  </tr>
-  <tr>
-    <td><select class="querysel" name="commu" id="commu">
-            <option value="USB通讯">USB通讯</option>
-            <option value="RS232通讯">RS232通讯</option>
-            <option value="TCP/IP通讯">TCP/IP通讯</option>
-            <option value="GPRS/CDMA无线通讯">GPRS/CDMA无线通讯</option>
-            <option value="RS485通讯">RS485通讯</option>
-            <option value="Wifi无线通讯">Wifi无线通讯</option>
-            <option value="TTL通讯">TTL通讯</option>
-            <option value="SPI/I2C通讯">SPI/I2C通讯</option>
-            <option value="PS2键盘口通讯">PS2键盘口通讯</option>
-            <option value="WG26/34通讯">WG26/34通讯</option>
-            <option value="蓝牙通讯">蓝牙通讯</option>
-            </select></td>
-  </tr>
-  <tr>
-    <td>使用方式</td>
-  </tr>
-  <tr>
-    <td><select class="querysel" name="use" id="use">
-            <option value="固定式读写器">固定式读写器</option>
-            <option value="手持式读写器">手持式读写器</option>
-            <option value="嵌入式读写器">嵌入式读写器</option>
-            <option value="通道式">通道式</option>
-            <option value="移动式读写器">移动式读写器</option>
-            </select></td>
-  </tr>
-  <tr>
-    <td align="right"><input type="submit" value=""  style="background: url(/template/CN/images/cbtn.jpg) no-repeat;  width:53px; height:23px; border:0px; margin-top:10px; margin-bottom:10px"/  onClick="urltest()"></td>
-  </tr>
-</table>
-
-
-
-      </div>
-    </div>
-    <!--left-->
-    <Div class="z_z">
-    	<div class="z_zdao">
-        	<table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
-            <tr>
-              <td width="4%"><img src="/template/CN/images/li.jpg" width="8" height="8" /></td>
-              <td width="80%"><img src="/template/CN/images/newsz.jpg" /></td>
-              <td width="16%" align="right"><a href="news.aspx"><img src="/template/CN/images/more.jpg" width="34" height="11" /></a></td>
-            </tr>
-          </table>
-        </div>
-        <div class="z_zimg"><img src="/template/CN/images/newb.jpg" /></div>
-        <div class="z_znews">
-        	<ul>
-
-
-             <li><font class="tim">【2015-05-20】</font><a href="news_show.aspx?NewsId=131"><font class="tim1">德卡科技客户满意度调查</font></a></li>
+            <!--left-->
+            <Div class="z_z">
+                <div class="z_zdao">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+                        <tr>
+                            <td width="4%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
+                            <td width="80%"><img src="{{ url_for('static', filename='images/newsz.jpg') }}" /></td>
+                            <td width="16%" align="right"><a href="news.aspx"><img src="{{ url_for('static', filename='images/more.jpg') }}" width="34" height="11" /></a></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="z_zimg"><img src="{{ url_for('static', filename='images/newb.jpg') }}" /></div>
+                <div class="z_znews">
+                    <ul>
+                        <li><font class="tim">【2015-05-20】</font><a href="news_show.aspx?NewsId=131"><font class="tim1">德卡科技客户满意度调查</font></a></li>
 
 <hr>
 
@@ -127,18 +115,18 @@
     <div class="z_rig">
     	<div class="z_rigdao"><table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
             <tr>
-              <td width="6%"><img src="/template/CN/images/li.jpg" width="8" height="8" /></td>
-              <td width="78%"><img src="/template/CN/images/serz.jpg" /></td>
+              <td width="6%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
+              <td width="78%"><img src="{{ url_for('static', filename='images/serz.jpg') }}" /></td>
               <td width="16%" align="right"></td>
             </tr>
           </table></div>
-          <Div class="z_rigimg"><img src="/template/CN/images/serb.jpg" /></Div>
+          <Div class="z_rigimg"><img src="{{ url_for('static', filename='images/serb.jpg') }}" /></Div>
           <div class="z_rignei">
           	<Ul>
-            	<li><a href="leixing.aspx"><img src="/template/CN/images/s1.jpg" /></a></li>
-                <li><a href="fuwu.aspx"><img src="/template/CN/images/s2.jpg" /></a></li>
-                <li><a href="down.aspx"><img src="/template/CN/images/s3.jpg" /></a></li>
-                <li><a href="problem.aspx"><img src="/template/CN/images/s4.jpg" /></a></li>
+            	<li><a href="leixing.aspx"><img src="{{ url_for('static', filename='images/s1.jpg') }}" /></a></li>
+                <li><a href="fuwu.aspx"><img src="{{ url_for('static', filename='images/s2.jpg') }}" /></a></li>
+                <li><a href="down.aspx"><img src="{{ url_for('static', filename='images/s3.jpg') }}" /></a></li>
+                <li><a href="problem.aspx"><img src="{{ url_for('static', filename='images/s4.jpg') }}" /></a></li>
             </Ul>
           </div>
 

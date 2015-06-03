@@ -2,6 +2,9 @@
 from __future__ import unicode_literals
 import hashlib
 import datetime
+import re
+import os
+from PIL import Image
 
 from flask import Blueprint, render_template, request, redirect, url_for, abort, current_app, session, jsonify
 from flask.ext.login import login_user, logout_user, login_required, current_user
@@ -26,7 +29,10 @@ def upload():
     # rint request.files['imgFile']
     if 'imgFile' in request.files:
         # TODO: 应该压缩一下图片
-        filename = upload_set.save(request.files['imgFile'])
+        file_storage = request.files['imgFile']
+        basename = hashlib.sha1(file_storage.read()).hexdigest()+os.path.splitext(file_storage.filename)[1]
+        file_storage.seek(0)
+        filename = upload_set.save(file_storage, name=basename)
         # print upload_set.path(filename)
         # print upload_set.url(filename)
         return jsonify(error=0, url=upload_set.url(filename))
@@ -69,6 +75,7 @@ def post(page):
         active='admin', label_active='post', posts=posts, pagination=pagination
     )
 
+from werkzeug.datastructures import FileStorage
 
 @admin.route('/post/<int:id>/edit/', methods=['GET', 'POST'])
 def edit_post(id):
@@ -80,6 +87,24 @@ def edit_post(id):
         p.title = title
         p.content = content
         p.update_date = datetime.datetime.now()
+        pattern = re.compile(r'<img src="(.*?)".*>')
+        match = pattern.search(p.content)
+        if match:
+            url = match.group(1)
+            basename = os.path.basename(url)
+            filename = upload_set.path(basename)
+            # 生成缩略图 [filename].[ext] -> [filename]_thumb.[ext]
+            _splitext = os.path.splitext(filename)
+            tb_filename = _splitext[0] + '_thumb' + _splitext[1]
+            tb_basename = os.path.basename(tb_filename)
+            try:
+                image = Image.open(filename)
+                image.thumbnail(size=(135, 88))
+                image.save(tb_filename)
+            except IOError:
+                print "cannot create thumbnail for", filename
+            else:
+                p.thumbnail = upload_set.url(tb_basename)
 
         db.session.add(p)
         db.session.commit()

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}西安交通大学生物医学分析技术与仪器研究所{% endblock %}
 {% block content %}
-        <div class="banner" style="margin-top:6px"><img src="/template/CN/images/ban7.jpg" width="1002" height="122" /></div>
+        <div class="banner" style="margin-top:6px"><img src="{{ url_for('static', filename='images/ban7.jpg') }}" width="1002" height="122" /></div>
 
         <div class="aboutz">
             <div class="aboutzleft">
@@ -34,7 +34,7 @@
                                 <div align="right" class="wz004">
                                     <img src="{{ url_for('static', filename='images/index_21.jpg') }}" /> 您的位置：<a href="{{ url_for('home.index') }}">首页</a>
                                     <img src="{{ url_for('static', filename='images/jiao.gif') }}" /><a href="">登录</a>
-
+                                </div>
                            </td>
                         </tr>
                     </table>

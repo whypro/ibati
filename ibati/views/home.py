@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort
-from ibati.models import Slider
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort, current_app
+from ibati.models import Slider, Category, Post
 
 
 home = Blueprint('home', __name__)
@@ -9,7 +9,10 @@ home = Blueprint('home', __name__)
 @home.route('/')
 def index():
     sliders = Slider.query.order_by(Slider.order.asc()).all()
-    return render_template('index.html', active='index', sliders=sliders)
+
+    cat = Category.query.filter_by(name='news').one()
+    news = Post.query.filter_by(category_id=cat.id).limit(current_app.config['INDEX_NEWS_NUM'])
+    return render_template('index.html', active='index', sliders=sliders, news=news)
     # return render_template('index.html')
 
 

@@ -10,7 +10,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, abort,
 from flask.ext.login import login_user, logout_user, login_required, current_user
 
 from ibati.extensions import db, upload_set
-from ibati.models import Category, Label, Post, JobTitle, Member, Slider, User
+from ibati.models import Category, Label, Post, JobTitle, Member, Slider, User, Link
 
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
@@ -145,9 +145,17 @@ def init_post(session):
     equipment = Label(name='equipment', cname='科研设备', order=400, category=research)
     session.add(equipment)
 
-    achievement = Category(name='achievement', cname='研究成果', order=500)
-    session.add(achievement)
+    member = Category(name='member', cname='研究队伍', order=500)
+    session.add(member)
+    teacher = Label(name='teacher', cname='教师', order=100, category=member)
+    session.add(teacher)
+    professor = Label(name='professor', cname='客座教授', order=200, category=member)
+    session.add(professor)
+    visiting_scholar = Label(name='visiting-scholar', cname='访问学者', order=300, category=member)
+    session.add(visiting_scholar)
 
+    achievement = Category(name='achievement', cname='研究成果', order=520)
+    session.add(achievement)
     paper = Label(name='paper', cname='论文', order=100, category=achievement)
     session.add(paper)
     patent = Label(name='patent', cname='专利', order=200, category=achievement)
@@ -155,17 +163,39 @@ def init_post(session):
     other = Label(name='other', cname='其他', order=300, category=achievement)
     session.add(other)
 
-    teaching = Category(name='teaching', cname='教学工作', order=600)
+    postgraduate = Category(name='postgraduate', cname='研究生培养', order=600)
+    session.add(postgraduate)
+
+    enrolling = Label(name='enrolling', cname='研究生招生', order=100, category=postgraduate)
+    session.add(enrolling)
+    candidate = Label(name='candidate', cname='在读研究生', order=200, category=postgraduate)
+    session.add(candidate)
+    graduated = Label(name='graduated', cname='毕业研究生', order=300, category=postgraduate)
+    session.add(graduated)
+
+    teaching = Category(name='teaching', cname='教学工作', order=700)
     session.add(teaching)
 
-    inter_coop = Category(name='inter-coop', cname='国际合作', order=700)
+    inter_coop = Category(name='inter-coop', cname='国际合作', order=720)
     session.add(inter_coop)
 
     recruitment = Category(name='recruitment', cname='人员招聘', order=800)
     session.add(recruitment)
 
     for _ in range(20):
-        p = Post(title='今天是个好日子', content='呵呵，只是一个测试', category=news, label=dispatch)
+        p = Post(
+            title='西安交大参加教育部深化高等学校创新创业教育改革视频会议',
+            content=('2015年6月2日，教育部组织召开深化高等学校创新创业教育改革视频会议，'
+                     '西安交大校长王树国、党委副书记宫辉、副校长郑庆华以及'
+                     '教务处、研究生院、就业中心、科研院、人力资源部、财务处、学生处、团委、工程坊、科技园、各书院负责人'
+                     '和创新创业教育教师代表40余人全程参会。'
+                     '为深入贯彻落实《国务院办公厅关于深化高等学校创新创业教育改革的实施意见》(以下简称《实施意见》)，'
+                     '教育部组织召开深化高等学校创新创业教育改革视频会议，对深化高校创新创业教育改革工作进行动员部署，'
+                     '努力造就大众创业、万众创新的生力军，为国家实施创新驱动发展战略提供人才智力支撑。'
+                     '教育部袁贵仁部长等教育部负责同志、教育部相关部门机构、各省教育行政部门和教育部直属高校等'
+                     '共7600余人参加大会。'),
+            category=news, label=dispatch
+        )
         db.session.add(p)
 
     user = User(username='whypro', password='whypro')
@@ -204,7 +234,7 @@ def init_home(session):
 
     slider_2 = Slider(
         title='皮肤热疼痛实验',
-        subtitle='我们团队首次发现热刺激下组织的疼痛水平不仅取决于温度变化，而且受温度变化诱发的热应力的影响，力学因素在组织疼痛中发挥着关键作用，由此建立了热-力-电（疼痛）多场耦合行为理论，为有效指导激光、微波等临床热疗技术及镇痛方案提供了理论依据。',
+        subtitle='由此建立了热-力-电（疼痛）多场耦合行为理论，为有效指导激光、微波等临床热疗技术及镇痛方案提供了理论依据。',
         image='images/content/052210.jpg', order=200, enable=True
     )
     session.add(slider_2)
@@ -218,3 +248,11 @@ def init_home(session):
 
     session.commit()
 
+    init_links(session)
+
+
+def init_links(session):
+    for i in range(5):
+        l = Link(name='友情链接', href='http://www.xjtu.edu.cn', order=i)
+        session.add(l)
+    session.commit()

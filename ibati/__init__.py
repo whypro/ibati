@@ -8,7 +8,7 @@ from logging import FileHandler, Formatter
 
 from ibati import views
 from ibati.extensions import db, upload_set
-from ibati.models import Category, User
+from ibati.models import Category, User, Link
 
 
 def create_app(config=None):
@@ -64,6 +64,11 @@ def init_app_context(app):
     def inject_categories():
         categories = Category.query.order_by(Category.order.asc()).all()
         return dict(categories=categories)
+
+    @app.context_processor
+    def inject_links():
+        links = Link.query.order_by(Link.order.asc()).all()
+        return dict(links=links)
 
 
 def configure_login(app):

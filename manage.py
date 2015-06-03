@@ -65,7 +65,7 @@ def debug():
     if get_pid() is not None:
         print 'ibati is running.'
         return False
-    app.run(host='0.0.0.0', port=8080, debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True, processes=5)
 
 
 if __name__ == '__main__':

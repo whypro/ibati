@@ -28,4 +28,5 @@ class Config(object):
     # Flask-Uploads
     UPLOADS_DEFAULT_DEST = os.path.realpath('uploads')
 
-    POSTS_PER_PAGE = 10
+    POSTS_PER_PAGE = 10     # 每页显示的主题数
+    INDEX_NEWS_NUM = 8      # 首页新闻个数

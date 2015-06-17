@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% block title %}管理中心{% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/zTree/css/zTreeStyle/zTreeStyle.css') }}" />
+{% endblock %}
+{% block script %}
+    <script charset="utf-8" src="{{ url_for('static', filename='plugins/zTree/js/jquery.ztree.core-3.5.min.js') }}"></script>
+    <script charset="utf-8" src="{{ url_for('static', filename='plugins/zTree/js/jquery.ztree.exedit-3.5.min.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="aboutz">
+
+        {% include 'admin/left-sider.html' %}
+
+        <div class="aboutrig">
+            <div class="aboutrigdao">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        {#
+                        <td width="2%">
+                            {% if label %}
+                            <img src="{{ url_for('static', filename='images/li2.jpg') }}" width="11" height="11" />
+                            {% endif %}
+                        </td>
+                        <td width="36%">
+                            {% if label %}
+                            <font class="wen4">{{ label.cname }}</font>
+                            {% endif %}
+                        </td>
+                        #}
+                        <td width="62%" align="right">
+                            <div align="right" class="wz004">
+                                <img src="{{ url_for('static', filename='images/index_21.jpg') }}" /> 您的位置：<a href="{{ url_for('home.index') }}">首页</a>
+                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" /><a href="{{ url_for('admin.index') }}">管理中心</a>
+                                {#
+                                {% if label %}
+                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" />{{ label.cname }}
+                                {% endif %}
+                                #}
+                            </div>
+                       </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="left"><img src="{{ url_for('static', filename='images/rigxian.jpg') }}" /></div>
+            <div class="aboutrignei">
+                <div class="zTreeBackground">
+		            <ul id="category_tree" class="ztree"></ul>
+	            </div>
+                <div style="text-align: right">
+                    <input id="save" type="button" value="保存" />&emsp;
+                    <input id="cancel" type="button" value="取消" />
+                </div>
+            </div>
+        </div>
+        <div class="both"></div>
+    </div>
+    <script>
+        var settings = {
+            async: {
+                enable: true,
+                url: "{{ url_for('admin.get_category_ztree_json') }}",
+                type: "get"
+            },
+            edit: {
+                enable: true,
+                drag: {
+                    isMove: true,
+                    prev: true,
+                    next: true,
+                    inner: false
+                }
+            },
+            callback: {
+                // beforeDrag: beforeDrag,
+				onDrop: onDrop,
+                onRename: onRename
+			}
+        };
+
+        function onRename(event, treeId, treeNode, isCancel) {
+            //alert(JSON.stringify(treeNode));
+            return true;
+        }
+
+        function onDrop(event, treeId, treeNodes, targetNode, moveType, isCopy) {
+            //alert(JSON.stringify(treeNodes));
+            //alert(JSON.stringify(targetNode));
+			return targetNode ? targetNode.drop !== false : true;
+		}
+
+
+        $(document).ready(function(){
+            var treeObj = $.fn.zTree.init($("#category_tree"), settings);
+            $("#save").click(function () {
+                // var simple_nodes = treeObj.transformToArray(treeObj.getNodes());
+                var nodes = treeObj.transformTozTreeNodes(treeObj.getNodes());
+                // alert(JSON.stringify(nodes));
+                $.ajax({
+                    url: "{{ url_for('admin.post_category_ztree_json') }}",
+                    data: JSON.stringify(nodes),
+                    contentType : "application/json",
+                    type : "POST",
+                    success: function(data){
+                        // alert("保存成功！");
+                        location.reload();
+                    }
+                });
+            });
+
+            $("#cancel").click(function () {
+                location.reload();
+            })
+        });
+
+    </script>
+
+{% endblock %}

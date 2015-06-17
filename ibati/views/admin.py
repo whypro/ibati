@@ -26,7 +26,7 @@ def index():
 @login_required
 def upload():
     # print request.form
-    # rint request.files['imgFile']
+    # print request.files['imgFile']
     if 'imgFile' in request.files:
         # TODO: 应该压缩一下图片
         file_storage = request.files['imgFile']
@@ -110,6 +110,38 @@ def edit_post(id):
         db.session.commit()
 
     return render_template('admin/post-edit.html', post=p)
+
+
+@admin.route('/category/')
+def category():
+    return render_template('admin/categories.html')
+
+import json
+@admin.route('/api/category/get/')
+def get_category_ztree_json():
+    nodes = []
+    categories = Category.query.order_by(Category.order.asc()).all()
+    for category in categories:
+        children = []
+        for label in category.labels:
+            children.append(dict(id=label.id, name=label.cname))
+        nodes.append(dict(id=category.id, name=category.cname, open=True, children=children))
+    return json.dumps(nodes)
+
+
+@admin.route('/api/category/post/', methods=['POST'])
+def post_category_ztree_json():
+    nodes = request.get_json()
+    # print json.dumps(nodes)
+    for category_node in nodes:
+        category = Category.query.get(category_node['id'])
+        category.cname = category_node['name']
+        for label_node in category_node['children']:
+            label = Label.query.get(label_node['id'])
+            label.cname = label_node['name']
+
+    db.session.commit()
+    return jsonify(result=200)
 
 
 @admin.route('/init/')

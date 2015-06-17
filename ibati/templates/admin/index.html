@@ -2,24 +2,9 @@
 {% block title %}管理中心{% endblock %}
 {% block content %}
     <div class="aboutz">
-        <div class="aboutzleft">
-            <div class="aboutzleftdao">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
-                    <tr>
-                        <td width="6%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
-                        <td width="94%">管理中心 <font class="wen3">Admin</font></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="aboutzleftmeun">
-                <ul>
-                    <li><a>导航栏管理</a></li>
-                    <li><a>首页幻灯片管理</a></li>
-                    <li><a href="{{ url_for('admin.post') }}">文章管理</a></li>
-                </ul>
-            </div>
-        </div>
-        <!--left-->
+
+        {% include 'admin/left-sider.html' %}
+
         <div class="aboutrig">
             <div class="aboutrigdao">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">

@@ -13,8 +13,15 @@ post = Blueprint('post', __name__, url_prefix='/post')
 @post.route('/<category>/<label>/', defaults={'page': 1})
 @post.route('/<category>/<label>/page/<int:page>/')
 def index(category, page, label=None):
+
     cat = Category.query.filter(Category.name==category).one()
 
+    # 单位简介
+    if cat.name == 'about-us':
+        p = cat.posts[0]
+        return render_template('about-us.html', category=p.category, post=p)
+
+    # 其他页面
     qry = Post.query.filter(Post.category_id==cat.id)
     if label:
         lab = Label.query.filter(Label.name==label).one()

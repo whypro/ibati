@@ -16,9 +16,11 @@
                         <li{% if active == 'index' %} class="active"{% endif %}>
                             <a href="{{ url_for('home.index') }}">首页</a>
                         </li>
+                        {#
                         <li{% if active == 'about-us' %} class="active"{% endif %}>
                             <a href="{{ url_for('home.about_us') }}">单位简介</a>
                         </li>
+                        #}
                         {% for category in categories %}
                         <li{% if active == category.name %} class="active"{% endif %}>
                             <a href="{{ url_for('post.index', category=category.name) }}">{{ category.cname }}</a>

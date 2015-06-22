@@ -2,7 +2,7 @@
 {% block title %}管理中心{% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/zTree/css/zTreeStyle/zTreeStyle.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='plugins/zTree/css/metroStyle/metroStyle.css') }}" />
 {% endblock %}
 {% block script %}
     <script charset="utf-8" src="{{ url_for('static', filename='plugins/zTree/js/jquery.ztree.core-3.5.min.js') }}"></script>
@@ -64,6 +64,11 @@
                 url: "{{ url_for('admin.get_category_ztree_json') }}",
                 type: "get"
             },
+            view: {
+				addHoverDom: addHoverDom,
+				removeHoverDom: removeHoverDom,
+				selectedMulti: false
+			},
             edit: {
                 enable: true,
                 drag: {
@@ -71,7 +76,8 @@
                     prev: true,
                     next: true,
                     inner: false
-                }
+                },
+                editNameSelectAll: true
             },
             callback: {
                 // beforeDrag: beforeDrag,
@@ -79,6 +85,27 @@
                 onRename: onRename
 			}
         };
+
+        var newCount = 1;
+        function addHoverDom(treeId, treeNode) {
+			var sObj = $("#" + treeNode.tId + "_span");
+            var btn = $("#addBtn_"+treeNode.tId);
+            // if (treeNode.isParent == false) return;
+            if (treeNode.level) return;
+			if (treeNode.editNameFlag || btn.length>0) return;
+			var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+				+ "' title='add node' onfocus='this.blur();'></span>";
+			sObj.after(addStr);
+			if (btn) btn.bind("click", function(){
+				var zTree = $.fn.zTree.getZTreeObj("category_tree");
+				zTree.addNodes(treeNode, {pId:treeNode.id, name:"未命名页面" + (newCount++)});
+				return false;
+			});
+		}
+
+        function removeHoverDom(treeId, treeNode) {
+			$("#addBtn_"+treeNode.tId).unbind().remove();
+		}
 
         function onRename(event, treeId, treeNode, isCancel) {
             //alert(JSON.stringify(treeNode));
@@ -97,7 +124,7 @@
             $("#save").click(function () {
                 // var simple_nodes = treeObj.transformToArray(treeObj.getNodes());
                 var nodes = treeObj.transformTozTreeNodes(treeObj.getNodes());
-                // alert(JSON.stringify(nodes));
+                alert(JSON.stringify(nodes));
                 $.ajax({
                     url: "{{ url_for('admin.post_category_ztree_json') }}",
                     data: JSON.stringify(nodes),

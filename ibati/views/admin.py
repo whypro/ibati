@@ -133,12 +133,14 @@ def get_category_ztree_json():
 def post_category_ztree_json():
     nodes = request.get_json()
     # print json.dumps(nodes)
-    for category_node in nodes:
+    for i, category_node in enumerate(nodes, start=1):
         category = Category.query.get(category_node['id'])
         category.cname = category_node['name']
-        for label_node in category_node['children']:
+        category.order = i * 100
+        for j, label_node in enumerate(category_node['children'], start=1):
             label = Label.query.get(label_node['id'])
             label.cname = label_node['name']
+            label.order = j * 100
 
     db.session.commit()
     return jsonify(result=200)
@@ -158,6 +160,9 @@ def create_all():
 
 
 def init_post(session):
+
+    about_us = Category(name='about-us', cname='单位简介', order=50)
+    session.add(about_us)
 
     news = Category(name='news', cname='新闻通知', order=100)
     session.add(news)
@@ -181,6 +186,8 @@ def init_post(session):
     session.add(member)
     teacher = Label(name='teacher', cname='教师', order=100, category=member)
     session.add(teacher)
+    postdoctor = Label(name='postdoctor', cname='博士后', order=150, category=member)
+    session.add(postdoctor)
     professor = Label(name='professor', cname='客座教授', order=200, category=member)
     session.add(professor)
     visiting_scholar = Label(name='visiting-scholar', cname='访问学者', order=300, category=member)
@@ -192,12 +199,13 @@ def init_post(session):
     session.add(paper)
     patent = Label(name='patent', cname='专利', order=200, category=achievement)
     session.add(patent)
+    monograph = Label(name='monograph', cname='专著', order=250, category=achievement)
+    session.add(monograph)
     other = Label(name='other', cname='其他', order=300, category=achievement)
     session.add(other)
 
     postgraduate = Category(name='postgraduate', cname='研究生培养', order=600)
     session.add(postgraduate)
-
     enrolling = Label(name='enrolling', cname='研究生招生', order=100, category=postgraduate)
     session.add(enrolling)
     candidate = Label(name='candidate', cname='在读研究生', order=200, category=postgraduate)
@@ -207,6 +215,10 @@ def init_post(session):
 
     teaching = Category(name='teaching', cname='教学工作', order=700)
     session.add(teaching)
+    undergraduate = Label(name='undergraduate', cname='本科生教学', order=100, category=teaching)
+    session.add(undergraduate)
+    postgraduate = Label(name='postgraduate', cname='研究生教学', order=200, category=teaching)
+    session.add(postgraduate)
 
     inter_coop = Category(name='inter-coop', cname='国际合作', order=720)
     session.add(inter_coop)
@@ -229,6 +241,24 @@ def init_post(session):
             category=news, label=dispatch
         )
         db.session.add(p)
+
+    p = Post(
+        title='单位简介',
+        content=('西安交通大学 生物医学分析技术与仪器研究所'
+                 'Institute of Biomedical Analytical Technology and Instrumentation'
+                 '生物医学分析技术及仪器研究所是根据国家十一五发展规划和生命科学与技术学院整体发展需要，'
+                 '通过学院整合于2007年6月15日成立。目标是充分发挥学科交叉的作用，'
+                 '在生物医学分析技术与仪器的基础理论研究、应用研究、人才培养、促进相应技术转化为生产力等方面取得显著进展。'
+                 '该所现有教职工12人，其中教授5人，副教授3 人和高级工程师1人，讲师3位。'
+                 '目前承担和完成了国家自然科学基金近30项（包括重点项目、国际合作）、国家科技部863项目、国家重大科学仪器设备开发项目、'
+                 '陕西省自然科学基金项目、西安市科技攻关项目、横向课题数十项等。'
+                 '目前的研究方向有生物医学光子学影像与光谱分析技术、基于多信息融合的生物荧光探针和光学传感器、先进敏感分析技术及仪器等。'
+                 '目前研究的重点项目包括有：基于多光谱荧光成像的在体三维光学标测系统、基于新型光穿孔技术的纳米尺度细胞膜微手术研究、'
+                 '金纳米棒靶向的激光细胞微手术及其机理研究、纳米材料的界观和微观效应及机理、基于纳米金探针的肿瘤细胞示踪等研究。'
+                 '研究所现有博士和硕士研究生80多名。'),
+        category=about_us
+    )
+    db.session.add(p)
 
     user = User(username='whypro', password='whypro')
     db.session.add(user)

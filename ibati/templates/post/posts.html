@@ -4,24 +4,9 @@
     <div class="banner" style="margin-top:6px"><img src="{{ url_for('static', filename='images/ban6.jpg') }}" width="1002" height="122" /></div>
 
     <div class="aboutz">
-        <div class="aboutzleft">
-            <div class="aboutzleftdao">
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
-                    <tr>
-                        <td width="6%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
-                        <td width="94%">{{ category.cname }} <font class="wen3">{{ category.name.capitalize() }}</font></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="aboutzleftmeun">
-                <ul>
-                    {% for label in category.labels %}
-                        <li{% if label_active == label.name %} class="active"{% endif %}><a title="{{ label.name }}" href="{{ url_for('post.index', category=category.name, label=label.name) }}">{{ label.cname }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        <!--left-->
+
+        {% include 'left-sider.html' %}
+
         <div class="aboutrig">
             <div class="aboutrigdao">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">

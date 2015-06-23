@@ -11,7 +11,8 @@ from flask.ext.login import login_user, logout_user, login_required, current_use
 
 from ibati.extensions import db, upload_set
 from ibati.models import Category, Label, Post, JobTitle, Member, Slider, User, Link
-
+from werkzeug.datastructures import FileStorage
+import json
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -75,7 +76,6 @@ def post(page):
         active='admin', label_active='post', posts=posts, pagination=pagination
     )
 
-from werkzeug.datastructures import FileStorage
 
 @admin.route('/post/<int:id>/edit/', methods=['GET', 'POST'])
 def edit_post(id):
@@ -112,11 +112,70 @@ def edit_post(id):
     return render_template('admin/post-edit.html', post=p)
 
 
+@admin.route('/slider/')
+def slider():
+    return render_template('admin/sliders.html')
+
+
+@admin.route('/link/')
+def link():
+    links = Link.query.order_by(Link.order.asc()).all()
+    return render_template('admin/links.html', links=links)
+
+
+@admin.route('/link/add/', methods=['POST'])
+def add_link():
+    name = request.form.get('name')
+    href = request.form.get('href')
+    order = request.form.get('order')
+    l = Link(name=name, href=href, order=order)
+    db.session.add(l)
+    db.session.commit()
+    return jsonify(result=200)
+
+
+@admin.route('/link/<int:id>/edit/', methods=['POST'])
+def edit_link(id):
+    l = Link.query.get_or_404(id)
+    name = request.form.get('name')
+    href = request.form.get('href')
+    order = request.form.get('order')
+    # print name, href
+    l.name = name
+    l.href = href
+    l.order = order
+
+    db.session.add(l)
+    db.session.commit()
+    return jsonify(result=200)
+
+
+@admin.route('/link/<int:id>/delete/')
+def delete_link(id):
+    l = Link.query.get_or_404(id)
+    db.session.delete(l)
+    db.session.commit()
+    return redirect(url_for('admin.link'))
+
+
+@admin.route('/link/delete/batch/')
+def batch_delete_link():
+    # print request.args
+    ids = request.args.getlist('ids[]')
+    # print ids
+    for id_ in ids:
+        l = Link.query.get_or_404(id_)
+        db.session.delete(l)
+    db.session.commit()
+
+    return jsonify(result=200)
+
+
 @admin.route('/category/')
 def category():
     return render_template('admin/categories.html')
 
-import json
+
 @admin.route('/api/category/get/')
 def get_category_ztree_json():
     nodes = []

@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+{% block title %}首页幻灯片管理{% endblock %}
+{% block content %}
+    <div class="aboutz">
+
+        {% include 'admin/left-sider.html' %}
+
+        <div class="aboutrig">
+            <div class="aboutrigdao">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        {#
+                        <td width="2%">
+                            {% if label %}
+                            <img src="{{ url_for('static', filename='images/li2.jpg') }}" width="11" height="11" />
+                            {% endif %}
+                        </td>
+                        <td width="36%">
+                            {% if label %}
+                            <font class="wen4">{{ label.cname }}</font>
+                            {% endif %}
+                        </td>
+                        #}
+                        <td width="62%" align="right">
+                            <div align="right" class="wz004">
+                                <img src="{{ url_for('static', filename='images/index_21.jpg') }}" /> 您的位置：<a href="{{ url_for('home.index') }}">首页</a>
+                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" /><a href="{{ url_for('admin.index') }}">管理中心</a>
+                                {#
+                                {% if label %}
+                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" />{{ label.cname }}
+                                {% endif %}
+                                #}
+                            </div>
+                       </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="left"><img src="{{ url_for('static', filename='images/rigxian.jpg') }}" /></div>
+            <div class="aboutrignei">
+                <style>
+                    .links-table {
+                        width: 100%;
+                        border: 1px;
+                        text-align: center;
+                    }
+
+                </style>
+
+                <table class="links-table">
+                    <thead>
+                        <tr>
+                            <th class="link-check-td" width="10%"><input id="link-check-all" type="checkbox" /></th>
+                            <th class="link-name-td" width="15%">名称</th>
+                            <th class="link-href-td" width="55%">链接</th>
+                            <th class="link-order-td" width="5%">排序</th>
+                            <th class="link-delete-td" width="15%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for link in links %}
+                        <tr id="{{ link.id }}">
+                            <td class="link-check-td"><input class="link-check-input" type="checkbox" /></td>
+                            <td class="link-name-td"><input class="link-name-input" name="name" value="{{ link.name }}" style="width: 90%;"/></td>
+                            <td class="link-href-td"><input class="link-href-input" name="href" value="{{ link.href }}" style="width: 90%;"/></td>
+                            <td class="link-order-td"><input class="link-order-input" name="order" value="{{ link.order }}" style="width: 90%;"/></td>
+                            <td class="link-delete-td">
+                                <a class="link-save" href="javascript:void(0)">保存</a>&nbsp;|&nbsp;
+                                <a class="link-delete" href="{{ url_for('admin.delete_link', id=link.id) }}">删除</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <a id="link-add" href="javascript:void(0)">添加</a>&nbsp;|&nbsp;
+                                <a id="link-delete-checked" href="javascript:void(0)">批量删除</a>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+        <div class="both"></div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function() {
+            $("#link-add").click(function() {
+                // alert("add");
+
+                var new_tr = [
+                    '                        <tr>',
+                    '                            <td class="link-check-td"><input class="link-check-input" type="checkbox" /></td>',
+                    '                            <td class="link-name-td"><input class="link-name-input" name="name" value="" style="width: 90%;"/></td>',
+                    '                            <td class="link-href-td"><input class="link-href-input" name="href" value="" style="width: 90%;"/></td>',
+                    '                            <td class="link-order-td"><input class="link-order-input" name="order" value="" style="width: 90%;"/></td>',
+                    '                            <td class="link-delete-td">',
+                    '                                <a class="link-add-save" href="javascript:void(0)">保存</a>&nbsp;|&nbsp;',
+                    '                                <a class="link-add-cancel" href="javascript:void(0)">取消</a>',
+                    '                            </td>',
+                    '                        </tr>'
+                ].join("\n");
+                $(".links-table tbody").append(new_tr);
+
+            });
+
+
+            $("#link-delete-checked").click(function() {
+                if (confirm("确认删除选中？")) {
+                    // alert($(".link-check-input:checked"));
+                    var ids = [];
+                    $(".link-check-input:checked").each(function() {
+                        ids.push($(this).parents("tr:first").attr("id"));
+                        // var delete_url = $(this).parents("tr:first").find(".link-delete").attr("href");
+                        // alert(delete_url);
+                    });
+                    // alert(ids);
+
+                    $.get("{{ url_for('admin.batch_delete_link') }}", {ids: ids}, function() {
+                        location.reload();
+                    });
+                }
+            });
+
+
+            $(".link-save").click(function() {
+                var tr = $(this).parents("tr:first");
+                var id = tr.attr("id");
+                var name = tr.find(".link-name-input").val();
+                var href = tr.find(".link-href-input").val();
+                var order = tr.find(".link-order-input").val();
+
+                // alert(id);
+                // alert(name);
+                // alert(href);
+
+                $.post("/admin/link/"+id+"/edit/", {name: name, href: href, order: order}, function() {
+                    alert('保存成功！');
+                    location.reload();
+                    // window.location.href = jqXHR.getResponseHeader('Location');
+                });
+            });
+
+            $("#link-check-all").click(function() {
+                // alert($(this).attr("checked"));
+                if ($(this).attr("checked") == true) {
+                    $(".link-check-input").each(function() {
+                        $(this).attr("checked", true);
+                    });
+                } else {
+                   $(".link-check-input").each(function() {
+                        $(this).attr("checked", false);
+                    });
+                }
+
+            });
+
+            $(".link-add-save").live("click", function() {
+                // alert("add");
+                var tr = $(this).parents("tr:first");
+                var name = tr.find(".link-name-input").val();
+                var href = tr.find(".link-href-input").val();
+                var order = tr.find(".link-order-input").val();
+                $.post("{{ url_for('admin.add_link') }}", {name: name, href: href, order: order}, function() {
+                    alert('保存成功！');
+                    location.reload();
+                });
+            });
+
+            $(".link-add-cancel").live("click", function() {
+                // alert('cancel');
+                var tr = $(this).parents("tr:first");
+                tr.detach();
+            });
+
+        });
+    </script>
+{% endblock %}

@@ -8,7 +8,7 @@
                     <img class="bigImg" width="1002" height="339" />
                     <div class="mask">
                         {% for slider in sliders %}
-                        <img src="{{ url_for('static', filename=slider.image) }}" uri="{{ url_for('static', filename=slider.image) }}" link="#"  width="60" height="22" style="border:2px #CCCCCC solid;" />
+                        <img src="{{ slider.image }}" uri="{{ slider.image }}" link="#"  width="60" height="22" style="border:2px #CCCCCC solid;" />
                         {% endfor %}
                     </div>
                 </div>

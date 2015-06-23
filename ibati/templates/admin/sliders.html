@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% block title %}首页图片管理{% endblock %}
+{% block content %}
+    <div class="aboutz">
+
+        {% include 'admin/left-sider.html' %}
+
+        <div class="aboutrig">
+            <div class="aboutrigdao">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        {#
+                        <td width="2%">
+                            {% if label %}
+                            <img src="{{ url_for('static', filename='images/li2.jpg') }}" width="11" height="11" />
+                            {% endif %}
+                        </td>
+                        <td width="36%">
+                            {% if label %}
+                            <font class="wen4">{{ label.cname }}</font>
+                            {% endif %}
+                        </td>
+                        #}
+                        <td width="62%" align="right">
+                            <div align="right" class="wz004">
+                                <img src="{{ url_for('static', filename='images/index_21.jpg') }}" /> 您的位置：<a href="{{ url_for('home.index') }}">首页</a>
+                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" /><a href="{{ url_for('admin.index') }}">管理中心</a>
+                                {#
+                                {% if label %}
+                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" />{{ label.cname }}
+                                {% endif %}
+                                #}
+                            </div>
+                       </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="left"><img src="{{ url_for('static', filename='images/rigxian.jpg') }}" /></div>
+            <div class="aboutrignei">
+                <style>
+                    .sliders-table {
+                        width: 100%;
+                        border: 1px;
+                        text-align: center;
+                    }
+
+                </style>
+
+                <table class="sliders-table">
+                    <thead>
+                        <tr>
+                            <th class="slider-check-td" width="5%"><input id="slider-check-all" type="checkbox" /></th>
+                            <th class="slider-preview-td" width="15%">预览</th>
+                            <th class="slider-title-td" width="15%">标题</th>
+                            <th class="slider-subtitle-td" width="15%">简介</th>
+                            <th class="slider-image-td" width="25%">位置</th>
+                            <th class="slider-order-td" width="5%">排序</th>
+                            <th class="slider-enable-td" width="5%">启用</th>
+                            <th class="slider-operation-td" width="15%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for slider in sliders %}
+                        <tr id="{{ slider.id }}">
+                            <td class="slider-check-td"><input class="slider-check-input" type="checkbox" /></td>
+                            <td class="slider-preview-td"><img class="slider-preview" src="{{ slider.image }}" style="width: 90%; height: 60px; padding: 8px 0 8px 0;" /></td>
+                            <td class="slider-title-td"><input class="slider-title-input" name="title" value="{{ slider.title }}" style="width: 90%;"/></td>
+                            <td class="slider-subtitle-td"><input class="slider-subtitle-input" name="title" value="{{ slider.subtitle }}" style="width: 90%;"/></td>
+                            <td class="slider-image-td"><input class="slider-image-input" name="image" value="{{ slider.image }}" style="width: 90%;"/></td>
+                            <td class="slider-order-td"><input class="slider-order-input" name="order" value="{{ slider.order }}" style="width: 90%;"/></td>
+                            <td class="slider-enable-td"><input class="slider-enable-input" name="enable" type="checkbox" {{ 'checked="checked"' if slider.enable }}style="width: 90%;"/></td>
+                            <td class="slider-operation-td">
+                                <a class="slider-save" href="javascript:void(0)">保存</a>&nbsp;|&nbsp;
+                                <a class="slider-delete" href="{{ url_for('admin.delete_slider', id=slider.id) }}">删除</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <a id="slider-add" href="javascript:void(0)">添加</a>&nbsp;|&nbsp;
+                                <a id="slider-delete-checked" href="javascript:void(0)">批量删除</a>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+
+            </div>
+        </div>
+        <div class="both"></div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='js/jquery.ajaxfileupload.js') }}" type="text/javascript"></script>
+    <script>
+        $(document).ready(function() {
+            $("#slider-add").click(function() {
+                // alert("add");
+
+                var new_tr = [
+                    '                        <tr>',
+                    '                            <td class="slider-check-td"><input class="slider-check-input" type="checkbox" /></td>',
+                    '                            <td class="slider-preview-td"><img class="slider-preview" src="" style="width: 90%; height: 60px; padding: 8px 0 8px 0;" /></td>',
+                    '                            <td class="slider-title-td"><input class="slider-title-input" name="title" value="" style="width: 90%;"/></td>',
+                    '                            <td class="slider-subtitle-td"><input class="slider-subtitle-input" name="subtitle" value="" style="width: 90%;"/></td>',
+                    '                            <td class="slider-image-td">',
+                    '                                <input class="slider-upload" type="file" name="imageFile" style="width: 90%; margin-bottom: 6px;" />',
+                    '                                <input class="slider-image-input" name="image" value="" style="width: 90%;"/>',
+
+                    '                            </td>',
+                    '                            <td class="slider-order-td"><input class="slider-order-input" name="order" value="" style="width: 90%;"/></td>',
+                    '                            <td class="slider-enable-td"><input class="slider-enable-input" name="enable" type="checkbox" checked="checked" style="width: 90%;"/></td>',
+                    '                            <td class="slider-operation-td">',
+                    '                                <a class="slider-add-save" href="javascript:void(0)">保存</a>&nbsp;|&nbsp;',
+                    '                                <a class="slider-add-cancel" href="javascript:void(0)">取消</a><br />',
+                    '                            </td>',
+                    '                        </tr>'
+                ].join("\n");
+                $(".sliders-table tbody").append(new_tr);
+
+                $(".sliders-table tbody tr:last .slider-upload").ajaxfileupload({
+                    'action': "{{ url_for('admin.upload_slider') }}",
+                    'params': {},
+                    'onComplete': function(response) {
+                        var path = response["path"];
+                        var tr = $(this).parents("tr:first");
+                        tr.find(".slider-image-input").val(path);
+                        tr.find(".slider-preview").attr("src", path);
+                    }
+
+                });
+            });
+
+
+            $("#slider-delete-checked").click(function() {
+                if (confirm("确认删除选中？")) {
+                    // alert($(".link-check-input:checked"));
+                    var ids = [];
+                    $(".slider-check-input:checked").each(function() {
+                        ids.push($(this).parents("tr:first").attr("id"));
+                        // var delete_url = $(this).parents("tr:first").find(".link-delete").attr("href");
+                        // alert(delete_url);
+                    });
+                    // alert(ids);
+
+                    $.get("{{ url_for('admin.batch_delete_slider') }}", {ids: ids}, function() {
+                        location.reload();
+                    });
+                }
+            });
+
+
+            $(".slider-save").click(function() {
+                var tr = $(this).parents("tr:first");
+                var id = tr.attr("id");
+                var title = tr.find(".slider-title-input").val();
+                var subtitle = tr.find(".slider-subtitle-input").val();
+                var image = tr.find(".slider-image-input").val();
+                var order = tr.find(".slider-order-input").val();
+                var enable = tr.find(".slider-enable-input").attr("checked");
+
+                $.post("/admin/slider/"+id+"/edit/",
+                        {title: title, subtitle: subtitle, image: image, order: order, enable: enable},
+                        function() {
+                    alert('保存成功！');
+                    location.reload();
+                    // window.location.href = jqXHR.getResponseHeader('Location');
+                });
+            });
+
+            $("#slider-check-all").click(function() {
+                // alert($(this).attr("checked"));
+                if ($(this).attr("checked") == true) {
+                    $(".slider-check-input").each(function() {
+                        $(this).attr("checked", true);
+                    });
+                } else {
+                   $(".slider-check-input").each(function() {
+                        $(this).attr("checked", false);
+                    });
+                }
+
+            });
+
+            $(".slider-add-save").live("click", function() {
+                // alert("add");
+                var tr = $(this).parents("tr:first");
+                var title = tr.find(".slider-title-input").val();
+                var subtitle = tr.find(".slider-subtitle-input").val();
+                var image = tr.find(".slider-image-input").val();
+                var order = tr.find(".slider-order-input").val();
+                var enable = tr.find(".slider-enable-input").attr("checked");
+
+                $.post("{{ url_for('admin.add_slider') }}",
+                        {title: title, subtitle: subtitle, image: image, order: order, enable: enable},
+                        function() {
+                    alert('保存成功！');
+                    location.reload();
+                });
+            });
+
+            $(".slider-add-cancel").live("click", function() {
+                // alert('cancel');
+                var tr = $(this).parents("tr:first");
+                tr.detach();
+            });
+
+
+
+        });
+    </script>
+{% endblock %}

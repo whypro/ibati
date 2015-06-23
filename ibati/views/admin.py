@@ -114,7 +114,8 @@ def edit_post(id):
 
 @admin.route('/slider/')
 def slider():
-    return render_template('admin/sliders.html')
+    sliders = Slider.query.order_by(Slider.order.asc()).all()
+    return render_template('admin/sliders.html', sliders=sliders)
 
 
 @admin.route('/link/')
@@ -169,6 +170,75 @@ def batch_delete_link():
     db.session.commit()
 
     return jsonify(result=200)
+
+
+@admin.route('/slider/add/', methods=['POST'])
+def add_slider():
+    title = request.form.get('title')
+    subtitle = request.form.get('subtitle')
+    image = request.form.get('image')
+    order = request.form.get('order')
+    enable = True if request.form.get('enable') == 'true' else False
+
+    s = Slider(title=title, subtitle=subtitle, image=image, order=order, enable=enable)
+    db.session.add(s)
+    db.session.commit()
+    return jsonify(result=200)
+
+
+@admin.route('/slider/<int:id>/edit/', methods=['POST'])
+def edit_slider(id):
+    s = Slider.query.get_or_404(id)
+    title = request.form.get('title')
+    subtitle = request.form.get('subtitle')
+    image = request.form.get('image')
+    order = request.form.get('order')
+    enable = True if request.form.get('enable') == 'true' else False
+    print request.form.get('enable'), enable
+    # print name, href
+    s.title = title
+    s.subtitle = subtitle
+    s.image = image
+    s.order = order
+    s.enable = enable
+
+    db.session.add(s)
+    db.session.commit()
+    return jsonify(result=200)
+
+
+@admin.route('/slider/<int:id>/delete/')
+def delete_slider(id):
+    s = Slider.query.get_or_404(id)
+    db.session.delete(s)
+    db.session.commit()
+    return redirect(url_for('admin.slider'))
+
+
+@admin.route('/slider/delete/batch/')
+def batch_delete_slider():
+    # print request.args
+    ids = request.args.getlist('ids[]')
+    # print ids
+    for id_ in ids:
+        s = Slider.query.get_or_404(id_)
+        db.session.delete(s)
+    db.session.commit()
+
+    return jsonify(result=200)
+
+from urlparse import urlparse
+@admin.route('/slider/upload/', methods=['POST'])
+def upload_slider():
+    print request.files
+    if 'imageFile' not in request.files:
+        abort(400)
+
+    file_storage = request.files['imageFile']
+    basename = hashlib.sha1(file_storage.read()).hexdigest()+os.path.splitext(file_storage.filename)[1]
+    file_storage.seek(0)
+    filename = upload_set.save(file_storage, name=basename)
+    return jsonify(result=200, path=urlparse(upload_set.url(filename)).path)
 
 
 @admin.route('/category/')

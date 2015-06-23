@@ -8,7 +8,7 @@ home = Blueprint('home', __name__)
 
 @home.route('/')
 def index():
-    sliders = Slider.query.order_by(Slider.order.asc()).all()
+    sliders = Slider.query.filter_by(enable=True).order_by(Slider.order.asc()).all()
 
     cat = Category.query.filter_by(name='news').one()
     news = Post.query.filter_by(category_id=cat.id).limit(current_app.config['INDEX_NEWS_NUM'])

@@ -11,7 +11,14 @@
                 <ul>
                     <li><a href="{{ url_for('admin.category') }}">网站结构管理</a></li>
                     <li><a href="{{ url_for('admin.slider') }}">首页图片管理</a></li>
-                    <li><a href="{{ url_for('admin.post') }}">文章内容管理</a></li>
+                    <li>
+                        <a>文章内容管理</a>
+                        <ul>
+                            {% for category in categories %}
+                            <li><a href="{{ url_for('admin.post', category=category.name) }}">{{ category.cname }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
                     <li><a href="{{ url_for('admin.link') }}">友情链接管理</a></li>
                 </ul>
             </div>

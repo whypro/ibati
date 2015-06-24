@@ -22,10 +22,10 @@ def index(category, page, label=None):
         return render_template('about-us.html', category=p.category, post=p)
 
     # 其他页面
-    qry = Post.query.filter(Post.category_id==cat.id)
+    qry = Post.query.filter_by(category_id=cat.id, status="公开")
     if label:
-        lab = Label.query.filter(Label.name==label).one()
-        qry = qry.filter(Post.label_id==lab.id)
+        lab = Label.query.filter_by(name=label).one()
+        qry = qry.filter_by(label_id=lab.id)
     else:
         lab = None
 

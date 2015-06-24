@@ -65,10 +65,11 @@ def logout():
     return redirect(url_for('home.index'))
 
 
-@admin.route('/post/', defaults={'page': 1})
-@admin.route('/post/<int:page>/')
-def post(page):
-    pagination = Post.query.paginate(page, per_page=current_app.config['POSTS_PER_PAGE'])
+@admin.route('/post/<category>/', defaults={'page': 1})
+@admin.route('/post/<category>/<int:page>/')
+def post(category, page):
+    cat = Category.query.filter_by(name=category).one()
+    pagination = Post.query.filter_by(category_id=cat.id).order_by(Post.update_date.desc()).paginate(page, per_page=current_app.config['POSTS_PER_PAGE'])
     posts = pagination.items
 
     return render_template(
@@ -86,6 +87,9 @@ def edit_post(id):
         content = request.form.get('content')
         p.title = title
         p.content = content
+        p.category_id = request.form.get('category_id')
+        p.label_id = request.form.get('label_id')
+        p.status = request.form.get('status')
         p.update_date = datetime.datetime.now()
         pattern = re.compile(r'<img src="(.*?)".*>')
         match = pattern.search(p.content)
@@ -109,7 +113,49 @@ def edit_post(id):
         db.session.add(p)
         db.session.commit()
 
-    return render_template('admin/post-edit.html', post=p)
+    category_labels = Label.query.filter_by(category_id=p.category_id).all()
+
+    return render_template('admin/post-edit.html', post=p, category_labels=category_labels)
+
+
+@admin.route('/post/add/', methods=['GET', 'POST'])
+@admin.route('/post/<category>/add/', methods=['GET'])
+def add_post(category=None):
+    if request.method == 'POST':
+        p = Post()
+        title = request.form.get('title')
+        content = request.form.get('content')
+        p.title = title
+        p.content = content
+        p.category_id = request.form.get('category_id')
+        p.label_id = request.form.get('label_id')
+        p.status = request.form.get('status')
+        p.update_date = datetime.datetime.now()
+        pattern = re.compile(r'<img src="(.*?)".*>')
+        match = pattern.search(p.content)
+        if match:
+            url = match.group(1)
+            basename = os.path.basename(url)
+            filename = upload_set.path(basename)
+            # 生成缩略图 [filename].[ext] -> [filename]_thumb.[ext]
+            _splitext = os.path.splitext(filename)
+            tb_filename = _splitext[0] + '_thumb' + _splitext[1]
+            tb_basename = os.path.basename(tb_filename)
+            try:
+                image = Image.open(filename)
+                image.thumbnail(size=(135, 88))
+                image.save(tb_filename)
+            except IOError:
+                print "cannot create thumbnail for", filename
+            else:
+                p.thumbnail = upload_set.url(tb_basename)
+
+        db.session.add(p)
+        db.session.commit()
+
+        return redirect(url_for('admin.post', category=p.category.name))
+
+    return render_template('admin/post-add.html')
 
 
 @admin.route('/slider/')

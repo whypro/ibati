@@ -340,6 +340,31 @@ a.wen22:hover {
     text-decoration: none
 }
 
+
+.aboutzleftmeun ul li ul {
+    display:block;
+    top:0;
+    left:0;
+    width:220px;
+}
+
+.aboutzleftmeun ul li ul li a {
+    display:block;
+    background: url(../images/lili3.jpg) no-repeat;
+    color:#6d6d6f;
+    height:24px;
+    line-height:24px;
+    font-weight:100;
+}
+
+.aboutzleftmeun ul li ul li a:hover {
+    background: url(../images/lili4.jpg) no-repeat;
+    color:#065f95;
+    height:24px;
+    line-height:24px;
+    font-weight:100;
+}
+
 .aboutrig {
     width: 760px;
     float: right

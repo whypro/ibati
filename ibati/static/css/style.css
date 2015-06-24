@@ -1,13 +1,16 @@
 @charset "utf-8";
 /* CSS Document */
+html {
+    overflow-y: scroll;
+}
+
 body {
     margin: 0px;
     padding: 0px;
     font-size: 12px;
     color: #6d6d6f;
     font-family: Arial, Helvetica, sans-serif;
-    background: url("../images/allb.jpg")/*tpa=http://www.decard.com/template/CN/images/allb.jpg*/ repeat-x;
-    background-color: #FFFFFF;
+    background: url("../images/allb.jpg")/*tpa=http://www.decard.com/template/CN/images/allb.jpg*/ repeat-x #FFFFFF;
 }
 
 form,p,ul,li,table,input,h1,h2,h3,h4,div,td,tr {

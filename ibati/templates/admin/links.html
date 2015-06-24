@@ -53,7 +53,7 @@
                             <th class="link-name-td" width="15%">名称</th>
                             <th class="link-href-td" width="60%">链接</th>
                             <th class="link-order-td" width="5%">排序</th>
-                            <th class="link-delete-td" width="15%">操作</th>
+                            <th class="link-operation-td" width="15%">操作</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,7 +63,7 @@
                             <td class="link-name-td"><input class="link-name-input" name="name" value="{{ link.name }}" style="width: 90%;"/></td>
                             <td class="link-href-td"><input class="link-href-input" name="href" value="{{ link.href }}" style="width: 90%;"/></td>
                             <td class="link-order-td"><input class="link-order-input" name="order" value="{{ link.order }}" style="width: 90%;"/></td>
-                            <td class="link-delete-td">
+                            <td class="link-operation-td">
                                 <a class="link-save" href="javascript:void(0)">保存</a>&nbsp;|&nbsp;
                                 <a class="link-delete" href="{{ url_for('admin.delete_link', id=link.id) }}">删除</a>
                             </td>
@@ -101,7 +101,7 @@
                     '                            <td class="link-name-td"><input class="link-name-input" name="name" value="" style="width: 90%;"/></td>',
                     '                            <td class="link-href-td"><input class="link-href-input" name="href" value="" style="width: 90%;"/></td>',
                     '                            <td class="link-order-td"><input class="link-order-input" name="order" value="" style="width: 90%;"/></td>',
-                    '                            <td class="link-delete-td">',
+                    '                            <td class="link-operation-td">',
                     '                                <a class="link-add-save" href="javascript:void(0)">保存</a>&nbsp;|&nbsp;',
                     '                                <a class="link-add-cancel" href="javascript:void(0)">取消</a>',
                     '                            </td>',

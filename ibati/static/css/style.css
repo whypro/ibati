@@ -107,6 +107,7 @@ a.wen22:hover {
     width: 1002px;
     margin: auto;
     height: 98px;
+    background: #6CA6CD;
 }
 
 .meun {
@@ -114,7 +115,7 @@ a.wen22:hover {
     margin: auto;
     height: 41px;
     line-height: 41px;
-    border-top: 1px #979797 dotted
+    border-top: 1px #979797 dotted;
 }
 
 .meun1 {
@@ -135,7 +136,7 @@ a.wen22:hover {
 
 .toplan {
     width: 1002px;
-    background: #065f95;
+    background: #6CA6CD;
     margin: auto;
     height: 34px
 }

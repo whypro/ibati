@@ -74,7 +74,7 @@ def post(category, page):
 
     return render_template(
         'admin/posts.html',
-        active='admin', label_active='post', posts=posts, pagination=pagination
+        active='admin', label_active='post', posts=posts, category=cat, pagination=pagination
     )
 
 
@@ -155,7 +155,30 @@ def add_post(category=None):
 
         return redirect(url_for('admin.post', category=p.category.name))
 
-    return render_template('admin/post-add.html')
+    return render_template('admin/post-add.html', category_name=category)
+
+
+@admin.route('/post/<int:id>/delete/')
+def delete_post(id):
+    p = Post.query.get_or_404(id)
+    category_name = p.category.name
+    db.session.delete(p)
+    db.session.commit()
+
+    return redirect(url_for('admin.post', category=category_name))
+
+
+@admin.route('/post/delete/batch/')
+def batch_delete_post():
+    # print request.args
+    ids = request.args.getlist('ids[]')
+    # print ids
+    for id_ in ids:
+        p = Post.query.get_or_404(id_)
+        db.session.delete(p)
+    db.session.commit()
+
+    return jsonify(result=200)
 
 
 @admin.route('/slider/')

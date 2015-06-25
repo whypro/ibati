@@ -48,6 +48,7 @@
 
                 <table class="posts-table">
                     <thead>
+                        {#
                         <tr>
                             <td><label for="category">一级分类：</label></td>
                             <td>
@@ -58,24 +59,31 @@
                                 </select>
                             </td>
                         </tr>
+                        #}
                         <tr>
                             <th class="post-check-td" width="10%"><input id="post-check-all" type="checkbox" /></th>
+                            {% if category.labels %}
                             <th class="post-label-td" width="10%">二级分类</th>
                             <th class="post-title-td" width="55%">文章标题</th>
+                            {% else %}
+                            <th class="post-title-td" width="65%">文章标题</th>
+                            {% endif %}
                             <th class="post-status-td" width="10%">状态</th>
                             <th class="post-operation-td" width="15%">操作</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for post in posts %}
-                        <tr>
+                        <tr id="{{ post.id }}">
                             <td class="post-check-td"><input class="post-check-input" type="checkbox" /></td>
+                            {% if category.labels %}
                             <td class="post-label-td">{{ post.label.cname }}</td>
+                            {% endif %}
                             <td class="post-title-td"><a href="{{ url_for('admin.edit_post', id=post.id) }}">{{ post.title }}</a></td>
                             <td class="post-status-td">{{ post.status }}</td>
                             <td class="post-operation-td">
                                 <a href="{{ url_for('post.detail', id=post.id) }}">预览</a>
-                                <a>删除</a>
+                                <a href="{{ url_for('admin.delete_post', id=post.id) }}">删除</a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -83,16 +91,51 @@
                     <tfoot>
                         <tr>
                             <td></td>
+                            {% if category.labels %}
                             <td></td>
+                            {% endif %}
                             <td></td>
                             <td></td>
                             <td>
-                                <a id="post-add" href="{{ url_for('admin.add_post') }}">添加</a>&nbsp;|&nbsp;
+                                <a id="post-add" href="{{ url_for('admin.add_post', category=category.name) }}">添加</a>&nbsp;|&nbsp;
                                 <a id="post-delete-checked" href="javascript:void(0)">批量删除</a>
                             </td>
                         </tr>
                     </tfoot>
                 </table>
+                <p align="center">
+
+                    <style>
+                        <!--
+                        #dcms_pager .pages {border:none;text-transform:uppercase;font-size:12px;margin:10px 0 10px 0;padding:0;height:20px;clear:both;text-align:center;}
+                        #dcms_pager .pages a {border:1px solid #ccc;text-decoration:none;margin:0 5px 0 0;padding:0 3px 0 3px;font-size:12px;height:16px;line-height:16px;}
+                        #dcms_pager .pages a:hover {border:1px solid #aeaeae;}
+                        #dcms_pager .pages .pgempty {border:1px solid #eee;color:#eee;}
+                        #dcms_pager .pages .pgcurrent {border:1px solid #aeaeae;color:#000;font-weight:bold;background-color:#eee;}
+                        -->
+                    </style>
+
+                    {% if pagination.pages < 2 %}
+                    {% else %}
+                        <div id="dcms_pager" align="center">
+                            <div class="pages">
+                                <a class="pgnext"{%- if pagination.has_prev %} href="{{ url_for('admin.post', category=category.name) }}"{% endif -%}>首页</a>
+                                <a class="pgnext"{%- if pagination.has_prev %} href="{{ url_for('admin.post', category=category.name, page=pagination.page-1) }}"{% endif -%}>上一页</a>
+                                {% for page in pagination.iter_pages(2, 2, 2, 2) %}
+                                {% if page %}
+                                    <a{%- if page == pagination.page %} class="page-number pgcurrent"{% else %} href="{{ url_for('admin.post', category=category.name, page=page) }}"{%- endif %}>{{ page }}</a>
+                                {% else %}
+                                    ...
+                                {% endif %}
+                                {% endfor %}
+
+                                <a class="pgnext"{%- if pagination.has_next %} href="{{ url_for('admin.post', category=category.name, page=pagination.page+1) }}"{% endif -%}>下一页</a>
+                                <a class="pgnext"{%- if pagination.has_next %} href="{{ url_for('admin.post', category=category.name, page=pagination.pages) }}"{% endif -%}>尾页</a>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                </p>
                 {#
                 {% for post in posts %}
                 <table width="100%" border="0" cellspacing="0" cellpadding="10">
@@ -166,6 +209,23 @@
                     });
                 }
 
+            });
+
+            $("#post-delete-checked").click(function() {
+                if (confirm("确认删除选中？")) {
+                    // alert($(".link-check-input:checked"));
+                    var ids = [];
+                    $(".post-check-input:checked").each(function() {
+                        ids.push($(this).parents("tr:first").attr("id"));
+                        // var delete_url = $(this).parents("tr:first").find(".link-delete").attr("href");
+                        // alert(delete_url);
+                    });
+                    // alert(ids);
+
+                    $.get("{{ url_for('admin.batch_delete_post') }}", {ids: ids}, function() {
+                        location.reload();
+                    });
+                }
             });
         });
 

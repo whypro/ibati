@@ -60,7 +60,7 @@
                     <label for="category">一级目录</label>
                     <select id="category-select" name="category_id">
                         {% for category in categories %}
-                        <option value="{{ category.id }}">{{ category.cname }}</option>
+                        <option value="{{ category.id }}"{%- if category_name == category.name %} selected="selected"{% endif -%}>{{ category.cname }}</option>
                         {% endfor %}
                     </select>
                     &nbsp;|&nbsp;
@@ -126,7 +126,8 @@
     });
 
     $(document).ready(function() {
-        $("#category-select").change(function() {
+        var category_select = $("#category-select")
+        category_select.change(function() {
             $.get("{{ url_for('admin.get_label_json') }}", {category_id: $(this).val()}, function(data) {
                 // alert(JSON.stringify(data));
                 var label_select = $("#label-select");
@@ -140,6 +141,8 @@
 
             });
         });
+
+        category_select.change();
     });
 </script>
 {% endblock %}

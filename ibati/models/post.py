@@ -9,6 +9,7 @@ class Category(db.Model):
     name = db.Column(db.String(20))
     cname = db.Column(db.Unicode(20))
     order = db.Column(db.Integer)
+    labels = db.relationship('Label', backref='category', order_by='Label.order')
 
 class Label(db.Model):
     __tablename__ = 'ibati_label'
@@ -17,7 +18,7 @@ class Label(db.Model):
     name = db.Column(db.String(20))
     cname = db.Column(db.Unicode(20))
     category_id = db.Column(db.Integer, db.ForeignKey('ibati_category.id'))
-    category = db.relationship('Category', backref='labels')
+    # category = db.relationship('Category', backref='labels')
     order = db.Column(db.Integer)
 
 class Post(db.Model):

@@ -68,19 +68,19 @@
                     {% if pagination.pages < 2 %}
                     {% else %}
                         <div id="dcms_pager" align="center">
-                            <div class=pages>
-                                <a class=pgnext href="{{ url_for('post.index', category=active, label=label_active) }}">首页</a>
+                            <div class="pages">
+                                <a class="pgnext"{%- if pagination.has_prev %} href="{{ url_for('post.index', category=active, label=label_active) }}"{% endif -%}>首页</a>
                                 <a class="pgnext"{%- if pagination.has_prev %} href="{{ url_for('post.index', category=active, label=label_active, page=pagination.page-1) }}"{% endif -%}>上一页</a>
                                 {% for page in pagination.iter_pages(2, 2, 2, 2) %}
                                 {% if page %}
-                                    <a{%- if page == pagination.page %} class="page-number pgcurrent"{%- endif %} href="{{ url_for('post.index', category=active, label=label_active, page=page) }}" >{{ page }}</a>
+                                    <a{%- if page == pagination.page %} class="page-number pgcurrent"{% else %} href="{{ url_for('post.index', category=active, label=label_active, page=page) }}"{%- endif %}>{{ page }}</a>
                                 {% else %}
                                     ...
                                 {% endif %}
                                 {% endfor %}
 
-                                <a class=pgnext{%- if pagination.has_next %} href="{{ url_for('post.index', category=active, label=label_active, page=pagination.page+1) }}"{% endif -%}>下一页</a>
-                                <a class=pgnext href="{{ url_for('post.index', category=active, label=label_active, page=pagination.pages) }}">尾页</a>
+                                <a class="pgnext"{%- if pagination.has_next %} href="{{ url_for('post.index', category=active, label=label_active, page=pagination.page+1) }}"{% endif -%}>下一页</a>
+                                <a class="pgnext"{%- if pagination.has_next %} href="{{ url_for('post.index', category=active, label=label_active, page=pagination.pages) }}"{% endif -%}>尾页</a>
                             </div>
                         </div>
                     {% endif %}

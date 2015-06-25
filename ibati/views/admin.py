@@ -54,7 +54,7 @@ def login():
             ).first()
             if user:
                 login_user(user)
-                return redirect(url_for('home.index'))
+                return redirect(url_for('admin.index'))
     return render_template('admin/login.html')
 
 
@@ -319,6 +319,15 @@ def post_category_ztree_json():
 
     db.session.commit()
     return jsonify(result=200)
+
+
+@admin.route('/api/label/get/')
+def get_label_json():
+    category_id = request.args.get('category_id')
+    cat = Category.query.get(category_id)
+    print cat.cname
+    labels = [dict(id=label.id, name=label.name, cname=label.cname) for label in cat.labels]
+    return jsonify(result=200, labels=labels)
 
 
 @admin.route('/init/')

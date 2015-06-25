@@ -58,14 +58,14 @@
                     <hr />
                     <div style="text-align: right;">
                     <label for="category">一级目录</label>
-                    <select name="category_id">
+                    <select id="category-select" name="category_id">
                         {% for category in categories %}
                         <option value="{{ category.id }}">{{ category.cname }}</option>
                         {% endfor %}
                     </select>
                     &nbsp;|&nbsp;
                     <label for="label">二级目录</label>
-                    <select name="label_id">
+                    <select id="label-select" name="label_id">
 
                     </select>
                     &nbsp;|&nbsp;
@@ -122,6 +122,23 @@
         });
         K('input[name=clear]').click(function(e) {
             editor.html('');
+        });
+    });
+
+    $(document).ready(function() {
+        $("#category-select").change(function() {
+            $.get("{{ url_for('admin.get_label_json') }}", {category_id: $(this).val()}, function(data) {
+                // alert(JSON.stringify(data));
+                var label_select = $("#label-select");
+                label_select.empty();
+                for (var i in data["labels"]) {
+                    var id = data["labels"][i]["id"];
+                    var name = data["labels"][i]["name"];
+                    var cname = data["labels"][i]["cname"];
+                    label_select.append('<option value='+id+'>'+cname+'</option>');
+                }
+
+            });
         });
     });
 </script>

@@ -11,7 +11,7 @@ class Config(object):
     DB_HOST = 'localhost'
     DB_DATABASE = 'ibati'
     DB_USERNAME = 'root'
-    DB_PASSWORD = ''
+    DB_PASSWORD = 'whypro'
     DB_PORT = int(3306)
 
     # FLASK-SQLALCHEMY
@@ -27,6 +27,7 @@ class Config(object):
 
     # Flask-Uploads
     UPLOADS_DEFAULT_DEST = os.path.realpath('uploads')
+    UPLOADED_FILES_ALLOW = ['pdf']
 
     POSTS_PER_PAGE = 10     # 每页显示的主题数
     INDEX_NEWS_NUM = 8      # 首页新闻个数

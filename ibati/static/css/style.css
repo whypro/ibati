@@ -5,24 +5,24 @@ html {
 }
 
 body {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     font-size: 12px;
     color: #6d6d6f;
     font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
-    background: url("../images/allb.jpg")/*tpa=http://www.decard.com/template/CN/images/allb.jpg*/ repeat-x #FFFFFF;
+    background: url("../images/allb.jpg") repeat-x #FFFFFF;
 }
 
 form,p,ul,li,table,input,h1,h2,h3,h4,div,td,tr {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     list-style: none outside;
 }
 
 img {
     border: none;
-    margin: 0px;
-    padding: 0px
+    margin: 0;
+    padding: 0;
 }
 
 .left {
@@ -34,11 +34,11 @@ img {
 }
 
 .both {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     clear: both;
-    font-size: 0px;
-    line-height: 0px;
+    font-size: 0;
+    line-height: 0;
 }
 /*全局定义*/
 a {
@@ -110,15 +110,14 @@ a.wen22:hover {
     background: #6CA6CD;
 }
 
-.meun {
+.menu {
     width: 1002px;
     margin: auto;
     height: 41px;
     line-height: 41px;
-    border-top: 1px #979797 dotted;
 }
 
-.meun1 {
+.menu1 {
     height: 41px;
     line-height: 41px;
     font-size: 14px;
@@ -155,10 +154,11 @@ a.wen22:hover {
 #nav ul li ul {
     position: absolute;
     top: 41px;
-    left: 0px;
+    left: 0;
     display: none;
     z-index: 9;
     background: url('../images/lili.jpg');
+    width: 110px;
 }
 
 #nav ul li ul li {
@@ -168,14 +168,15 @@ a.wen22:hover {
     font-weight: 100;
     font-size: 13px;
     text-indent: 1.6em;
-    width: 100px;
+    width: 110px;
+    margin: 0;
 }
 #nav ul li ul a:hover {
     color: #065f95;
     background: url('../images/lili2.jpg');
 }
 #nav ul li ul li ul {
-    top: 0px;
+    top: 0;
     left: 150px;
     width: 180px;
 }
@@ -324,8 +325,8 @@ a.wen22:hover {
     width: 1002px;
     margin: auto;
     border: 1px #CFD8E1 solid;
-    border-left: 0px;
-    border-right: 0px;
+    border-left: 0;
+    border-right: 0;
     height: 29px;
     line-height: 29px;
     margin-top: 12px;
@@ -382,7 +383,7 @@ a.wen22:hover {
     float: left;
     width: 190px;
     height: 36px;
-    background: url("../images/meunout.jpg")/*tpa=http://www.decard.com/template/CN/images/meunout.jpg*/ no-repeat;
+    background: url("../images/meunout.jpg") no-repeat;
     line-height: 36px;
     padding-left: 30px;
     margin-bottom: 1px
@@ -390,7 +391,7 @@ a.wen22:hover {
 
 .aboutzleftmeun ul li a:hover {
     float: left;
-    background: url("../images/meunon.jpg")/*tpa=http://www.decard.com/template/CN/images/meunon.jpg*/ no-repeat;
+    background: url("../images/meunon.jpg") no-repeat;
     width: 190px;
     height: 36px;
     line-height: 36px;
@@ -694,15 +695,15 @@ a.wen22:hover {
 
 .job TABLE TD.job_td_title {
     TEXT-ALIGN: left;
-    PADDING-BOTTOM: 0px;
+    PADDING-BOTTOM: 0;
     PADDING-LEFT: 10px;
-    PADDING-RIGHT: 0px;
+    PADDING-RIGHT: 0;
     CURSOR: pointer;
-    PADDING-TOP: 0px
+    PADDING-TOP: 0
 }
 
 .job TABLE TD.job_td_title IMG {
-    MARGIN: 0px 9px 0px 0px
+    MARGIN: 0 9px 0 0
 }
 
 .job TABLE TD.job_td_title1 A {
@@ -715,7 +716,7 @@ a.wen22:hover {
 }
 
 .job TABLE TD.job_td_title1 IMG {
-    MARGIN: 0px 7px 0px 0px
+    MARGIN: 0 7px 0 0
 }
 
 .job_txt {
@@ -723,7 +724,7 @@ a.wen22:hover {
     PADDING-BOTTOM: 15px;
     LINE-HEIGHT: 22px;
     PADDING-LEFT: 20px;
-    PADDING-RIGHT: 0px;
+    PADDING-RIGHT: 0;
     PADDING-TOP: 15px
 }
 

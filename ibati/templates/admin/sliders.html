@@ -107,7 +107,6 @@
                     '                            <td class="slider-image-td">',
                     '                                <input class="slider-upload" type="file" name="imageFile" style="width: 90%; margin-bottom: 6px;" />',
                     '                                <input class="slider-image-input" name="image" value="" style="width: 90%;"/>',
-
                     '                            </td>',
                     '                            <td class="slider-order-td"><input class="slider-order-input" name="order" value="'+new_order+'" style="width: 90%;"/></td>',
                     '                            <td class="slider-enable-td"><input class="slider-enable-input" name="enable" type="checkbox" checked="checked" style="width: 90%;"/></td>',
@@ -125,8 +124,11 @@
                     'onComplete': function(response) {
                         var path = response["path"];
                         var tr = $(this).parents("tr:first");
-                        tr.find(".slider-image-input").val(path);
+                        var input = tr.find(".slider-image-input").val(path);
+                        input.val(path);
+                        input.attr("readonly", "readonly");
                         tr.find(".slider-preview").attr("src", path);
+
                     }
 
                 });

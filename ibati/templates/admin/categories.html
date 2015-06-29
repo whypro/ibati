@@ -4,10 +4,6 @@
 {% block css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='plugins/zTree/css/metroStyle/metroStyle.css') }}" />
 {% endblock %}
-{% block script %}
-    <script charset="utf-8" src="{{ url_for('static', filename='plugins/zTree/js/jquery.ztree.core-3.5.min.js') }}"></script>
-    <script charset="utf-8" src="{{ url_for('static', filename='plugins/zTree/js/jquery.ztree.exedit-3.5.min.js') }}"></script>
-{% endblock %}
 
 {% block content %}
     <div class="aboutz">
@@ -47,6 +43,12 @@
         </div>
         <div class="both"></div>
     </div>
+{% endblock %}
+
+{% block script %}
+    <script charset="utf-8" src="{{ url_for('static', filename='plugins/zTree/js/jquery.ztree.core-3.5.min.js') }}"></script>
+    <script charset="utf-8" src="{{ url_for('static', filename='plugins/zTree/js/jquery.ztree.exedit-3.5.min.js') }}"></script>
+
     <script>
         var settings = {
             async: {

@@ -3,10 +3,6 @@
 {% block css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='plugins/kindeditor/themes/default/default.css') }}" />
 {% endblock %}
-{% block script %}
-    <script charset="utf-8" src="{{ url_for('static', filename='plugins/kindeditor/kindeditor-min.js') }}"></script>
-    <script charset="utf-8" src="{{ url_for('static', filename='plugins/kindeditor/lang/zh_CN.js') }}"></script>
-{% endblock %}
 {% block content %}
     <div class="aboutz">
 
@@ -53,6 +49,8 @@
                     <select id="category-select" name="category_id">
                         {% for category in categories %}
                         <option value="{{ category.id }}"{%- if category_name == category.name %} selected="selected"{% endif -%}>{{ category.cname }}</option>
+                        {% else %}
+                        <option value="-1"{%- if not post.label_id %} selected="selected"{% endif -%}>无</option>
                         {% endfor %}
                     </select>
                     &nbsp;|&nbsp;
@@ -79,62 +77,69 @@
         </div>
         <div class="both"></div>
     </div>
+{% endblock %}
+{% block script %}
+    <script charset="utf-8" src="{{ url_for('static', filename='plugins/kindeditor/kindeditor-min.js') }}"></script>
+    <script charset="utf-8" src="{{ url_for('static', filename='plugins/kindeditor/lang/zh_CN.js') }}"></script>
 
-<script>
-    var editor;
-    KindEditor.ready(function(K) {
-        editor = K.create('textarea[name="content"]', {
-            allowFileManager : true,
-            uploadJson: '{{ url_for('admin.upload') }}',
-            fileManagerJson: 'file_manager/'
-        });
-        K('input[name=getHtml]').click(function(e) {
-            alert(editor.html());
-        });
-        K('input[name=isEmpty]').click(function(e) {
-            alert(editor.isEmpty());
-        });
-        K('input[name=getText]').click(function(e) {
-            alert(editor.text());
-        });
-        K('input[name=selectedHtml]').click(function(e) {
-            alert(editor.selectedHtml());
-        });
-        K('input[name=setHtml]').click(function(e) {
-            editor.html('<h3>Hello KindEditor</h3>');
-        });
-        K('input[name=setText]').click(function(e) {
-            editor.text('<h3>Hello KindEditor</h3>');
-        });
-        K('input[name=insertHtml]').click(function(e) {
-            editor.insertHtml('<strong>插入HTML</strong>');
-        });
-        K('input[name=appendHtml]').click(function(e) {
-            editor.appendHtml('<strong>添加HTML</strong>');
-        });
-        K('input[name=clear]').click(function(e) {
-            editor.html('');
-        });
-    });
-
-    $(document).ready(function() {
-        var category_select = $("#category-select")
-        category_select.change(function() {
-            $.get("{{ url_for('admin.get_label_json') }}", {category_id: $(this).val()}, function(data) {
-                // alert(JSON.stringify(data));
-                var label_select = $("#label-select");
-                label_select.empty();
-                for (var i in data["labels"]) {
-                    var id = data["labels"][i]["id"];
-                    var name = data["labels"][i]["name"];
-                    var cname = data["labels"][i]["cname"];
-                    label_select.append('<option value='+id+'>'+cname+'</option>');
-                }
-
+    <script>
+        var editor;
+        KindEditor.ready(function(K) {
+            editor = K.create('textarea[name="content"]', {
+                allowFileManager : true,
+                uploadJson: '{{ url_for('admin.upload') }}',
+                fileManagerJson: 'file_manager/'
+            });
+            K('input[name=getHtml]').click(function(e) {
+                alert(editor.html());
+            });
+            K('input[name=isEmpty]').click(function(e) {
+                alert(editor.isEmpty());
+            });
+            K('input[name=getText]').click(function(e) {
+                alert(editor.text());
+            });
+            K('input[name=selectedHtml]').click(function(e) {
+                alert(editor.selectedHtml());
+            });
+            K('input[name=setHtml]').click(function(e) {
+                editor.html('<h3>Hello KindEditor</h3>');
+            });
+            K('input[name=setText]').click(function(e) {
+                editor.text('<h3>Hello KindEditor</h3>');
+            });
+            K('input[name=insertHtml]').click(function(e) {
+                editor.insertHtml('<strong>插入HTML</strong>');
+            });
+            K('input[name=appendHtml]').click(function(e) {
+                editor.appendHtml('<strong>添加HTML</strong>');
+            });
+            K('input[name=clear]').click(function(e) {
+                editor.html('');
             });
         });
 
-        category_select.change();
-    });
-</script>
+        $(document).ready(function() {
+            var category_select = $("#category-select")
+            category_select.change(function() {
+                $.get("{{ url_for('admin.get_label_json') }}", {category_id: $(this).val()}, function(data) {
+                    // alert(JSON.stringify(data));
+                    var label_select = $("#label-select");
+                    label_select.empty();
+                    if (!data["labels"].length) {
+                        label_select.append('<option value="-1">无</option>')
+                    }
+                    for (var i in data["labels"]) {
+                        var id = data["labels"][i]["id"];
+                        var name = data["labels"][i]["name"];
+                        var cname = data["labels"][i]["cname"];
+                        label_select.append('<option value='+id+'>'+cname+'</option>');
+                    }
+
+                });
+            });
+
+            category_select.change();
+        });
+    </script>
 {% endblock %}

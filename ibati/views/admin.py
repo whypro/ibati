@@ -88,7 +88,9 @@ def edit_post(id):
         p.title = title
         p.content = content
         p.category_id = request.form.get('category_id')
-        p.label_id = request.form.get('label_id')
+        label_id = int(request.form.get('label_id'))
+        if label_id != -1:
+            p.label_id = label_id
         p.status = request.form.get('status')
         p.update_date = datetime.datetime.now()
         pattern = re.compile(r'<img src="(.*?)".*>')
@@ -128,7 +130,9 @@ def add_post(category=None):
         p.title = title
         p.content = content
         p.category_id = request.form.get('category_id')
-        p.label_id = request.form.get('label_id')
+        label_id = int(request.form.get('label_id'))
+        if label_id != -1:
+            p.label_id = label_id
         p.status = request.form.get('status')
         p.update_date = datetime.datetime.now()
         pattern = re.compile(r'<img src="(.*?)".*>')

@@ -44,22 +44,6 @@ def detail(id):
     p.click_count += 1
     db.session.add(p)
     db.session.commit()
-    return render_template('post/post-detail.html', category=p.category, post=p)
+    return render_template('post/post-detail.html', category=p.category, label=p.label, post=p)
 
-
-@post.route('/add/', methods=['GET', 'POST'])
-def add():
-    if request.method == 'POST':
-        print 'done'
-        return redirect(url_for('post.add'))
-    
-    return render_template('post/post-add.html')
-
-@post.route('/<int:id>/delete/')
-def delete(id):
-    p = Post.query.get_or_404(id)
-    db.session.delete(p)
-    db.session.commit()
-
-    return '删除成功'
 

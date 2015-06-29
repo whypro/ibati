@@ -9,27 +9,17 @@
             <div class="aboutrigdao">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                        {#
                         <td width="2%">
-                            {% if label %}
                             <img src="{{ url_for('static', filename='images/li2.jpg') }}" width="11" height="11" />
-                            {% endif %}
                         </td>
                         <td width="36%">
-                            {% if label %}
-                            <font class="wen4">{{ label.cname }}</font>
-                            {% endif %}
+                            <font class="wen4">友情链接管理</font>
                         </td>
-                        #}
                         <td width="62%" align="right">
                             <div align="right" class="wz004">
                                 <img src="{{ url_for('static', filename='images/index_21.jpg') }}" /> 您的位置：<a href="{{ url_for('home.index') }}">首页</a>
                                 <img src="{{ url_for('static', filename='images/jiao.gif') }}" /><a href="{{ url_for('admin.index') }}">管理中心</a>
-                                {#
-                                {% if label %}
-                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" />{{ label.cname }}
-                                {% endif %}
-                                #}
+                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" />友情链接管理
                             </div>
                        </td>
                     </tr>
@@ -94,13 +84,15 @@
         $(document).ready(function() {
             $("#link-add").click(function() {
                 // alert("add");
+                var order_array = $('[class^="link-order-input"]').map(function () { return $(this).val(); }).get();
+                var new_order = Math.max.apply(Math, order_array) + (order_array[order_array.length-1]-order_array[order_array.length-2]);
 
                 var new_tr = [
                     '                        <tr>',
                     '                            <td class="link-check-td"><input class="link-check-input" type="checkbox" /></td>',
                     '                            <td class="link-name-td"><input class="link-name-input" name="name" value="" style="width: 90%;"/></td>',
                     '                            <td class="link-href-td"><input class="link-href-input" name="href" value="" style="width: 90%;"/></td>',
-                    '                            <td class="link-order-td"><input class="link-order-input" name="order" value="" style="width: 90%;"/></td>',
+                    '                            <td class="link-order-td"><input class="link-order-input" name="order" value="'+new_order+'" style="width: 90%;"/></td>',
                     '                            <td class="link-operation-td">',
                     '                                <a class="link-add-save" href="javascript:void(0)">保存</a>&nbsp;|&nbsp;',
                     '                                <a class="link-add-cancel" href="javascript:void(0)">取消</a>',

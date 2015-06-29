@@ -9,7 +9,7 @@ body {
     padding: 0px;
     font-size: 12px;
     color: #6d6d6f;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Microsoft YaHei", Arial, Helvetica, sans-serif;
     background: url("../images/allb.jpg")/*tpa=http://www.decard.com/template/CN/images/allb.jpg*/ repeat-x #FFFFFF;
 }
 
@@ -124,6 +124,68 @@ a.wen22:hover {
     font-size: 14px;
 }
 
+#nav {
+    height: 41px;
+    position: relative;
+    z-index: 9;
+    margin: 0 auto;
+}
+
+#nav a, #nav a:link {
+    color: #6d6d6f;
+    display: block;
+}
+
+#nav a:hover {
+    color: #065f95;
+    text-decoration: none;
+}
+
+#nav ul li {
+    float: left;
+    text-align: left;
+    line-height: 41px;
+    position: relative;
+    height: 41px;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 20px;
+}
+
+#nav ul li ul {
+    position: absolute;
+    top: 41px;
+    left: 0px;
+    display: none;
+    z-index: 9;
+    background: url('../images/lili.jpg');
+}
+
+#nav ul li ul li {
+    line-height: 24px;
+    height: 24px;
+    background: none;
+    font-weight: 100;
+    font-size: 13px;
+    text-indent: 1.6em;
+    width: 100px;
+}
+#nav ul li ul a:hover {
+    color: #065f95;
+    background: url('../images/lili2.jpg');
+}
+#nav ul li ul li ul {
+    top: 0px;
+    left: 150px;
+    width: 180px;
+}
+.w150 {
+    width: 150px;
+}
+.w170 {
+    width: 180px;
+}
+
 .yu {
     width: 139px;
     height: 21px;
@@ -165,12 +227,12 @@ a.wen22:hover {
 }
 
 .zhongxialeft {
-    width: 247px;
+    width: 307px;
     float: left;
 }
 
 .zhongxialeftdao {
-    width: 247px;
+    width: 307px;
     float: left;
     border-bottom: 3px #99D4E2 solid;
     height: 30px;
@@ -178,8 +240,7 @@ a.wen22:hover {
 }
 
 .zxnei {
-    width: 245px;
-    border: 1px #d7d7d7 solid;
+    width: 307px;
     margin-top: 11px;
     float: left;
     line-height: 24px
@@ -190,14 +251,14 @@ a.wen22:hover {
 }
 
 .z_z {
-    width: 375px;
+    width: 307px;
     float: left;
     margin-left: 40px;
     display: inline
 }
 
 .z_zdao {
-    width: 375px;
+    width: 307px;
     float: left;
     border-bottom: 3px #99D4E2 solid;
     height: 30px;
@@ -205,13 +266,13 @@ a.wen22:hover {
 }
 
 .z_zimg {
-    width: 375px;
+    width: 307px;
     margin-top: 11px;
     float: left
 }
 
 .z_znews {
-    width: 375px;
+    width: 307px;
     float: left;
     margin-top: 8px
 }
@@ -229,12 +290,12 @@ a.wen22:hover {
 }
 
 .z_rig {
-    width: 300px;
+    width: 307px;
     float: right
 }
 
 .z_rigdao {
-    width: 300px;
+    width: 307px;
     float: left;
     height: 30px;
     line-height: 30px;
@@ -242,13 +303,13 @@ a.wen22:hover {
 }
 
 .z_rigimg {
-    width: 300px;
+    width: 307px;
     float: left;
     margin-top: 11px;
 }
 
 .z_rignei {
-    width: 300px;
+    width: 307px;
     float: left
 }
 
@@ -297,11 +358,9 @@ a.wen22:hover {
     border-bottom: 3px #99D4E2 solid;
     font-size: 14px;
     font-weight: bold;
-    font-family: "微软雅黑"
 }
 
 .wen3 {
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 11px;
     color: #999999;
     font-weight: 100
@@ -391,7 +450,6 @@ a.wen22:hover {
     font-size: 14px;
     color: #f47900;
     font-weight: bold;
-    font-family: "微软雅黑"
 }
 
 .newsbo {
@@ -437,8 +495,7 @@ a.wen22:hover {
     text-indent: 1em;
     width: 70%;
     float: left;
-    background: url("../images/index_22.jpg")/*tpa=http://www.decard.com/template/CN/images/index_22.jpg*/ no-repeat;
-    background-position: 10px center;
+    background: url("../images/index_22.jpg") no-repeat 10px center;
     text-indent: 1.8em
 }
 
@@ -446,8 +503,7 @@ a.wen22:hover {
     text-indent: 1em;
     width: 90%;
     float: left;
-    background: url("../images/index_23.jpg")/*tpa=http://www.decard.com/template/CN/images/index_23.jpg*/ no-repeat;
-    background-position: 10px center;
+    background: url("../images/index_23.jpg") no-repeat 10px center;
     text-indent: 2.8em
 }
 
@@ -494,59 +550,6 @@ a.wen22:hover {
     display: inline
 }
 
-
-
-/*#nav {
-	Z-INDEX: 1000000; LINE-HEIGHT: 41px; LIST-STYLE-TYPE: none; width:810px; z-index:100000; position: relative
-}
-#nav A {
-	TEXT-ALIGN: center; WIDTH: 120px; DISPLAY: block;z-index:100000
-}
-#nav A:link {
-	COLOR: #6d6d6f; MARGIN-LEFT: 0px; TEXT-DECORATION: none;z-index:100000
-}
-#nav A:visited {
-	COLOR: #6d6d6f; TEXT-DECORATION: none;z-index:100000
-}
-#nav A:hover {
-	COLOR: #065f95; FONT-WEIGHT: bold; TEXT-DECORATION: none;z-index:100000
-}
-#nav LI {
-	Z-INDEX: 1000000; WIDTH: 120px; FLOAT: left; font-size:14px; font-weight:bold;z-index:100000
-}
-#nav LI A:hover {
-	Z-INDEX: 1000000; COLOR: #065f95; font-size:14px; font-weight:bold;z-index:100000; text-decoration:underline
-}
-#nav LI UL {
-	Z-INDEX: 1000000; POSITION: absolute; TEXT-ALIGN: left; FILTER: Alpha(opacity=100); LINE-HEIGHT: 24px; LIST-STYLE-TYPE: none; WIDTH: 120px; LEFT: -999em; float:left;z-index:100000
-}
-#nav LI UL LI {
-	Z-INDEX: 1000000; WIDTH: 120px; BACKGROUND: #f2f2f2; FLOAT: left;  font-weight:100; font-size:12px; font-family:Arial, Helvetica, sans-serif;z-index:100000
-}
-
-
-
-
-
-#nav LI UL A {
-	Z-INDEX: 1000000; TEXT-ALIGN: center; WIDTH: 120px; DISPLAY: block; COLOR: #6d6d6f;z-index:100000
-}
-#nav LI UL A:link {
-	Z-INDEX: 1000000; COLOR: #6d6d6f; TEXT-DECORATION: none;
-}
-#nav LI UL A:visited {
-	Z-INDEX: 1000000; COLOR: #6d6d6f; TEXT-DECORATION: none;
-}
-#nav LI UL A:hover {
-	Z-INDEX: 1000000; BACKGROUND: #999999; COLOR: #f3f3f3; FONT-WEIGHT: normal; TEXT-DECORATION: none;z-index:100000;font-size:12px;
-}
-#nav LI:hover UL {
-	LEFT: auto
-}
-#nav LI.sfhover UL {
-	LEFT: auto
-}
-*/
 
 .zhong_zftop {
     width: 100%;
@@ -636,7 +639,7 @@ a.wen22:hover {
 .suckerdiv ul li a {
     display: block;
     height: 36px;
-    background: url("../images/meunout.jpg")/*tpa=http://www.decard.com/template/CN/images/meunout.jpg*/ no-repeat;
+    background: url("../images/meunout.jpg") no-repeat;
     line-height: 36px;
     padding-left: 30px;
     width: 190px;
@@ -644,7 +647,7 @@ a.wen22:hover {
 }
 
 .suckerdiv ul li a:hover {
-    background: url("../images/meunon.jpg")/*tpa=http://www.decard.com/template/CN/images/meunon.jpg*/ no-repeat;
+    background: url("../images/meunon.jpg") no-repeat;
     width: 190px;
     height: 36px;
     line-height: 36px;
@@ -673,7 +676,7 @@ a.wen22:hover {
 .job TABLE TH {
     BORDER-BOTTOM: #ddd 1px solid;
     BORDER-LEFT: #ddd 1px solid;
-    BACKGROUND: url("../images/bg20.png")/*tpa=http://www.decard.com/template/CN/images/bg20.png*/ repeat-x;
+    BACKGROUND: url("../images/bg20.png") repeat-x;
     HEIGHT: 30px;
     COLOR: #898989;
     BORDER-TOP: #ddd 1px solid;

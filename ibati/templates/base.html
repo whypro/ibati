@@ -12,80 +12,24 @@
 
     {% block css %}{% endblock %}
 
-    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.4.4.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/lrtk.js') }}"></script>
-
-    {% block script %}{% endblock %}
-
     <body>
+
+        {% include 'header.html' %}
+        {% block content %}{% endblock %}
+
+        {% include 'footer.html' %}
+
+        <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.4.4.min.js') }}"></script>
+        <script type="text/javascript" src="{{ url_for('static', filename='js/lrtk.js') }}"></script>
+
         <script type="text/javascript" src="{{ url_for('static', filename='js/javascript100.min.js') }}"></script>
         <script type="text/javascript">
             js100(function(){
               Javascript100.downMenu({id:"nav",cls:"pcls"});
             });
         </script>
-        <style type="text/css">
-            #nav {
-                height: 41px;
-                position: relative;
-                z-index: 9;
-                margin: 0 auto;
-            }
-            #nav a, #nav a:link {
-                color: #6d6d6f;
-                display: block;
-            }
-            #nav a:hover {
-                color: #065f95;
-                text-decoration: none;
-            }
-            #nav ul li {
-                float: left;
-                text-align: left;
-                line-height: 41px;
-                position: relative;
-                height: 41px;
-                font-size: 13px;
-                font-weight: bold;
-                margin: 0 10px;
-            }
-            #nav ul li ul {
-                position: absolute;
-                top: 41px;
-                left: 0px;
-                display: none;
-                z-index: 9;
-                background: url({{ url_for('static', filename='images/lili.jpg') }});
-            }
-            #nav ul li ul li {
-                line-height: 24px;
-                height: 24px;
-                background: none;
-                font-weight: 100;
-                font-size: 12px;
-                text-indent: 1.6em;
-                width: 100px;
-            }
-            #nav ul li ul a:hover {color: #065f95;
-                background: url({{ url_for('static', filename='images/lili2.jpg') }});
-            }
-            #nav ul li ul li ul {
-                top: 0px;
-                left: 150px;
-                width: 180px;
-            }
-            .w150 {
-                width: 150px;
-            }
-            .w170 {
-                width: 180px;
-            }
-        </style>
 
-        {% include 'header.html' %}
-        {% block content %}{% endblock %}
-
-        {% include 'footer.html' %}
+        {% block script %}{% endblock %}
 
     </body>
 </html>

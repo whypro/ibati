@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}管理中心{% endblock %}
+{% block title %}文章内容管理{% endblock %}
 {% block css %}
     <link rel="stylesheet" href="{{ url_for('static', filename='plugins/kindeditor/themes/default/default.css') }}" />
 {% endblock %}
@@ -16,27 +16,18 @@
             <div class="aboutrigdao">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                        {#
                         <td width="2%">
-                            {% if label %}
                             <img src="{{ url_for('static', filename='images/li2.jpg') }}" width="11" height="11" />
-                            {% endif %}
                         </td>
                         <td width="36%">
-                            {% if label %}
-                            <font class="wen4">{{ label.cname }}</font>
-                            {% endif %}
+                            <font class="wen4">文章内容管理</font>
                         </td>
-                        #}
+
                         <td width="62%" align="right">
                             <div align="right" class="wz004">
                                 <img src="{{ url_for('static', filename='images/index_21.jpg') }}" /> 您的位置：<a href="{{ url_for('home.index') }}">首页</a>
                                 <img src="{{ url_for('static', filename='images/jiao.gif') }}" /><a href="{{ url_for('admin.index') }}">管理中心</a>
-                                {#
-                                {% if label %}
-                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" />{{ label.cname }}
-                                {% endif %}
-                                #}
+                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" />文章内容管理
                             </div>
                        </td>
                     </tr>

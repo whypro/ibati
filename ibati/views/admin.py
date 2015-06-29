@@ -304,6 +304,7 @@ def upload_slider():
         abort(400)
 
     file_storage = request.files['imageFile']
+    file_storage.filename = file_storage.filename.lower()
     basename = hashlib.sha1(file_storage.read()).hexdigest()+os.path.splitext(file_storage.filename)[1]
     file_storage.seek(0)
     filename = upload_set.save(file_storage, name=basename)
@@ -497,21 +498,21 @@ def init_home(session):
     slider_1 = Slider(
         title='心肌细胞实验',
         subtitle='心肌细胞电学特性和力学特性就耦合起来。但由于心血管疾病会改变力学或电学特性，因此这就很有研究的价值。',
-        image='images/content/052502.jpg', order=100, enable=True
+        image='/static/images/content/052502.jpg', order=100, enable=True
     )
     session.add(slider_1)
 
     slider_2 = Slider(
         title='皮肤热疼痛实验',
         subtitle='由此建立了热-力-电（疼痛）多场耦合行为理论，为有效指导激光、微波等临床热疗技术及镇痛方案提供了理论依据。',
-        image='images/content/052210.jpg', order=200, enable=True
+        image='/static/images/content/052210.jpg', order=200, enable=True
     )
     session.add(slider_2)
 
     slider_3 = Slider(
         title='标题3',
         subtitle='',
-        image='images/content/051903.jpg', order=300, enable=True
+        image='/static/images/content/051903.jpg', order=300, enable=True
     )
     session.add(slider_3)
 

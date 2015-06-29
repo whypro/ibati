@@ -49,14 +49,14 @@
                         </tr>
                     </table>
                 </div>
-                <div class="z_zimg"><img src="{{ url_for('static', filename='images/newb.jpg') }}" /></div>
+{#                <div class="z_zimg"><img src="{{ url_for('static', filename='images/newb.jpg') }}" /></div>#}
                 <div class="z_znews">
                     <ul>
                         {% for n in news %}
                         <li>
-                            <font class="tim">【{{ n.create_date.strftime('%Y-%m-%d') }}】</font>&emsp;
+                            <font class="tim">[{{ n.create_date.strftime('%Y-%m-%d') }}]</font>&nbsp;
                             <a href="{{ url_for('post.detail', id=n.id) }}">
-                                <font class="tim1">{{ n.title|truncate(length=20, killwords=True, end='…') }}</font>
+                                <font class="tim1">{{ n.title|truncate(length=17, killwords=True, end='…') }}</font>
                             </a>
                         </li>
                         {% endfor %}
@@ -74,7 +74,7 @@
                         </tr>
                     </table>
                 </div>
-                <div class="z_rigimg"><img src="{{ url_for('static', filename='images/serb.jpg') }}" /></div>
+{#                <div class="z_rigimg"><img src="{{ url_for('static', filename='images/serb.jpg') }}" /></div>#}
                 <div class="z_rignei">
                     {#
                     <Ul>
@@ -90,6 +90,5 @@
             <!--rig-->
             <div class="both"></div>
         </div>
-        <!--end-->
 
 {% endblock %}

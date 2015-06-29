@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from ibati.extensions import db
 import datetime
 
@@ -31,7 +32,7 @@ class Post(db.Model):
     # author = 
     create_date = db.Column(db.DateTime, default=datetime.datetime.now)
     update_date = db.Column(db.DateTime, default=datetime.datetime.now)
-    status = db.Column(db.String(16))
+    status = db.Column(db.String(16), default='公开')
 
     category_id = db.Column(db.Integer, db.ForeignKey('ibati_category.id'))
     category = db.relationship('Category', backref='posts')

@@ -44,11 +44,22 @@
                 </div>
                 <div class="left"><img src="{{ url_for('static', filename='images/rigxian.jpg') }}" /></div>
                 <div class="aboutrignei">
-                    <h3>西安交通大学 生物医学分析技术与仪器研究所</h3>
-					<h4>Institute of Biomedical Analytical Technology and Instrumentation</h4>
-					<p>
-						&emsp;&emsp;生物医学分析技术及仪器研究所是根据国家十一五发展规划和生命科学与技术学院整体发展需要，通过学院整合于2007年6月15日成立。目标是充分发挥学科交叉的作用，在生物医学分析技术与仪器的基础理论研究、应用研究、人才培养、促进相应技术转化为生产力等方面取得显著进展。该所现有教职工12人，其中教授5人，副教授3 人和高级工程师1人，讲师3位。目前承担和完成了国家自然科学基金近30项（包括重点项目、国际合作）、国家科技部863项目、国家重大科学仪器设备开发项目、陕西省自然科学基金项目、西安市科技攻关项目、横向课题数十项等。目前的研究方向有生物医学光子学影像与光谱分析技术、基于多信息融合的生物荧光探针和光学传感器、先进敏感分析技术及仪器等。目前研究的重点项目包括有：基于多光谱荧光成像的在体三维光学标测系统、基于新型光穿孔技术的纳米尺度细胞膜微手术研究、金纳米棒靶向的激光细胞微手术及其机理研究、纳米材料的界观和微观效应及机理、基于纳米金探针的肿瘤细胞示踪等研究。研究所现有博士和硕士研究生80多名。
-					</p>
+                    <h4 style="text-align: center; line-height:40px; color:#dd2d20; font-size:20px;">西安交通大学 生物医学分析技术与仪器研究所</h4>
+                    <h5 style="text-align: center; line-height:20px; font-size:15px; margin: 3px;">Institute of Biomedical Analytical Technology and Instrumentation</h5>
+
+                    <div style="text-align: center; color: #999;">
+                        发布时间：{{ post.create_date.strftime('%Y-%m-%d %H:%M') }}&emsp;&emsp;
+                        点击次数：{{ post.click_count }}
+                    </div>
+
+                    <div>
+                        {{ post.content|safe }}
+                    </div>
+
+
+
+
+
                 </div>
             </div>
             <div class="both"></div>

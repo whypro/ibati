@@ -11,6 +11,7 @@ import subprocess
 import os
 import datetime
 import shutil
+from zipfile import ZipFile
 
 from flask.ext.script import Manager, Server
 from flask.ext.migrate import Migrate, MigrateCommand
@@ -98,6 +99,7 @@ def backup():
     if not ret:
         print '数据库已备份至 {0}'.format(os.path.abspath(sql_file))
     else:
+        os.remove(sql_file)
         print '数据库备份失败'
 
 
@@ -126,6 +128,9 @@ def restore():
         print '数据库还原失败'
 
     # 还原上传文件
+    with ZipFile('backup/uploads-{date}.zip'.format(date=date_str), 'r') as z:
+        z.extractall()
+    print '文件已还原'
 
 
 @manager.command
@@ -135,6 +140,8 @@ def init():
     init_home(db.session)
     init_post(db.session)
     init_member(db.session)
+
+    shutil.rmtree(config.Config.UPLOADS_DEFAULT_DEST)
 
 
 if __name__ == '__main__':

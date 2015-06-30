@@ -92,7 +92,7 @@ def backup():
             '-p{0}'.format(config.Config.DB_PASSWORD),
             config.Config.DB_DATABASE,
         ],
-        stdout=f, shell=True
+        stdout=f
     )
     f.close()
     if not ret:
@@ -117,7 +117,7 @@ def restore():
             '-p{0}'.format(config.Config.DB_PASSWORD),
             config.Config.DB_DATABASE,
         ],
-        stdin=f, shell=True
+        stdin=f
     )
     f.close()
     if not ret:

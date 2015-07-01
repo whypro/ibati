@@ -65,50 +65,81 @@
                 enable: true,
                 drag: {
                     isMove: true,
+                    isCopy: false,
                     prev: true,
                     next: true,
                     inner: false
                 },
-                editNameSelectAll: true
+                editNameSelectAll: true,
+                showRemoveBtn: showRemoveBtn
             },
             callback: {
                 // beforeDrag: beforeDrag,
-				onDrop: onDrop,
-                onRename: onRename
+                // onDrop: onDrop,
+                // onRename: onRename,
+                beforeDrop: beforeDrop,
+                beforeRemove: beforeRemove,
+                onRemove: onRemove
 			}
         };
 
-        var newCount = 1;
         function addHoverDom(treeId, treeNode) {
 			var sObj = $("#" + treeNode.tId + "_span");
-            var btn = $("#addBtn_"+treeNode.tId);
             // if (treeNode.isParent == false) return;
             if (treeNode.level) return;
-			if (treeNode.editNameFlag || btn.length>0) return;
+			if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+            if (!treeNode.isParent) return;
+
 			var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
 				+ "' title='add node' onfocus='this.blur();'></span>";
 			sObj.after(addStr);
+            var btn = $("#addBtn_"+treeNode.tId);
 			if (btn) btn.bind("click", function(){
-				var zTree = $.fn.zTree.getZTreeObj("category_tree");
-				zTree.addNodes(treeNode, {pId:treeNode.id, name:"未命名页面" + (newCount++)});
-				return false;
-			});
+                var zTree = $.fn.zTree.getZTreeObj("category_tree");
+                zTree.addNodes(treeNode, {id: -1, pId: treeNode.id, name: "未命名页面"});
+                return false;
+            });
 		}
 
         function removeHoverDom(treeId, treeNode) {
-			$("#addBtn_"+treeNode.tId).unbind().remove();
+            // alert(JSON.stringify(treeNode));
+            $("#addBtn_"+treeNode.tId).unbind().remove();
 		}
 
+        /*
         function onRename(event, treeId, treeNode, isCancel) {
             //alert(JSON.stringify(treeNode));
             return true;
         }
+        */
 
+        /*
         function onDrop(event, treeId, treeNodes, targetNode, moveType, isCopy) {
-            //alert(JSON.stringify(treeNodes));
-            //alert(JSON.stringify(targetNode));
+            // alert(JSON.stringify(treeNodes));
+            // alert(JSON.stringify(targetNode));
 			return targetNode ? targetNode.drop !== false : true;
 		}
+		*/
+
+        function beforeDrop(treeId, treeNodes, targetNode, moveType, isCopy) {
+            // 保证是同一级
+            return treeNodes[0]["level"] == targetNode["level"];
+		}
+
+        function beforeRemove(treeId, treeNode) {
+            return confirm("确认删除页面【" + treeNode.name + "】吗？\n注意：删除后不可恢复，页面中所包含的文章也会全部删除！");
+        }
+
+        function showRemoveBtn(treeId, treeNode) {
+            if (!(treeNode.level == 1 && treeNode.custom)) return;
+            return true;
+        }
+
+        function onRemove(event, treeId, treeNode) {
+            $.get("/admin/api/label/"+treeNode.id+"/delete/", {}, function (data) {
+                location.reload();
+            })
+        }
 
 
         $(document).ready(function(){
@@ -116,14 +147,14 @@
             $("#save").click(function () {
                 // var simple_nodes = treeObj.transformToArray(treeObj.getNodes());
                 var nodes = treeObj.transformTozTreeNodes(treeObj.getNodes());
-                alert(JSON.stringify(nodes));
+                // alert(JSON.stringify(nodes));
                 $.ajax({
                     url: "{{ url_for('admin.post_category_ztree_json') }}",
                     data: JSON.stringify(nodes),
                     contentType : "application/json",
                     type : "POST",
                     success: function(data){
-                        // alert("保存成功！");
+                        alert("保存成功！");
                         location.reload();
                     }
                 });

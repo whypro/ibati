@@ -104,10 +104,6 @@ def init_post(session):
         category=about_us
     )
     db.session.add(p)
-
-    user = User(username='whypro', password='whypro')
-    db.session.add(user)
-
     db.session.commit()
 
 
@@ -167,8 +163,18 @@ def init_links(session):
 
 
 def init_account(session):
-    username = raw_input('Admin username: ')
-    password = raw_input('Admin password: ')
-    password_confirm = raw_input('Confirm password: ')
-    print username, password
+    username = None
+    password = None
+    password_confirm = None
+
+    while not username:
+        username = raw_input('Admin username: ')
+
+    while not password or not password_confirm or password_confirm != password:
+        password = raw_input('Admin password: ')
+        password_confirm = raw_input('Confirm password: ')
+
+    u = User(username=username, password=password)
+    session.add(u)
+    session.commit()
 

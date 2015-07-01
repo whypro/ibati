@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from ibati.extensions import db
 import datetime
 
+
 class Category(db.Model):
     __tablename__ = 'ibati_category'
 
@@ -12,15 +13,18 @@ class Category(db.Model):
     order = db.Column(db.Integer)
     labels = db.relationship('Label', backref='category', order_by='Label.order')
 
+
 class Label(db.Model):
     __tablename__ = 'ibati_label'
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(20))
     cname = db.Column(db.Unicode(20))
-    category_id = db.Column(db.Integer, db.ForeignKey('ibati_category.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('ibati_category.id', ondelete='CASCADE'))
     # category = db.relationship('Category', backref='labels')
     order = db.Column(db.Integer)
+    custom = db.Column(db.Boolean, default=False)
+
 
 class Post(db.Model):
 
@@ -34,7 +38,7 @@ class Post(db.Model):
     update_date = db.Column(db.DateTime, default=datetime.datetime.now)
     status = db.Column(db.String(16), default='公开')
 
-    category_id = db.Column(db.Integer, db.ForeignKey('ibati_category.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('ibati_category.id', ondelete='CASCADE'))
     category = db.relationship('Category', backref='posts')
 
     label_id = db.Column(db.Integer, db.ForeignKey('ibati_label.id'))

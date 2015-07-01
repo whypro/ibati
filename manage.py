@@ -141,7 +141,9 @@ def init():
     init_post(db.session)
     init_member(db.session)
 
-    shutil.rmtree(config.Config.UPLOADS_DEFAULT_DEST)
+    uploads_dir = config.Config.UPLOADS_DEFAULT_DEST
+    if os.path.exists(uploads_dir):
+        shutil.rmtree(uploads_dir)
 
 
 if __name__ == '__main__':

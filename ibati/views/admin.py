@@ -327,7 +327,7 @@ def get_category_ztree_json():
     for category in categories:
         children = []
         for label in category.labels:
-            children.append(dict(id=label.id, name=label.cname))
+            children.append(dict(id=label.id, name=label.cname, custom=label.custom))
         nodes.append(dict(id=category.id, name=category.cname, open=True, children=children))
     return json.dumps(nodes)
 
@@ -342,9 +342,27 @@ def post_category_ztree_json():
         category.order = i * 100
         for j, label_node in enumerate(category_node['children'], start=1):
             label = Label.query.get(label_node['id'])
+            if not label:
+                # new label
+                label = Label()
+                label.custom = True
+                db.session.add(label)
+
+            if label.custom:
+                label.name = label_node['name']
+
             label.cname = label_node['name']
             label.order = j * 100
+            label.category_id = category.id
 
+    db.session.commit()
+    return jsonify(result=200)
+
+
+@admin.route('/api/label/<int:id>/delete/')
+def delete_label_json(id):
+    l = Label.query.get(id)
+    db.session.delete(l)
     db.session.commit()
     return jsonify(result=200)
 

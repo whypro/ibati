@@ -17,42 +17,105 @@
         </div>
 
 
-        <div class="zhongxia">
-            <div class="zhongxialeft">
-                <div class="zhongxialeftdao">
+        <div class="index-row">
+            <div class="index-col-left-6">
+                <div class="index-col-left-ban-6">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
                             <td width="6%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
                             <td width="78%"><img src="{{ url_for('static', filename='images/title_intro.png') }}" width="63" height="14" /></td>
-                            <td width="16%" align="right">&nbsp;<a href="{{ url_for('home.about_us') }}"><img src="{{ url_for('static', filename='images/more.jpg') }}" width="34" height="11" /></a></td>
+                            <td width="16%" align="right">&nbsp;<a href="{{ url_for('post.index', category='about-us') }}"><img src="{{ url_for('static', filename='images/more.jpg') }}" width="34" height="11" /></a></td>
                         </tr>
                     </table>
                 </div>
-                <div class="zxnei">
-
+                <div class="index-col-left-content-6">
+                    {% set about_us = '生物医学分析技术及仪器研究所是根据国家十一五发展规划和生命科学与技术学院整体发展需要，通过学院整合于2007年6月15日成立。目标是充分发挥学科交叉的作用，在生物医学分析技术与仪器的基础理论研究、应用研究、人才培养、促进相应技术转化为生产力等方面取得显著进展。该所现有教职工12人，其中教授5人，副教授3 人和高级工程师1人，讲师3位。目前承担和完成了国家自然科学基金近30项（包括重点项目、国际合作）、国家科技部863项目、国家重大科学仪器设备开发项目、陕西省自然科学基金项目、西安市科技攻关项目、横向课题数十项等。目前的研究方向有生物医学光子学影像与光谱分析技术、基于多信息融合的生物荧光探针和光学传感器、先进敏感分析技术及仪器等。目前研究的重点项目包括有：基于多光谱荧光成像的在体三维光学标测系统、基于新型光穿孔技术的纳米尺度细胞膜微手术研究、金纳米棒靶向的激光细胞微手术及其机理研究、纳米材料的界观和微观效应及机理、基于纳米金探针的肿瘤细胞示踪等研究。研究所现有博士和硕士研究生80多名。' %}
+                    <p>
+                        &emsp;&emsp;{{ about_us|truncate(length=268, killwords=True, end='…') }}
+                    </p>
+                    {#
                     <p>&emsp;&emsp;生物医学分析技术及仪器研究所是根据国家十一五发展规划和生命科学与技术学院整体发展需要，通过学院整合于2007年6月15日成立。
                         目标是充分发挥学科交叉的作用，在生物医学分析技术与仪器的基础理论研究、应用研究、人才培养、促进相应技术转化为生产力等方面取得显著进展。
-                        该所现有教职工12人，其中教授5人，副教授3 人和高级工程师1人，讲师3位。目前承担和完成了国家…
+                        该所现有教职工12人，其中教授5人，副教授3 人和高级工程师1人，讲师3位。
+                        目前承担和完成了国家自然科学基金近30项（包括重点项目、国际合作）、国家科技部863项目、国家重大科学仪器设备开发项目、陕西省自然科学基金项目、西安市科技攻关项目、横向课题数十项等。
+                        目前的研究方向有生物医学光子学影像与光谱分析技术、基于多信息融合的生物荧光探针和光学传感器、先进敏感分析技术及仪器等。
+                        目前研究的重点项目包括有：基于多光谱荧光成像的在体三维光学标测系统、基于新型光穿孔技术的纳米尺度细胞膜微手术研究、金纳米棒靶向的激光细胞微手术及其机理研究、
+                        纳米材料的界观和微观效应及机理、基于纳米金探针的肿瘤细胞示踪等研究。研究所现有博士和硕士研究生80多名。
                     </p>
+                    #}
 
                 </div>
             </div>
 
-            <!--left-->
-            <div class="z_z">
-                <div class="z_zdao">
+            <div class="index-col-right-6">
+                <div class="index-col-right-ban-6">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
                         <tr>
-                            <td width="4%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
-                            <td width="80%"><img src="{{ url_for('static', filename='images/title_news.png') }}" width="63" height="14" /></td>
-                            <td width="16%" align="right"><a href="{{ url_for('post.index', category='news') }}"><img src="{{ url_for('static', filename='images/more.jpg') }}" width="34" height="11" /></a></td>
+                          <td width="6%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
+                          <td width="78%"><img src="{{ url_for('static', filename='images/title_area.png') }}" width="63" height="14" /></td>
+                          <td width="16%" align="right"><a href="{{ url_for('post.index', category='research', label='area') }}"><img src="{{ url_for('static', filename='images/more.jpg') }}" width="34" height="11" /></a></td>
+                        </tr>
+                    </table>
+                </div>
+{#                <div class="z_rigimg"><img src="{{ url_for('static', filename='images/serb.jpg') }}" /></div>#}
+                <div class="index-col-right-content-6">
+                    <ul>
+                        {% for a in areas %}
+                        <li>
+                            <font class="tim">[{{ a.create_date.strftime('%Y-%m-%d') }}]</font>&nbsp;
+                            <a href="{{ url_for('post.detail', id=a.id) }}">
+                                <font class="tim1">{{ a.title|truncate(length=29, killwords=True, end='…') }}</font>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+            <!--rig-->
+            <div class="both"></div>
+        </div>
+
+        <div class="index-row">
+            <div class="index-col-left-4">
+                <div class="index-col-left-ban-4">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td width="6%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
+                            <td width="78%"><img src="{{ url_for('static', filename='images/title_dispatch.png') }}" width="63" height="14" /></td>
+                            <td width="16%" align="right">&nbsp;<a href="{{ url_for('post.index', category='news', label='dispatch') }}"><img src="{{ url_for('static', filename='images/more.jpg') }}" width="34" height="11" /></a></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="z_znews">
+                    <ul>
+                        {% for d in dispatches %}
+                        <li>
+                            <font class="tim">[{{ d.create_date.strftime('%Y-%m-%d') }}]</font>&nbsp;
+                            <a href="{{ url_for('post.detail', id=d.id) }}">
+                                <font class="tim1">{{ d.title|truncate(length=17, killwords=True, end='…') }}</font>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+
+            <!--left-->
+            <div class="index-col-center-4">
+                <div class="index-col-center-ban-4">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+                        <tr>
+                            <td width="6%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
+                            <td width="78%"><img src="{{ url_for('static', filename='images/title_notice.png') }}" width="63" height="14" /></td>
+                            <td width="16%" align="right"><a href="{{ url_for('post.index', category='news', label='notice') }}"><img src="{{ url_for('static', filename='images/more.jpg') }}" width="34" height="11" /></a></td>
                         </tr>
                     </table>
                 </div>
 {#                <div class="z_zimg"><img src="{{ url_for('static', filename='images/newb.jpg') }}" /></div>#}
                 <div class="z_znews">
                     <ul>
-                        {% for n in news %}
+                        {% for n in notices %}
                         <li>
                             <font class="tim">[{{ n.create_date.strftime('%Y-%m-%d') }}]</font>&nbsp;
                             <a href="{{ url_for('post.detail', id=n.id) }}">
@@ -64,26 +127,28 @@
                 </div>
             </div>
             <!--z-->
-            <div class="z_rig">
-                <div class="z_rigdao">
+            <div class="index-col-right-4">
+                <div class="index-col-right-ban-4">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
                         <tr>
                           <td width="6%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
-                          <td width="78%"><img src="{{ url_for('static', filename='images/title_research.png') }}" width="63" height="14" /></td>
-                          <td width="16%" align="right"><a href="{{ url_for('post.index', category='research', label='area') }}"><img src="{{ url_for('static', filename='images/more.jpg') }}" width="34" height="11" /></a></td>
+                          <td width="78%"><img src="{{ url_for('static', filename='images/title_report.png') }}" width="63" height="14" /></td>
+                          <td width="16%" align="right"><a href="{{ url_for('post.index', category='news', label='report') }}"><img src="{{ url_for('static', filename='images/more.jpg') }}" width="34" height="11" /></a></td>
                         </tr>
                     </table>
                 </div>
 {#                <div class="z_rigimg"><img src="{{ url_for('static', filename='images/serb.jpg') }}" /></div>#}
-                <div class="z_rignei">
-                    {#
-                    <Ul>
-                        <li><a href="leixing.aspx"><img src="{{ url_for('static', filename='images/s1.jpg') }}" /></a></li>
-                        <li><a href="fuwu.aspx"><img src="{{ url_for('static', filename='images/s2.jpg') }}" /></a></li>
-                        <li><a href="down.aspx"><img src="{{ url_for('static', filename='images/s3.jpg') }}" /></a></li>
-                        <li><a href="problem.aspx"><img src="{{ url_for('static', filename='images/s4.jpg') }}" /></a></li>
-                    </Ul>
-                    #}
+                <div class="z_znews">
+                    <ul>
+                        {% for r in reports %}
+                        <li>
+                            <font class="tim">[{{ r.create_date.strftime('%Y-%m-%d') }}]</font>&nbsp;
+                            <a href="{{ url_for('post.detail', id=r.id) }}">
+                                <font class="tim1">{{ r.title|truncate(length=17, killwords=True, end='…') }}</font>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
                 </div>
 
             </div>

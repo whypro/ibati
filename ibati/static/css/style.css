@@ -221,18 +221,28 @@ a.wen22:hover {
     border: 1px #cfd8e1 solid
 }
 
-.zhongxia {
+.index-row {
     width: 1002px;
     margin: auto;
     margin-top: 12px;
 }
 
-.zhongxialeft {
+.index-col-left-4 {
     width: 307px;
     float: left;
 }
 
-.zhongxialeftdao {
+.index-col-left-6 {
+    width: 460px;
+    float: left;
+}
+
+.index-col-right-6 {
+    width: 460px;
+    float: right
+}
+
+.index-col-left-ban-4 {
     width: 307px;
     float: left;
     border-bottom: 3px #99D4E2 solid;
@@ -240,8 +250,23 @@ a.wen22:hover {
     line-height: 30px
 }
 
-.zxnei {
+.index-col-left-ban-6 {
+    width: 460px;
+    float: left;
+    border-bottom: 3px #99D4E2 solid;
+    height: 30px;
+    line-height: 30px
+}
+
+.index-col-left-content-4 {
     width: 307px;
+    margin-top: 11px;
+    float: left;
+    line-height: 24px
+}
+
+.index-col-left-content-6 {
+    width: 460px;
     margin-top: 11px;
     float: left;
     line-height: 24px
@@ -251,14 +276,14 @@ a.wen22:hover {
     width: 210px
 }
 
-.z_z {
+.index-col-center-4 {
     width: 307px;
     float: left;
     margin-left: 40px;
     display: inline
 }
 
-.z_zdao {
+.index-col-center-ban-4 {
     width: 307px;
     float: left;
     border-bottom: 3px #99D4E2 solid;
@@ -290,13 +315,21 @@ a.wen22:hover {
     color: #e98d2a
 }
 
-.z_rig {
+.index-col-right-4 {
     width: 307px;
     float: right
 }
 
-.z_rigdao {
+.index-col-right-ban-4 {
     width: 307px;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 3px #99D4E2 solid;
+}
+
+.index-col-right-ban-6 {
+    width: 460px;
     float: left;
     height: 30px;
     line-height: 30px;
@@ -309,16 +342,29 @@ a.wen22:hover {
     margin-top: 11px;
 }
 
-.z_rignei {
+.index-col-right-content-4 {
     width: 307px;
     float: left
 }
 
-.z_rignei ul {
+.index-col-right-content-4 ul {
 }
 
-.z_rignei ul li {
+.index-col-right-content-4 ul li {
     float: left
+}
+
+.index-col-right-content-6 {
+    width: 460px;
+    float: left;
+    margin-top: 8px
+}
+
+.index-col-right-content-6 ul {
+}
+
+.index-col-right-content-6 ul li {
+    line-height: 21px;
 }
 
 .down {

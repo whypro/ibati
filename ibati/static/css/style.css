@@ -103,11 +103,15 @@ a.wen22:hover {
     text-decoration: underline
 }
 
+.header {
+    width: 100%;
+    background: #0d59a7;
+    height: 162px;
+}
+
 .top {
     width: 1002px;
     margin: auto;
-    height: 98px;
-    background: #6CA6CD;
 }
 
 .menu {
@@ -147,8 +151,8 @@ a.wen22:hover {
     position: relative;
     height: 41px;
     font-size: 15px;
-    font-weight: bold;
-    margin: 0 20px;
+    margin: 0 16px;
+    _margin: 0 15px;    /* IE6 */
 }
 
 #nav ul li ul {
@@ -198,10 +202,21 @@ a.wen22:hover {
 }
 
 .toplan {
-    width: 1002px;
-    background: #6CA6CD;
+    width: 100%;
+    background: #0d59a7;
     margin: auto;
-    height: 34px
+    height: 5px;
+
+    background: -ms-linear-gradient(left, #0d59a7, #b0e0e6 50%, #0d59a7);        /* IE 10 */
+    /* Firefox 3.6+ */
+    background:-moz-linear-gradient(left, #0d59a7, #b0e0e6 50%, #0d59a7);
+    /* Safari 4-5, Chrome 1-9*/
+    background: -webkit-gradient(linear, left top, right top, from(#0d59a7), color-stop(0.5, #b0e0e6), to(#0d59a7));
+    /* Safari 5.1+, Chrome 10+ */
+    background: -webkit-linear-gradient(left, #0d59a7, #b0e0e6 50%, #0d59a7);
+    /*Opera 11.10+*/
+    background: -o-linear-gradient(left, #0d59a7, #b0e0e6 50%, #0d59a7);
+
 }
 
 .banner {
@@ -233,27 +248,27 @@ a.wen22:hover {
 }
 
 .index-col-left-6 {
-    width: 460px;
+    width: 614px;
     float: left;
 }
 
 .index-col-right-6 {
-    width: 460px;
+    width: 307px;
     float: right
 }
 
 .index-col-left-ban-4 {
     width: 307px;
     float: left;
-    border-bottom: 3px #99D4E2 solid;
+    border-bottom: 3px #0d59a7 solid;
     height: 30px;
     line-height: 30px
 }
 
 .index-col-left-ban-6 {
-    width: 460px;
+    width: 614px;
     float: left;
-    border-bottom: 3px #99D4E2 solid;
+    border-bottom: 3px #0d59a7 solid;
     height: 30px;
     line-height: 30px
 }
@@ -266,10 +281,33 @@ a.wen22:hover {
 }
 
 .index-col-left-content-6 {
-    width: 460px;
+    width: 614px;
     margin-top: 11px;
     float: left;
+    font-size: 13px;
     line-height: 24px
+}
+
+.index-col-right-ban-6 {
+    width: 307px;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    border-bottom: 3px #0d59a7 solid;
+}
+
+.index-col-right-content-6 {
+    width: 307px;
+    float: left;
+    margin-top: 8px
+}
+
+.index-col-right-content-6 ul {
+}
+
+.index-col-right-content-6 ul li {
+    font-size: 13px;
+    line-height: 24px;
 }
 
 .querysel {
@@ -286,7 +324,7 @@ a.wen22:hover {
 .index-col-center-ban-4 {
     width: 307px;
     float: left;
-    border-bottom: 3px #99D4E2 solid;
+    border-bottom: 3px #0d59a7 solid;
     height: 30px;
     line-height: 30px
 }
@@ -307,7 +345,8 @@ a.wen22:hover {
 }
 
 .z_znews ul li {
-    line-height: 21px;
+    font-size: 13px;
+    line-height: 24px;
 }
 
 .tim {
@@ -325,15 +364,7 @@ a.wen22:hover {
     float: left;
     height: 30px;
     line-height: 30px;
-    border-bottom: 3px #99D4E2 solid;
-}
-
-.index-col-right-ban-6 {
-    width: 460px;
-    float: left;
-    height: 30px;
-    line-height: 30px;
-    border-bottom: 3px #99D4E2 solid;
+    border-bottom: 3px #0d59a7 solid;
 }
 
 .z_rigimg {
@@ -352,19 +383,6 @@ a.wen22:hover {
 
 .index-col-right-content-4 ul li {
     float: left
-}
-
-.index-col-right-content-6 {
-    width: 460px;
-    float: left;
-    margin-top: 8px
-}
-
-.index-col-right-content-6 ul {
-}
-
-.index-col-right-content-6 ul li {
-    line-height: 21px;
 }
 
 .down {

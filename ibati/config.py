@@ -31,4 +31,4 @@ class Config(object):
     UPLOADED_FILES_ALLOW = ['pdf']
 
     POSTS_PER_PAGE = 10     # 每页显示的主题数
-    INDEX_NEWS_NUM = 8      # 首页新闻个数
+    INDEX_NEWS_NUM = 6      # 首页新闻个数

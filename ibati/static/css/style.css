@@ -799,3 +799,9 @@ a.wen22:hover {
 .job_td_ico2 {
     DISPLAY: none
 }
+
+
+.post-content img {
+    max-width: 100%;
+    height: auto;
+}

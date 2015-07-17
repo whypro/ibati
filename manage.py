@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 #  -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from ibati import create_app
@@ -25,54 +25,9 @@ manager = Manager(app)
 manager.add_command('db', MigrateCommand)
 # manager.add_command('debug', Server(host='127.0.0.1', port=8080, debug=True))
 
-
-def get_pid():
-    gunicorn_pid = None
-    if os.path.exists('/tmp/gunicorn.pid'):
-        f = open('/tmp/gunicorn.pid', 'r')
-        pid = f.readline().strip()
-        if pid:
-            p = subprocess.Popen(['ps', 'h', pid], stdout=subprocess.PIPE)
-            pro, err = p.communicate()
-            if pro:
-                gunicorn_pid = int(pid)
-    return gunicorn_pid
-
-
-@manager.command
-def stop():
-    """Stop server"""
-    pid = get_pid()
-    if pid is None:
-        print 'ibati is not running.'
-        return False
-    subprocess.call(['kill', str(pid)])
-    return True
-
-
-@manager.command
-def start():
-    """Start server by gunicorn"""
-    if get_pid() is not None:
-        print 'ibati is running.'
-        return False
-    print subprocess.call('source venv/bin/activate', shell=True)
-    subprocess.call('./gunicorn.sh', shell=True)
-    return True
-
-
-@manager.command
-def pid():
-    """Show pid"""
-    print get_pid()
-
-
 @manager.command
 def debug():
     """Start Server in debug mode"""
-    if get_pid() is not None:
-        print 'ibati is running.'
-        return False
     app.run(host='0.0.0.0', port=5000, debug=True, processes=1)
 
 
@@ -135,15 +90,34 @@ def restore():
 
 @manager.command
 def init():
+    # 创建数据库
+    create_db_sql = 'CREATE DATABASE IF NOT EXISTS {0} DEFAULT CHARACTER SET utf8'.format(config.Config.DB_DATABASE)
+    # print create_db_sql
+    ret = subprocess.call(
+        [
+            'mysql', '-u', config.Config.DB_USERNAME,
+            '-p{0}'.format(config.Config.DB_PASSWORD),
+            '-e', create_db_sql,
+        ]
+    )
+    if not ret:
+        print '数据库创建成功'
+    else:
+        print '数据库创建失败'
+        return 
+
     db.drop_all()
     db.create_all()
+    print '数据表创建成功'
     init_home(db.session)
     init_post(db.session)
     init_member(db.session)
+    print '数据初始化成功'
 
     uploads_dir = config.Config.UPLOADS_DEFAULT_DEST
     if os.path.exists(uploads_dir):
         shutil.rmtree(uploads_dir)
+    print '目录初始化成功'
 
 
 if __name__ == '__main__':

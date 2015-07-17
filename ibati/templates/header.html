@@ -1,10 +1,16 @@
-        <div class="top">
-            <table width="100%" border="0" cellspacing="0" cellpadding="0" height="98">
-                <tr>
-                    <td><a href="{{ url_for('home.index') }}"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="西安交通大学生物医学分析技术与仪器研究所" /></a></td>
-                    <td align="center"><img src="{{ url_for('static', filename='images/ibati_logo.png') }}" /></td>
-                </tr>
-            </table>
+        <div class="header">
+            <div class="top">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                            <a href="{{ url_for('home.index') }}">
+                                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="西安交通大学生物医学分析技术与仪器研究所" style="margin-top: 18px;"/>
+                            </a>
+                        </td>
+                        <td align="center"><img src="{{ url_for('static', filename='images/ibati_logo.png') }}" style="margin-top: 72px;"/></td>
+                    </tr>
+                </table>
+            </div>
         </div>
 
 
@@ -24,16 +30,18 @@
                         {% for category in categories %}
                         <li{% if active == category.name %} class="active"{% endif %}>
                             <a href="{{ url_for('post.index', category=category.name) }}">{{ category.cname }}</a>
+                            {% if category.labels %}
                             <ul>
                                 {% for label in category.labels %}
                                 <li><a href="{{ url_for('post.index', category=category.name, label=label.name) }}">{{ label.cname }}</a></li>
                                 {% endfor %}
                             </ul>
+                            {% endif %}
                         </li>
                         {% endfor %}
-
+                        <li><a href="{{ url_for('home.contact_us') }}">联系我们</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="toplan" style="height:14px"></div>
+        <div class="toplan"></div>

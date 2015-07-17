@@ -805,3 +805,7 @@ a.wen22:hover {
     max-width: 100%;
     height: auto;
 }
+
+.post-content {
+    line-height: normal;
+}

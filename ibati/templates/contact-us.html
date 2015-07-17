@@ -1,78 +1,63 @@
 {% extends 'base.html' %}
 {% block title %}西安交通大学生物医学分析技术与仪器研究所{% endblock %}
 {% block content %}
-        <!-- Page Title -->
-		<div class="section section-breadcrumbs">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<h1>联系我们</h1>
-					</div>
-				</div>
-			</div>
-		</div>
-        
-        <div class="section">
-	    	<div class="container">
-	        	<div class="row">
-	        		<div class="col-sm-7">
-	        			<!-- Map -->
-	        			<div id="contact-us-map">
+		<div class="banner" style="margin-top:6px"><img src="{{ url_for('static', filename='images/ban5.jpg') }}" width="1002" height="122" /></div>
 
-	        			</div>
-	        			<!-- End Map -->
-	        			<!-- Contact Info -->
-	        			<p class="contact-us-details">
-	        				<b>地址：</b>陕西省西安市咸宁西路28号<br/>
-	        				<b>电话：</b>+86 0000000000<br/>
-	        				<b>邮箱：</b><a href="mailto:getintoutch@yourcompanydomain.com">getintoutch@yourcompanydomain.com</a>
-	        			</p>
-	        			<!-- End Contact Info -->
-	        		</div>
-	        		<div class="col-sm-5">
-	        			<!-- Contact Form -->
-	        			<h3>给我们留言</h3>
-	        			<div class="contact-form-wrapper">
-		        			<form class="form-horizontal" role="form">
-		        				 <div class="form-group">
-		        				 	<label for="Name" class="col-sm-3 control-label"><b>您的姓名</b></label>
-		        				 	<div class="col-sm-9">
-										<input class="form-control" id="Name" type="text" placeholder="">
-									</div>
+        <div class="aboutz">
+            <div class="aboutzleft">
+                <div class="aboutzleftdao">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" height="30">
+                        <tr>
+                            <td width="6%"><img src="{{ url_for('static', filename='images/li.jpg') }}" width="8" height="8" /></td>
+                            <td width="94%">联系我们<font class="wen3">Contact us</font></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="aboutzleftmeun">
+                    <ul>
+
+                    </ul>
+                </div>
+            </div>
+            <!--left-->
+            <div class="aboutrig">
+                <div class="aboutrigdao">
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            {#
+                            <td width="2%">
+                                <img src="{{ url_for('static', filename='images/li2.jpg') }}" width="11" height="11" />
+                            </td>
+                            <td width="36%">
+                                <font class="wen4">单位简介</font>
+                            </td>
+                            #}
+
+                            <td width="62%" align="right">
+                                <div align="right" class="wz004">
+                                    <img src="{{ url_for('static', filename='images/index_21.jpg') }}" /> 您的位置：<a href="{{ url_for('home.index') }}">首页</a>
+                                    <img src="{{ url_for('static', filename='images/jiao.gif') }}" /><a href="">联系我们</a>
 								</div>
-								<div class="form-group">
-									<label for="contact-email" class="col-sm-3 control-label"><b>您的邮箱</b></label>
-									<div class="col-sm-9">
-										<input class="form-control" id="contact-email" type="text" placeholder="">
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="contact-message" class="col-sm-3 control-label"><b>选择主题</b></label>
-									<div class="col-sm-9">
-										<select class="form-control" id="prependedInput">
-											<option>请选择一个主题……</option>
-											<option>普通</option>
-											<option>服务</option>
-											<option>订单</option>
-										</select>
-									</div>
-								</div>
-								<div class="form-group">
-									<label for="contact-message" class="col-sm-3 control-label"><b>留言内容</b></label>
-									<div class="col-sm-9">
-										<textarea class="form-control" rows="5" id="contact-message"></textarea>
-									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-12">
-										<button type="submit" class="btn pull-right">发送</button>
-									</div>
-								</div>
-		        			</form>
-		        		</div>
-		        		<!-- End Contact Info -->
-	        		</div>
-	        	</div>
-	    	</div>
-	    </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="left"><img src="{{ url_for('static', filename='images/rigxian.jpg') }}" /></div>
+                <div class="aboutrignei">
+					<div>
+						<p class="contact-us-details" style="float: left;">
+							<b>单位名称：</b>西安交通大学 生物医学分析技术与仪器研究所<br/>
+							<b>地址：</b>陕西省西安市咸宁西路28号<br/>
+							<b>电话：</b>+86 0000000000<br/>
+							<b>邮箱：</b>getintoutch@yourcompanydomain.com<br />
+						</p>
+						<div style="float: right;">
+							<img src="http://api.map.baidu.com/staticimage?width=420&height=315&center=108.991898,34.245953&zoom=14&markers=108.989023,34.253771&markerStyles=m" />
+
+						</div>
+					</div>
+                </div>
+            </div>
+            <div class="both"></div>
+        </div>
 {% endblock %}

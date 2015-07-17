@@ -5,14 +5,15 @@ import datetime
 import re
 import os
 from PIL import Image
+from urlparse import urlparse
+import json
 
 from flask import Blueprint, render_template, request, redirect, url_for, abort, current_app, session, jsonify
 from flask.ext.login import login_user, logout_user, login_required, current_user
 
 from ibati.extensions import db, upload_set
 from ibati.models import Category, Label, Post, JobTitle, Member, Slider, User, Link
-from werkzeug.datastructures import FileStorage
-import json
+
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
 
@@ -67,6 +68,7 @@ def logout():
 
 @admin.route('/post/<category>/', defaults={'page': 1})
 @admin.route('/post/<category>/<int:page>/')
+@login_required
 def post(category, page):
     cat = Category.query.filter_by(name=category).one()
     pagination = Post.query.filter_by(category_id=cat.id).order_by(Post.update_date.desc()).paginate(page, per_page=current_app.config['POSTS_PER_PAGE'])
@@ -79,6 +81,7 @@ def post(category, page):
 
 
 @admin.route('/post/<int:id>/edit/', methods=['GET', 'POST'])
+@login_required
 def edit_post(id):
     p = Post.query.get_or_404(id)
 
@@ -122,6 +125,7 @@ def edit_post(id):
 
 @admin.route('/post/add/', methods=['GET', 'POST'])
 @admin.route('/post/<category>/add/', methods=['GET'])
+@login_required
 def add_post(category=None):
     if request.method == 'POST':
         p = Post()
@@ -163,6 +167,7 @@ def add_post(category=None):
 
 
 @admin.route('/post/<int:id>/delete/')
+@login_required
 def delete_post(id):
     p = Post.query.get_or_404(id)
     category_name = p.category.name
@@ -173,6 +178,7 @@ def delete_post(id):
 
 
 @admin.route('/post/delete/batch/')
+@login_required
 def batch_delete_post():
     # print request.args
     ids = request.args.getlist('ids[]')
@@ -186,18 +192,21 @@ def batch_delete_post():
 
 
 @admin.route('/slider/')
+@login_required
 def slider():
     sliders = Slider.query.order_by(Slider.order.asc()).all()
     return render_template('admin/sliders.html', sliders=sliders)
 
 
 @admin.route('/link/')
+@login_required
 def link():
     links = Link.query.order_by(Link.order.asc()).all()
     return render_template('admin/links.html', links=links)
 
 
 @admin.route('/link/add/', methods=['POST'])
+@login_required
 def add_link():
     name = request.form.get('name')
     href = request.form.get('href')
@@ -209,6 +218,7 @@ def add_link():
 
 
 @admin.route('/link/<int:id>/edit/', methods=['POST'])
+@login_required
 def edit_link(id):
     l = Link.query.get_or_404(id)
     name = request.form.get('name')
@@ -225,6 +235,7 @@ def edit_link(id):
 
 
 @admin.route('/link/<int:id>/delete/')
+@login_required
 def delete_link(id):
     l = Link.query.get_or_404(id)
     db.session.delete(l)
@@ -233,6 +244,7 @@ def delete_link(id):
 
 
 @admin.route('/link/delete/batch/')
+@login_required
 def batch_delete_link():
     # print request.args
     ids = request.args.getlist('ids[]')
@@ -246,6 +258,7 @@ def batch_delete_link():
 
 
 @admin.route('/slider/add/', methods=['POST'])
+@login_required
 def add_slider():
     title = request.form.get('title')
     subtitle = request.form.get('subtitle')
@@ -260,6 +273,7 @@ def add_slider():
 
 
 @admin.route('/slider/<int:id>/edit/', methods=['POST'])
+@login_required
 def edit_slider(id):
     s = Slider.query.get_or_404(id)
     title = request.form.get('title')
@@ -281,6 +295,7 @@ def edit_slider(id):
 
 
 @admin.route('/slider/<int:id>/delete/')
+@login_required
 def delete_slider(id):
     s = Slider.query.get_or_404(id)
     db.session.delete(s)
@@ -289,6 +304,7 @@ def delete_slider(id):
 
 
 @admin.route('/slider/delete/batch/')
+@login_required
 def batch_delete_slider():
     # print request.args
     ids = request.args.getlist('ids[]')
@@ -300,8 +316,9 @@ def batch_delete_slider():
 
     return jsonify(result=200)
 
-from urlparse import urlparse
+
 @admin.route('/slider/upload/', methods=['POST'])
+@login_required
 def upload_slider():
     print request.files
     if 'imageFile' not in request.files:
@@ -316,11 +333,13 @@ def upload_slider():
 
 
 @admin.route('/category/')
+@login_required
 def category():
     return render_template('admin/categories.html')
 
 
 @admin.route('/api/category/get/')
+@login_required
 def get_category_ztree_json():
     nodes = []
     categories = Category.query.order_by(Category.order.asc()).all()
@@ -333,6 +352,7 @@ def get_category_ztree_json():
 
 
 @admin.route('/api/category/post/', methods=['POST'])
+@login_required
 def post_category_ztree_json():
     nodes = request.get_json()
     # print json.dumps(nodes)
@@ -360,6 +380,7 @@ def post_category_ztree_json():
 
 
 @admin.route('/api/label/<int:id>/delete/')
+@login_required
 def delete_label_json(id):
     l = Label.query.get(id)
     db.session.delete(l)
@@ -368,6 +389,7 @@ def delete_label_json(id):
 
 
 @admin.route('/api/label/get/')
+@login_required
 def get_label_json():
     category_id = request.args.get('category_id')
     cat = Category.query.get(category_id)
@@ -376,3 +398,31 @@ def get_label_json():
     return jsonify(result=200, labels=labels)
 
 
+@admin.route('/password/', methods=['GET', 'POST'])
+@login_required
+def password():
+    if request.method == 'POST':
+
+        username = request.form.get('username')
+        old_password = request.form.get('old-password')
+        new_password = request.form.get('new-password')
+        confirm_password = request.form.get('confirm-password')
+        print username, old_password, new_password, confirm_password
+
+        message = ''
+        user = User.query.filter_by(username=username, password=hashlib.md5(old_password).hexdigest()).first()
+        if not user:
+            message = '用户名或原密码错误'
+        elif new_password != confirm_password:
+            message = '新密码两次输入不匹配'
+        elif not new_password:
+            message = '新密码不能为空'
+        else:
+            user.password = hashlib.md5(new_password).hexdigest()
+            db.session.add(user)
+            db.session.commit()
+            message = '修改成功'
+
+        return render_template('admin/password.html', message=message)
+
+    return render_template('admin/password.html')

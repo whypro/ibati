@@ -35,6 +35,11 @@
 
 ### 安装
 
+* python2.7+
+* virtualenv
+* supervisor
+
+
     $ virtualenv venv
     $ source venv/bin/activate
     (venv)$ pip install -r requirements.txt

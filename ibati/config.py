@@ -13,7 +13,7 @@ class Config(object):
     DB_DATABASE = 'ibati'
     DB_USERNAME = 'root'
     DB_PASSWORD = 'whypro'
-    DB_PORT = int(3306)
+    DB_PORT = 3306
 
     # FLASK-SQLALCHEMY
     SQLALCHEMY_DATABASE_URI = 'mysql://{username}:{password}@{host}:{port}/{database}?charset=utf8'.format(

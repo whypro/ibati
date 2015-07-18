@@ -1,5 +1,7 @@
 # IBATI
 
+## 安装与部署
+
 下面以本人的 Arch Linux 为例，描述一下安装部署的步骤。  
 **注意：所有相对路径都是相对于 IBATI 目录，因此在每一步输入命令前，请确认您已切换到了 IBATI 目录。**
 
@@ -135,3 +137,29 @@
 * 部署完成
 
     访问 http://[your_ip] 浏览吧！
+
+## 备份与还原
+
+* 备份
+		
+		$ source venv/bin/activate
+    	$ ./manage.py backup
+		$ deactivate
+
+	文件会备份至 backup 目录，请定期将其拷贝至安全的地方。
+
+* 还原
+
+		$ source venv/bin/activate
+    	$ ./manage.py restore
+		$ deactivate
+
+    之后会显示出可以还原的备份文件列表，输入备份文件名后，便可恢复到指定日期。
+
+## 调试
+
+	在一些情况下需要调试服务器时，可以使用：
+
+	$ source venv/bin/activate
+	$ ./manage.py debug
+

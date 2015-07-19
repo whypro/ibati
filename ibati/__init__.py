@@ -3,6 +3,11 @@ from __future__ import unicode_literals
 from flask import Flask, flash, redirect, url_for
 from flask.ext.login import LoginManager, current_user
 from flask.ext.uploads import configure_uploads, patch_request_class
+
+import htmlmin
+# from cssmin import cssmin
+# from jsmin import jsmin
+
 import logging
 from logging import FileHandler, Formatter
 
@@ -41,8 +46,24 @@ def create_app(config=None):
     configure_uploads(app, (upload_set, ))
     patch_request_class(app)    # default 16M limit
 
+    init_app_request_handler(app)
+
     return app
 
+
+def init_app_request_handler(app):
+    @app.after_request
+    def minify(response):
+        if response.content_type == 'text/html; charset=utf-8':
+            response.set_data(htmlmin.minify(response.get_data(as_text=True), remove_comments=True, remove_empty_space=True))
+        # elif response.content_type == 'text/css; charset=utf-8':
+        #     response.direct_passthrough = False
+        #     response.set_data(cssmin(response.get_data(as_text=True)))
+        # elif response.content_type == 'application/javascript':
+        #     response.direct_passthrough = False
+        #     response.set_data(jsmin(response.get_data(as_text=True)))
+
+        return response
 
 def init_app_logger(app):
     # logging

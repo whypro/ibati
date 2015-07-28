@@ -71,7 +71,7 @@
                             {% if category.labels %}
                             <td class="post-label-td">{{ post.label.cname }}</td>
                             {% endif %}
-                            <td class="post-title-td"><a href="{{ url_for('admin.edit_post', id=post.id) }}">{{ post.title }}</a></td>
+                            <td class="post-title-td"><a href="{{ url_for('admin.edit_post', id=post.id) }}">{{ post.title|d('无标题', true) }}</a></td>
                             <td class="post-status-td">{{ post.status }}</td>
                             <td class="post-operation-td">
                                 <a href="{{ url_for('post.detail', id=post.id) }}">预览</a>

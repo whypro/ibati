@@ -38,6 +38,8 @@
         $ source venv/bin/activate
         (venv)$ pip install -r requirements.txt
         (venv)$ deactivate
+        
+    如果这一步报错，请安装 python-devel 和 mysql-devel
 
 * 修改 ibati/config.py
 

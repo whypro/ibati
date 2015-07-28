@@ -393,7 +393,7 @@ def delete_label_json(id):
 def get_label_json():
     category_id = request.args.get('category_id')
     cat = Category.query.get(category_id)
-    print cat.cname
+    # print cat.cname
     labels = [dict(id=label.id, name=label.name, cname=label.cname) for label in cat.labels]
     return jsonify(result=200, labels=labels)
 

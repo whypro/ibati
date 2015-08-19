@@ -27,6 +27,8 @@
 
         # pacman -S python2
         # pacman -S python2-pip
+    
+    这里需要 python 版本为 2.7+。
 
 * 安装 virtualenv
 
@@ -134,7 +136,7 @@
 
         $ supervisord -c etc/supervisord.conf
 
-    访问 http://[your_ip]:9001 管理（启动，停止，重启） Web 服务器。
+    访问 http://[your_ip]:9001 管理（启动，停止，重启） Web 服务器；也可以使用 supservisorctl 命令工具管理。
 
 * 部署完成
 

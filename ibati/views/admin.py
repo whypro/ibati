@@ -71,6 +71,15 @@ def logout():
 @login_required
 def post(category, page):
     cat = Category.query.filter_by(name=category).one()
+
+    # 单位简介
+    if cat.name == 'about-us':
+        return redirect(url_for('admin.edit_post', id=cat.posts[0].id))
+    # 联系我们
+    elif cat.name == 'contact-us':
+        return redirect(url_for('admin.edit_post', id=cat.posts[0].id))
+
+    # 其他页面
     pagination = Post.query.filter_by(category_id=cat.id).order_by(Post.update_date.desc()).paginate(page, per_page=current_app.config['POSTS_PER_PAGE'])
     posts = pagination.items
 

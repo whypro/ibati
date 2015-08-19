@@ -2,8 +2,9 @@
 from __future__ import unicode_literals
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort, current_app
 
-from ibati.extensions import db
-from ibati.models import Category, Label, Post
+from ..extensions import db
+from ..models import Category, Label, Post
+from .home import about_us, contact_us
 
 post = Blueprint('post', __name__, url_prefix='/post')
 
@@ -18,8 +19,10 @@ def index(category, page, label=None):
 
     # 单位简介
     if cat.name == 'about-us':
-        p = cat.posts[0]
-        return render_template('about-us.html', category=p.category, post=p)
+        return redirect(url_for('home.about_us'))
+    # 联系我们
+    elif cat.name == 'contact-us':
+        return redirect(url_for('home.contact_us'))
 
     # 其他页面
     qry = Post.query.filter_by(category_id=cat.id, status="公开")

@@ -17,7 +17,7 @@ from flask.ext.script import Manager, Server
 from flask.ext.migrate import Migrate, MigrateCommand
 
 from ibati.extensions import db
-from ibati.init_data import init_home, init_links, init_member, init_post
+from ibati.init_data import init_home, init_links, init_post
 
 migrate = Migrate(app, db)
 
@@ -111,7 +111,6 @@ def init():
     print '数据表创建成功'
     init_home(db.session)
     init_post(db.session)
-    init_member(db.session)
     print '数据初始化成功'
 
     uploads_dir = config.Config.UPLOADS_DEFAULT_DEST

@@ -44,22 +44,9 @@
                 </div>
                 <div class="left"><img src="{{ url_for('static', filename='images/rigxian.jpg') }}" /></div>
                 <div class="aboutrignei">
-					<div>
-                        
-						<p class="contact-us-details">
-							<b>单位名称：</b>西安交通大学 生物医学分析技术与仪器研究所<br/>
-							<b>地址：</b>陕西省西安市咸宁西路28号 西安交通大学兴庆校区生命学院图书馆西侧教2北5楼<br/>
-                            <b>联系人：</b>张镇西（所长）<br />
-							<b>电话：</b>029-82666854<br/>
-							<b>邮箱：</b>zxzhang@mail.xjtu.edu.cn<br />
-						</p>
-
-                        <div style="text-align: center; margin-top: 10px; margin-bottom: 10px;">
-                            <img src="http://api.map.baidu.com/staticimage?width=420&height=315&center=108.991898,34.245953&zoom=14&markers=108.989023,34.253771&markerStyles=m" />
-
-                        </div>
-						
-					</div>
+					<div class="post-content">
+                        {{ post.content|safe }}
+                    </div>
                 </div>
             </div>
             <div class="both"></div>

@@ -71,6 +71,9 @@ def init_post(session):
     recruitment = Category(name='recruitment', cname='人员招聘', order=800)
     session.add(recruitment)
 
+    contact_us = Category(name='contact-us', cname='联系我们', order=900)
+    session.add(contact_us)
+
     for _ in range(20):
         p = Post(
             title='西安交大参加教育部深化高等学校创新创业教育改革视频会议',
@@ -135,44 +138,64 @@ def init_post(session):
         )
         db.session.add(p)
 
+    about_us_content = '''
+<p style="text-indent:2em;">
+    生物医学分析技术及仪器研究所是根据国家十一五发展规划和生命科学与技术学院整体发展需要，通过学院整合于2007年6月15日成立。目标是充分发挥学科交叉的作用，在生物医学分析技术与仪器的基础理论研究、应用研究、人才培养、促进相应技术转化为生产力等方面取得显著进展。该所现有教职工12人，其中教授5人，副教授3 人和高级工程师1人，讲师3位。目前承担和完成了国家自然科学基金近30项（包括重点项目、国际合作）、国家科技部863项目、国家重大科学仪器设备开发项目、陕西省自然科学基金项目、西安市科技攻关项目、横向课题数十项等。目前的研究方向有生物医学光子学影像与光谱分析技术、基于多信息融合的生物荧光探针和光学传感器、先进敏感分析技术及仪器等。目前研究的重点项目包括有：基于多光谱荧光成像的在体三维光学标测系统、基于新型光穿孔技术的纳米尺度细胞膜微手术研究、金纳米棒靶向的激光细胞微手术及其机理研究、纳米材料的界观和微观效应及机理、基于纳米金探针的肿瘤细胞示踪等研究。研究所现有博士和硕士研究生80多名。
+</p>
+'''
     p = Post(
         title='单位简介',
-        content=('西安交通大学 生物医学分析技术与仪器研究所'
-                 'Institute of Biomedical Analytical Technology and Instrumentation'
-                 '生物医学分析技术及仪器研究所是根据国家十一五发展规划和生命科学与技术学院整体发展需要，'
-                 '通过学院整合于2007年6月15日成立。目标是充分发挥学科交叉的作用，'
-                 '在生物医学分析技术与仪器的基础理论研究、应用研究、人才培养、促进相应技术转化为生产力等方面取得显著进展。'
-                 '该所现有教职工12人，其中教授5人，副教授3 人和高级工程师1人，讲师3位。'
-                 '目前承担和完成了国家自然科学基金近30项（包括重点项目、国际合作）、国家科技部863项目、国家重大科学仪器设备开发项目、'
-                 '陕西省自然科学基金项目、西安市科技攻关项目、横向课题数十项等。'
-                 '目前的研究方向有生物医学光子学影像与光谱分析技术、基于多信息融合的生物荧光探针和光学传感器、先进敏感分析技术及仪器等。'
-                 '目前研究的重点项目包括有：基于多光谱荧光成像的在体三维光学标测系统、基于新型光穿孔技术的纳米尺度细胞膜微手术研究、'
-                 '金纳米棒靶向的激光细胞微手术及其机理研究、纳米材料的界观和微观效应及机理、基于纳米金探针的肿瘤细胞示踪等研究。'
-                 '研究所现有博士和硕士研究生80多名。'),
+        content=about_us_content,
         category=about_us
     )
     db.session.add(p)
+
+    contact_us_content = '''
+<p>
+    <strong>单位名称</strong><strong>：</strong>西安交通大学 生物医学分析技术与仪器研究所
+</p>
+<p>
+    <strong>地址：</strong>陕西省西安市咸宁西路28号 西安交通大学兴庆校区生命学院图书馆西侧教2北5楼
+</p>
+<div style="text-align:left;">
+    <br />
+</div>
+<p>
+    <strong>联系人：</strong>张镇西（所长）
+</p>
+<p>
+    <strong>电话：</strong>029-82666854
+</p>
+<p>
+    <strong>邮箱：</strong>zxzhang@mail.xjtu.edu.cn
+</p>
+<p>
+    <br />
+</p>
+<p>
+    <strong>联系人：</strong>朱键（副所长）
+</p>
+<p>
+    <strong>电话：</strong>029-82664224
+</p>
+<p>
+    <strong>邮箱：</strong>zhujian@mail.xjtu.edu.cn
+</p>
+<p>
+    <br />
+</p>
+<p>
+    <strong><img src="http://api.map.baidu.com/staticimage?width=420&amp;height=315&amp;center=108.991898,34.245953&amp;zoom=14&amp;markers=108.989023,34.253771&amp;markerStyles=m" alt="" width="420" height="315" title="" align="" /></strong>
+</p>
+'''
+    p = Post(
+        title='联系我们',
+        content=contact_us_content,
+        category=contact_us
+    )
+    db.session.add(p)
+
     db.session.commit()
-
-
-
-def init_member(session):
-    teacher = JobTitle(name='教师')
-    session.add(teacher)
-
-    student = JobTitle(name='学生')
-    session.add(student)
-
-    zhaolinger = Member(name='赵灵儿', job_title=student, intro='西安交通大学软件学院学生', photo='uploads/200800000006.jpg')
-    session.add(zhaolinger)
-    linyueru = Member(name='林月如', job_title=student, intro='西安交通大学软件学院学生', photo='uploads/200800000012.jpg')
-    session.add(linyueru)
-    anu = Member(name='阿奴', job_title=student, intro='西安交通大学软件学院学生', photo='uploads/200800000020.jpg')
-    session.add(anu)
-    wuhou = Member(name='巫后', job_title=teacher, intro='西安交通大学软件学院老师', photo='uploads/200800000123.jpg')
-    session.add(wuhou)
-
-    session.commit()
 
 
 def init_home(session):

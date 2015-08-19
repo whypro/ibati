@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort, current_app
-from ibati.models import Slider, Category, Post, Label
+from ..models import Slider, Category, Post, Label
 
 
 home = Blueprint('home', __name__)
@@ -28,7 +28,16 @@ def index():
 
 @home.route('/contact-us/')
 def contact_us():
-    return render_template('contact-us.html', active='contact_us')
+    cat = Category.query.filter(Category.name=='contact-us').one()
+    p = cat.posts[0]
+    return render_template('contact-us.html', category='contact-us', post=p)
+
+
+@home.route('/about-us/')
+def about_us():
+    cat = Category.query.filter(Category.name=='about-us').one()
+    p = cat.posts[0]
+    return render_template('about-us.html', category='about-us', post=p)
 
 
 @home.route('/team/')

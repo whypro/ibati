@@ -809,3 +809,8 @@ a.wen22:hover {
 .post-content {
     line-height: 2;
 }
+
+.post-content li {
+    margin-left: 40px;
+    list-style: disc outside none;
+}

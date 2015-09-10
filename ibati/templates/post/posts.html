@@ -41,7 +41,7 @@
                         <td width="20%">
                             <div style="margin-left: 10px; margin-right: 10px; border: 1px #dfdfdf solid; text-align: center;">
                             <a href="{{ url_for('post.detail', id=post.id) }}">
-                                <img src="{{ post.thumbnail|d(url_for('static', filename='images/post_tb_default.png'), True) }}" style="height: 98px;">
+                                <img src="{{ post.thumbnail|d(url_for('static', filename='images/post_tb_default.png'), True) }}" style="height: 98px; max-width: 130px;">
                             </a>
                             </div>
                         </td>

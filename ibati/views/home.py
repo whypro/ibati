@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort, current_app
-from ..models import Slider, Category, Post, Label
 
+from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort, current_app
+
+from ..models import Slider, Category, Post, Label
+from ..extensions import db
 
 home = Blueprint('home', __name__)
 
@@ -30,6 +32,9 @@ def index():
 def contact_us():
     cat = Category.query.filter(Category.name=='contact-us').one()
     p = cat.posts[0]
+    p.click_count += 1
+    db.session.add(p)
+    db.session.commit()
     return render_template('contact-us.html', category='contact-us', post=p)
 
 
@@ -37,6 +42,9 @@ def contact_us():
 def about_us():
     cat = Category.query.filter(Category.name=='about-us').one()
     p = cat.posts[0]
+    p.click_count += 1
+    db.session.add(p)
+    db.session.commit()
     return render_template('about-us.html', category='about-us', post=p)
 
 

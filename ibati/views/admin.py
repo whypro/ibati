@@ -89,6 +89,31 @@ def post(category, page):
     )
 
 
+def gen_thumb(content):
+    """根据文章内容的第一张图片，生成文章缩略图"""
+    pattern = re.compile(r'<img.*src="(.*?)".*>')
+    match = pattern.search(content)
+    if match:
+        url = match.group(1)
+        if url.startswith('http'):
+            return url
+        basename = os.path.basename(url)
+        filename = upload_set.path(basename)
+        # 生成缩略图 [filename].[ext] -> [filename]_thumb.[ext]
+        _splitext = os.path.splitext(filename)
+        tb_filename = _splitext[0] + '_thumb' + _splitext[1]
+        tb_basename = os.path.basename(tb_filename)
+        try:
+            image = Image.open(filename)
+            image.thumbnail(size=(135, 88))
+            image.save(tb_filename)
+        except IOError:
+            print "cannot create thumbnail for", filename
+        else:
+            return upload_set.url(tb_basename)
+    return None
+
+
 @admin.route('/post/<int:id>/edit/', methods=['GET', 'POST'])
 @login_required
 def edit_post(id):
@@ -105,24 +130,7 @@ def edit_post(id):
             p.label_id = label_id
         p.status = request.form.get('status')
         p.update_date = datetime.datetime.now()
-        pattern = re.compile(r'<img src="(.*?)".*>')
-        match = pattern.search(p.content)
-        if match:
-            url = match.group(1)
-            basename = os.path.basename(url)
-            filename = upload_set.path(basename)
-            # 生成缩略图 [filename].[ext] -> [filename]_thumb.[ext]
-            _splitext = os.path.splitext(filename)
-            tb_filename = _splitext[0] + '_thumb' + _splitext[1]
-            tb_basename = os.path.basename(tb_filename)
-            try:
-                image = Image.open(filename)
-                image.thumbnail(size=(135, 88))
-                image.save(tb_filename)
-            except IOError:
-                print "cannot create thumbnail for", filename
-            else:
-                p.thumbnail = upload_set.url(tb_basename)
+        p.thumbnail = gen_thumb(p.content)
 
         db.session.add(p)
         db.session.commit()
@@ -148,24 +156,7 @@ def add_post(category=None):
             p.label_id = label_id
         p.status = request.form.get('status')
         p.update_date = datetime.datetime.now()
-        pattern = re.compile(r'<img src="(.*?)".*>')
-        match = pattern.search(p.content)
-        if match:
-            url = match.group(1)
-            basename = os.path.basename(url)
-            filename = upload_set.path(basename)
-            # 生成缩略图 [filename].[ext] -> [filename]_thumb.[ext]
-            _splitext = os.path.splitext(filename)
-            tb_filename = _splitext[0] + '_thumb' + _splitext[1]
-            tb_basename = os.path.basename(tb_filename)
-            try:
-                image = Image.open(filename)
-                image.thumbnail(size=(135, 88))
-                image.save(tb_filename)
-            except IOError:
-                print "cannot create thumbnail for", filename
-            else:
-                p.thumbnail = upload_set.url(tb_basename)
+        p.thumbnail = gen_thumb(p.content)
 
         db.session.add(p)
         db.session.commit()

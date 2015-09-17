@@ -30,6 +30,10 @@
     
     这里需要 python 版本为 2.7+。
 
+* 安装 PIL 依赖的组件
+
+    请检查 libjpeg-devel 是否安装，否则 PIL 的某些苟能将不可用。
+
 * 安装 virtualenv
 
         # pip install virtualenv

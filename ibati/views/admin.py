@@ -105,10 +105,11 @@ def gen_thumb(content):
         tb_basename = os.path.basename(tb_filename)
         try:
             image = Image.open(filename)
-            image.thumbnail(size=(135, 88))
+            image.thumbnail(size=(130, 98))
             image.save(tb_filename)
-        except IOError:
-            print "cannot create thumbnail for", filename
+        except IOError as e:
+            current_app.logger.error("cannot create thumbnail for %s", filename)
+            current_app.logger.error(e)
         else:
             return upload_set.url(tb_basename)
     return None

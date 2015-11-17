@@ -52,7 +52,7 @@
                         <tr id="{{ backup.id }}">
                             <td class="backup-check-td"><input class="backup-check-input" type="checkbox" /></td>
                             <td class="backup-date-td">{{ backup.date_str }}</td>
-                            <td class="backup-size-td">{{ backup.size }} 字节</td>
+                            <td class="backup-size-td">{{ backup.size|human }}</td>
                             <td class="backup-operation-td">
                                 <a href="{{ url_for('admin.download_backup', bid=backup.id) }}">下载至本地</a>
                                 <a href="{{ url_for('admin.delete_backup', bid=backup.id) }}">删除</a>

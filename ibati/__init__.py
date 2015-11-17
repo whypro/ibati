@@ -9,6 +9,7 @@ from logging import FileHandler, Formatter
 from ibati import views
 from ibati.extensions import db, upload_set
 from ibati.models import Category, User, Link
+from ibati.helpers import human_readable_size
 
 
 def create_app(config=None):
@@ -34,6 +35,8 @@ def create_app(config=None):
     # app context
     init_app_context(app)
 
+    init_jinja_filters(app)
+
     # flask-login
     configure_login(app)
 
@@ -52,6 +55,10 @@ def init_app_logger(app):
     ))
     file_handler.setLevel(logging.ERROR)
     app.logger.addHandler(file_handler)
+
+
+def init_jinja_filters(app):
+    app.jinja_env.filters['human'] = human_readable_size
 
 
 def init_app_context(app):

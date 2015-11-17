@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+from __future__ import unicode_literals, division
 from zipfile import ZipFile, ZIP_DEFLATED
 import datetime
 import subprocess
 import os
+import math
 
 from flask import request, current_app
 
@@ -84,3 +85,11 @@ def restore(date_str):
     else:
         current_app.logger.error('数据库还原失败')
     os.remove(sql_file)
+
+
+def human_readable_size(size):
+    unit = 1024
+    if size < unit: return str(size) + ' B'
+    exp = int(math.log(size) / math.log(unit))
+    pre = 'KMGTPE'[exp-1]
+    return '{0:.2f} {1}'.format(size / math.pow(unit, exp), pre)

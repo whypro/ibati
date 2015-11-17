@@ -37,16 +37,16 @@ def backup():
             stdout=f
         )
     if not ret:
-        print '数据库备份成功'
+        current_app.logger.error('数据库备份成功')
     else:
         os.remove(sql_file)
-        print '数据库备份失败'
+        current_app.logger.error('数据库备份失败')
         return None
 
     # 生成压缩包
     with ZipFile(zip_file, 'w', compression=ZIP_DEFLATED) as zf:
         for root, dirs, files in os.walk(current_app.config['UPLOADS_DEFAULT_DEST']):
-            print root, dirs, files
+            # print root, dirs, files
             for f in files:
                 zf.write(os.path.join(root, f))
 
@@ -54,7 +54,7 @@ def backup():
 
     os.remove(sql_file)
 
-    print '数据已备份至 {0}'.format(zip_file)
+    current_app.logger.error('数据已备份至 {0}'.format(zip_file))
 
     return date_str, zip_file, os.path.getsize(zip_file)
 
@@ -66,7 +66,7 @@ def restore(date_str):
     # 还原上传文件
     with ZipFile(zip_file, 'r') as zf:
         zf.extractall()
-    print '文件已还原'
+    current_app.logger.error('文件已还原')
 
     # 还原数据库
     with open(sql_file, 'r') as f:
@@ -79,7 +79,7 @@ def restore(date_str):
             stdin=f
         )
     if not ret:
-        print '数据库还原成功'
+        current_app.logger.error('数据库还原成功')
     else:
-        print '数据库还原失败'
+        current_app.logger.error('数据库还原失败')
     os.remove(sql_file)

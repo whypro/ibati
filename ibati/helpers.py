@@ -45,7 +45,8 @@ def backup():
 
     # 生成压缩包
     with ZipFile(zip_file, 'w', compression=ZIP_DEFLATED) as zf:
-        for root, dirs, files in os.walk(current_app.config['UPLOADS_DEFAULT_DEST']):
+        uploads_dir = os.path.relpath(current_app.config['UPLOADS_DEFAULT_DEST'], current_app.config['APP_DIR'])
+        for root, dirs, files in os.walk(uploads_dir):
             # print root, dirs, files
             for f in files:
                 zf.write(os.path.join(root, f))

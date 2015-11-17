@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from ibati.extensions import db
 import datetime
+
+from ..extensions import db
 
 
 class Slider(db.Model):

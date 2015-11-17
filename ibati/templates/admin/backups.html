@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+{% block title %}备份数据管理{% endblock %}
+{% block content %}
+    <div class="aboutz">
+
+        {% include 'admin/left-sider.html' %}
+
+        <div class="aboutrig">
+            <div class="aboutrigdao">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+
+                        <td width="2%">
+                            <img src="{{ url_for('static', filename='images/li2.jpg') }}" width="11" height="11" />
+                        </td>
+                        <td width="36%">
+                            <font class="wen4">备份数据管理</font>
+                        </td>
+
+                        <td width="62%" align="right">
+                            <div align="right" class="wz004">
+                                <img src="{{ url_for('static', filename='images/index_21.jpg') }}" /> 您的位置：<a href="{{ url_for('home.index') }}">首页</a>
+                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" /><a href="{{ url_for('admin.index') }}">管理中心</a>
+                                <img src="{{ url_for('static', filename='images/jiao.gif') }}" />备份数据管理
+                            </div>
+                       </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="left"><img src="{{ url_for('static', filename='images/rigxian.jpg') }}" /></div>
+            <div class="aboutrignei">
+                <style>
+                    .backups-table {
+                        width: 100%;
+                        border: 1px;
+                        text-align: center;
+                    }
+
+                </style>
+
+                <table class="backups-table">
+                    <thead>
+                        <tr>
+                            <th class="backup-check-td" width="10%"><input id="backup-check-all" type="checkbox" /></th>
+                            <th class="backup-time-td" width="50%">日期</th>
+                            <th class="backup-size-td" width="10%">大小</th>
+                            <th class="backup-operation-td" width="30%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for backup in backups %}
+                        <tr id="{{ backup.id }}">
+                            <td class="backup-check-td"><input class="backup-check-input" type="checkbox" /></td>
+                            <td class="backup-date-td">{{ backup.date_str }}</td>
+                            <td class="backup-size-td">{{ backup.size }} 字节</td>
+                            <td class="backup-operation-td">
+                                <a href="{{ url_for('admin.download_backup', bid=backup.id) }}">下载至本地</a>
+                                <a href="{{ url_for('admin.delete_backup', bid=backup.id) }}">删除</a>
+                                {#<a href="">还原</a>#}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <a id="backup-new" href="{{ url_for('admin.new_backup') }}">备份</a>&nbsp;|&nbsp;
+                                {#<a id="backup-upload" href="javascript:void(0);">从本地还原</a>&nbsp;|&nbsp;#}
+                                <a id="backup-delete-checked" href="javascript:void(0)">批量删除</a>
+                                <form action="{{ url_for('admin.upload_backup') }}" method="post">
+                                    <input type="file" id="backup-upload-input" name="backup-file" value="从本地还原" style="display: none;" />
+                                </form>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+                <p align="center">
+
+                    <style>
+                        <!--
+                        #dcms_pager .pages {border:none;text-transform:uppercase;font-size:12px;margin:10px 0 10px 0;padding:0;height:20px;clear:both;text-align:center;}
+                        #dcms_pager .pages a {border:1px solid #ccc;text-decoration:none;margin:0 5px 0 0;padding:0 3px 0 3px;font-size:12px;height:16px;line-height:16px;}
+                        #dcms_pager .pages a:hover {border:1px solid #aeaeae;}
+                        #dcms_pager .pages .pgempty {border:1px solid #eee;color:#eee;}
+                        #dcms_pager .pages .pgcurrent {border:1px solid #aeaeae;color:#000;font-weight:bold;background-color:#eee;}
+                        -->
+                    </style>
+                    {#
+                    {% if pagination.pages < 2 %}
+                    {% else %}
+                        <div id="dcms_pager" align="center">
+                            <div class="pages">
+                                <a class="pgnext"{%- if pagination.has_prev %} href="{{ url_for('admin.post', category=category.name) }}"{% endif -%}>首页</a>
+                                <a class="pgnext"{%- if pagination.has_prev %} href="{{ url_for('admin.post', category=category.name, page=pagination.page-1) }}"{% endif -%}>上一页</a>
+                                {% for page in pagination.iter_pages(2, 2, 2, 2) %}
+                                {% if page %}
+                                    <a{%- if page == pagination.page %} class="page-number pgcurrent"{% else %} href="{{ url_for('admin.post', category=category.name, page=page) }}"{%- endif %}>{{ page }}</a>
+                                {% else %}
+                                    ...
+                                {% endif %}
+                                {% endfor %}
+
+                                <a class="pgnext"{%- if pagination.has_next %} href="{{ url_for('admin.post', category=category.name, page=pagination.page+1) }}"{% endif -%}>下一页</a>
+                                <a class="pgnext"{%- if pagination.has_next %} href="{{ url_for('admin.post', category=category.name, page=pagination.pages) }}"{% endif -%}>尾页</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                    #}
+                </p>
+            </div>
+        </div>
+        <div class="both"></div>
+    </div>
+{% endblock %}
+{% block script %}
+    <script>
+        $(document).ready(function() {
+            $("#post-check-all").click(function() {
+                // alert($(this).attr("checked"));
+                if ($(this).attr("checked") == true) {
+                    $(".post-check-input").each(function() {
+                        $(this).attr("checked", true);
+                    });
+                } else {
+                   $(".post-check-input").each(function() {
+                        $(this).attr("checked", false);
+                    });
+                }
+
+            });
+
+            $("#post-delete-checked").click(function() {
+                if (confirm("确认删除选中？")) {
+                    // alert($(".link-check-input:checked"));
+                    var ids = [];
+                    $(".post-check-input:checked").each(function() {
+                        ids.push($(this).parents("tr:first").attr("id"));
+                        // var delete_url = $(this).parents("tr:first").find(".link-delete").attr("href");
+                        // alert(delete_url);
+                    });
+                    // alert(ids);
+
+                    $.get("{{ url_for('admin.batch_delete_post') }}", {ids: ids}, function() {
+                        location.reload();
+                    });
+                }
+            });
+
+            $("#backup-upload").click(function () {
+                $("#backup-upload-input").click();
+            });
+        });
+
+    </script>
+{% endblock %}

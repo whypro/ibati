@@ -32,3 +32,5 @@ class Config(object):
 
     POSTS_PER_PAGE = 10     # 每页显示的主题数
     INDEX_NEWS_NUM = 6      # 首页新闻个数
+
+    APP_DIR = os.path.realpath('.')

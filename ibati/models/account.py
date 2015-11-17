@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
-# from __future__ import unicode_literals
+from __future__ import unicode_literals
 import hashlib
+
 from flask.ext.login import UserMixin
-from ibati.extensions import db
+
+from ..extensions import db
+
 
 class User(db.Model, UserMixin):
     __tablename__ = 'ibati_user'

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from ibati.extensions import db
 import datetime
+
+from ..extensions import db
 
 
 class Category(db.Model):

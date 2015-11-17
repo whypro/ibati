@@ -7,12 +7,17 @@ import os
 from PIL import Image
 from urlparse import urlparse
 import json
+import shutil
+import subprocess
+from zipfile import ZipFile, ZIP_DEFLATED
 
-from flask import Blueprint, render_template, request, redirect, url_for, abort, current_app, session, jsonify
+from flask import Blueprint, render_template, request, redirect, url_for, abort, current_app, session, jsonify, send_file, send_from_directory
 from flask.ext.login import login_user, logout_user, login_required, current_user
 
-from ibati.extensions import db, upload_set
-from ibati.models import Category, Label, Post, JobTitle, Member, Slider, User, Link
+from ..extensions import db, upload_set
+from ..models import Category, Label, Post, JobTitle, Member, Slider, User, Link, Backup
+from .. import config
+from ..helpers import backup, restore
 
 
 admin = Blueprint('admin', __name__, url_prefix='/admin')
@@ -427,3 +432,62 @@ def password():
         return render_template('admin/password.html', message=message)
 
     return render_template('admin/password.html')
+
+
+
+@admin.route('/backup/')
+@login_required
+def show_backups():
+    backups = Backup.query.all()
+    return render_template('admin/backups.html', backups=backups)
+
+
+@admin.route('/backup/<int:bid>/delete/')
+@login_required
+def delete_backup(bid):
+    b = Backup.query.get_or_404(bid)
+    zip_file = b.zip_file
+    db.session.delete(b)
+    db.session.commit()
+    if os.path.exists(zip_file):
+        os.remove(zip_file)
+    return redirect(url_for('admin.show_backups'))
+
+
+@admin.route('/backup/<int:bid>/download/')
+@login_required
+def download_backup(bid):
+    b = Backup.query.get_or_404(bid)
+    zip_file = os.path.join(current_app.config['APP_DIR'], b.zip_file)
+    return send_file(zip_file, as_attachment=True)
+
+
+@admin.route('/backup/new/', methods=['GET'])
+@login_required
+def new_backup():
+    date_str, zip_file, size = backup()
+    if date_str:
+        b = Backup(date_str=date_str, zip_file=zip_file, size=size)
+        db.session.add(b)
+        db.session.commit()
+
+    return redirect(url_for('admin.show_backups'))
+
+
+@admin.route('/backup/upload/', methods=['POST'])
+@login_required
+def upload_backup():
+    # TODO: 
+    if 'backup-file' in request.files:
+        file_storage = request.files['backup-file']
+
+    return redirect(url_for('admin.show_backups'))
+
+
+@admin.route('/backup/restore/<date_str>/')
+@login_required
+def restore_backup(date_str):
+    restore(date_str)
+    return jsonify(status=200)
+
+

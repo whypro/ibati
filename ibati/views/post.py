@@ -26,11 +26,17 @@ def index(category, page, label=None):
 
     # 其他页面
     qry = Post.query.filter_by(category_id=cat.id, status="公开")
+    # 子类别筛选
     if label:
         lab = Label.query.filter_by(name=label).one()
         qry = qry.filter_by(label_id=lab.id)
     else:
         lab = None
+    # 排序
+    if cat.name == 'member':
+        qry = qry.order_by(Post.create_date.asc())
+    else:
+        qry = qry.order_by(Post.create_date.desc())
 
     pagination = qry.paginate(page, per_page=current_app.config['POSTS_PER_PAGE'])
     posts = pagination.items

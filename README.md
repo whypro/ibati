@@ -88,7 +88,7 @@
     
             #access_log  logs/host.access.log  main;
     
-            root   /home/whypro/codes/IBATI;    # your root directory
+            root   /your/deploying/path/IBATI;    # your root directory
     
             location / {
                 try_files $uri @proxy_to_app;
@@ -105,7 +105,7 @@
             # redirect server error pages to the static page /50x.html
             error_page   500 502 503 504  /50x.html;
             location = /50x.html {
-                root   /your/deploying/IBATI/ibati/templates/;
+                root   /your/deploying/path/IBATI/ibati/templates/;
             }
         }
 

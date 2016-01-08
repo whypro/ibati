@@ -21,9 +21,9 @@ def index():
     dispatch_label = Label.query.filter_by(name='dispatch').one()
     notice_label = Label.query.filter_by(name='notice').one()
     report_label = Label.query.filter_by(name='report').one()
-    dispatches = Post.query.filter_by(category_id=news_cat.id, label_id=dispatch_label.id).limit(current_app.config['INDEX_NEWS_NUM'])
-    notices = Post.query.filter_by(category_id=news_cat.id, label_id=notice_label.id).limit(current_app.config['INDEX_NEWS_NUM'])
-    reports = Post.query.filter_by(category_id=news_cat.id, label_id=report_label.id).limit(current_app.config['INDEX_NEWS_NUM'])
+    dispatches = Post.query.filter_by(category_id=news_cat.id, label_id=dispatch_label.id).order_by(Post.create_date.desc()).limit(current_app.config['INDEX_NEWS_NUM'])
+    notices = Post.query.filter_by(category_id=news_cat.id, label_id=notice_label.id).order_by(Post.create_date.desc()).limit(current_app.config['INDEX_NEWS_NUM'])
+    reports = Post.query.filter_by(category_id=news_cat.id, label_id=report_label.id).order_by(Post.create_date.desc()).limit(current_app.config['INDEX_NEWS_NUM'])
     return render_template('index.html', active='index', sliders=sliders, areas=areas, dispatches=dispatches, notices=notices, reports=reports)
     # return render_template('index.html')
 

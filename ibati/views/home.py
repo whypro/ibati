@@ -15,7 +15,7 @@ def index():
 
     research_cat = Category.query.filter_by(name='research').one()
     area_label = Label.query.filter_by(name='area').one()
-    areas = Post.query.filter_by(category_id=research_cat.id, label_id=area_label.id).limit(current_app.config['INDEX_NEWS_NUM'])
+    areas = Post.query.filter_by(category_id=research_cat.id, label_id=area_label.id).limit(current_app.config['INDEX_AREA_NUM'])
 
     news_cat = Category.query.filter_by(name='news').one()
     dispatch_label = Label.query.filter_by(name='dispatch').one()

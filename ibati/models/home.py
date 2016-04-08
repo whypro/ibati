@@ -24,3 +24,10 @@ class Link(db.Model):
     order = db.Column(db.Integer)
 
 
+class Advertisement(db.Model):
+    __tablename__ = 'ibati_advertisement'
+
+    id = db.Column(db.Integer, primary_key=True)
+    url = db.Column(db.String(255))
+    image = db.Column(db.String(255))
+    enable = db.Column(db.Boolean)

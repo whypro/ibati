@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block title %}首页{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/ad.css') }}"></link >
+{% endblock %}
 {% block content %}
         <div class="banner" style="margin-top:6px">
             <!-- indexCon start -->
@@ -160,4 +163,37 @@
             <div class="both"></div>
         </div>
 
+{% endblock %}
+{% block script %}
+{% if advertisement.enable %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/floatingAd.js') }}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $.floatingAd({
+        //频率
+        delay: 30,
+        //超链接后是否关闭漂浮
+        isLinkClosed: false,
+        //漂浮内容
+        ad: [{
+            //关闭区域背景透明度(0.1-1)
+            headFilter: 0.3,
+            //图片
+            'img': '{{ advertisement.image }}',
+            //图片高度
+            'imgHeight': 100,
+            //图片宽度
+            'imgWidth': 200,
+            //图片链接
+            'linkUrl': '{{ advertisement.url }}',
+            //浮动层级别
+            'z-index': 100,
+            //标题
+            // 'title': '',
+            'closed-icon': "{{ url_for('static', filename='images/ad_close.png') }}"
+        }]
+    });
+});
+</script>
+{% endif %}
 {% endblock %}

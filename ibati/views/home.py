@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from flask import Blueprint, render_template, request, jsonify, redirect, url_for, abort, current_app
 
-from ..models import Slider, Category, Post, Label
+from ..models import Slider, Category, Post, Label, Advertisement
 from ..extensions import db
 
 home = Blueprint('home', __name__)
@@ -12,6 +12,7 @@ home = Blueprint('home', __name__)
 @home.route('/')
 def index():
     sliders = Slider.query.filter_by(enable=True).order_by(Slider.order.asc()).all()
+    advertisement = Advertisement.query.first()
 
     research_cat = Category.query.filter_by(name='research').one()
     area_label = Label.query.filter_by(name='area').one()
@@ -24,7 +25,7 @@ def index():
     dispatches = Post.query.filter_by(category_id=news_cat.id, label_id=dispatch_label.id).order_by(Post.create_date.desc()).limit(current_app.config['INDEX_NEWS_NUM'])
     notices = Post.query.filter_by(category_id=news_cat.id, label_id=notice_label.id).order_by(Post.create_date.desc()).limit(current_app.config['INDEX_NEWS_NUM'])
     reports = Post.query.filter_by(category_id=news_cat.id, label_id=report_label.id).order_by(Post.create_date.desc()).limit(current_app.config['INDEX_NEWS_NUM'])
-    return render_template('index.html', active='index', sliders=sliders, areas=areas, dispatches=dispatches, notices=notices, reports=reports)
+    return render_template('index.html', active='index', sliders=sliders, areas=areas, dispatches=dispatches, notices=notices, reports=reports, advertisement=advertisement)
     # return render_template('index.html')
 
 

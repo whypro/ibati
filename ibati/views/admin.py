@@ -15,7 +15,7 @@ from flask import Blueprint, render_template, request, redirect, url_for, abort,
 from flask.ext.login import login_user, logout_user, login_required, current_user
 
 from ..extensions import db, upload_set
-from ..models import Category, Label, Post, JobTitle, Member, Slider, User, Link, Backup
+from ..models import Category, Label, Post, JobTitle, Member, Slider, User, Link, Backup, Advertisement
 from .. import config
 from ..helpers import backup, restore
 
@@ -491,3 +491,44 @@ def restore_backup(date_str):
     return jsonify(status=200)
 
 
+@admin.route('/advertisement/')
+@login_required
+def advertisement():
+    advertisement = Advertisement.query.first()
+    if not advertisement:
+        advertisement = Advertisement()
+        db.session.add(advertisement)
+        db.session.commit()
+    return render_template('admin/advertisement.html', advertisement=advertisement)
+
+
+@admin.route('/advertisement/upload/', methods=['POST'])
+@login_required
+def upload_advertisement():
+    print request.files
+    if 'imageFile' not in request.files:
+        abort(400)
+
+    file_storage = request.files['imageFile']
+    file_storage.filename = file_storage.filename.lower()
+    basename = hashlib.sha1(file_storage.read()).hexdigest()+os.path.splitext(file_storage.filename)[1]
+    file_storage.seek(0)
+    filename = upload_set.save(file_storage, name=basename)
+    return jsonify(result=200, path=urlparse(upload_set.url(filename)).path)
+
+
+@admin.route('/advertisement/edit/', methods=['POST'])
+@login_required
+def edit_advertisement():
+    advertisement = Advertisement.query.first()
+    url = request.form.get('url')
+    image = request.form.get('image')
+    enable = True if request.form.get('enable') == 'true' else False
+    # print name, href
+    advertisement.url = url
+    advertisement.image = image
+    advertisement.enable = enable
+    
+    db.session.add(advertisement)
+    db.session.commit()
+    return jsonify(result=200)

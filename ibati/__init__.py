@@ -15,6 +15,9 @@ from ibati.helpers import human_readable_size
 def create_app(config=None):
     app = Flask(__name__)
 
+    # logger
+    init_app_logger(app)
+
     # config
     app.config.from_object(config)
 
@@ -23,14 +26,9 @@ def create_app(config=None):
     app.register_blueprint(views.post)
     app.register_blueprint(views.member)
     app.register_blueprint(views.admin)
-    #app.register_blueprint(views.error_log)
-    #app.register_blueprint(views.error_log_status)
 
     # database
     db.init_app(app)
-
-    # logger
-    init_app_logger(app)
 
     # app context
     init_app_context(app)
@@ -50,10 +48,9 @@ def create_app(config=None):
 def init_app_logger(app):
     file_handler = FileHandler('flask.log')
     file_handler.setFormatter(Formatter(
-        '%(asctime)s %(levelname)s: %(message)s '
-        '[in %(pathname)s:%(lineno)d]'
+        '%(asctime)s|%(levelname)s|%(pathname)s:%(lineno)d|%(message)s'
     ))
-    file_handler.setLevel(logging.ERROR)
+    file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)
 
 

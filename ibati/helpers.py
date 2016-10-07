@@ -11,6 +11,7 @@ from flask import request, current_app
 from . import config
 from .extensions import db
 
+
 def get_client_ip():
     # 获取 ip 地址
     if 'x-forwarded-for' in request.headers:

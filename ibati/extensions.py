@@ -4,7 +4,6 @@ from MySQLdb import connect
 
 db = SQLAlchemy()
 
-
 from flask.ext.uploads import UploadSet, IMAGES, DOCUMENTS
 
 

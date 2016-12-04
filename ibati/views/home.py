@@ -13,7 +13,7 @@ home = Blueprint('home', __name__)
 @home.route('/')
 def index():
     sliders = Slider.query.filter_by(enable=True).order_by(Slider.order.asc()).all()
-    floating_ad = Advertisement.query.filter_by(type='漂浮').first()
+    floating_ad = Advertisement.query.filter_by(type='浮动').first()
     banner_ad = Advertisement.query.filter_by(type='横幅').first()
 
     research_cat = Category.query.filter_by(name='research').one()

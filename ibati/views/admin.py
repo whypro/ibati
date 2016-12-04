@@ -434,7 +434,6 @@ def password():
     return render_template('admin/password.html')
 
 
-
 @admin.route('/backup/')
 @login_required
 def show_backups():
@@ -494,12 +493,18 @@ def restore_backup(date_str):
 @admin.route('/advertisement/')
 @login_required
 def advertisement():
-    advertisement = Advertisement.query.first()
-    if not advertisement:
-        advertisement = Advertisement()
+    floating = Advertisement.query.filter_by(type='浮动').first()
+    if not floating:
+        advertisement = Advertisement(type='浮动')
         db.session.add(advertisement)
-        db.session.commit()
-    return render_template('admin/advertisement.html', advertisement=advertisement)
+    banner = Advertisement.query.filter_by(type='横幅').first()
+    if not banner:
+        advertisement = Advertisement(type='横幅')
+        db.session.add(advertisement)
+    db.session.commit()
+
+    advertisements = Advertisement.query.all()
+    return render_template('admin/advertisement.html', advertisements=advertisements)
 
 
 @admin.route('/advertisement/upload/', methods=['POST'])
@@ -517,10 +522,10 @@ def upload_advertisement():
     return jsonify(result=200, path=urlparse(upload_set.url(filename)).path)
 
 
-@admin.route('/advertisement/edit/', methods=['POST'])
+@admin.route('/advertisement/<int:id>/edit/', methods=['POST'])
 @login_required
-def edit_advertisement():
-    advertisement = Advertisement.query.first()
+def edit_advertisement(id):
+    advertisement = Advertisement.query.get_or_404(id)
     url = request.form.get('url')
     image = request.form.get('image')
     enable = True if request.form.get('enable') == 'true' else False

@@ -39,15 +39,18 @@
                 <table class="advertisement-table">
                     <thead>
                         <tr>
+                            <th class="advertisement-type-td" width="5%">类型</th>
                             <th class="advertisement-preview-td" width="15%">预览</th>
                             <th class="advertisement-url-td" width="15%">链接</th>
-                            <th class="advertisement-image-td" width="25%">位置</th>
+                            <th class="advertisement-image-td" width="15%">位置</th>
                             <th class="advertisement-enable-td" width="5%">启用</th>
                             <th class="advertisement-operation-td" width="15%">操作</th>
                         </tr>
                     </thead>
                     <tbody>
+                        {% for advertisement in advertisements %}
                         <tr id="{{ advertisement.id }}">
+                            <td class="advertisement-type-td">{{ advertisement.type }}</td>
                             <td class="advertisement-preview-td"><img class="advertisement-preview" src="{{ advertisement.image }}" style="width: 90%; height: 60px; padding: 8px 0 8px 0;" /></td>
                             <td class="advertisement-url-td"><input class="advertisement-url-input" name="url" value="{{ advertisement.url }}" style="width: 90%;"/></td>
                             <td class="advertisement-image-td">
@@ -59,9 +62,9 @@
                                 <a class="advertisement-save" href="javascript:void(0)">保存</a>
                             </td>
                         </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
-
             </div>
         </div>
         <div class="both"></div>
@@ -93,7 +96,7 @@
                 var image = tr.find(".advertisement-image-input").val();
                 var enable = tr.find(".advertisement-enable-input").attr("checked");
 
-                $.post("/admin/advertisement/edit/", {url: url, image: image, enable: enable}, function() {
+                $.post("/admin/advertisement/"+id+"/edit/", {url: url, image: image, enable: enable}, function() {
                     alert('保存成功！');
                     location.reload();
                     // window.location.href = jqXHR.getResponseHeader('Location');

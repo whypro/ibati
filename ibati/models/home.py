@@ -28,6 +28,7 @@ class Advertisement(db.Model):
     __tablename__ = 'ibati_advertisement'
 
     id = db.Column(db.Integer, primary_key=True)
-    url = db.Column(db.String(255))
-    image = db.Column(db.String(255))
+    url = db.Column(db.String(255), default='')
+    image = db.Column(db.String(255), default='')
     enable = db.Column(db.Boolean)
+    type = db.Column(db.String(50))

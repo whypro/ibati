@@ -13,7 +13,8 @@ home = Blueprint('home', __name__)
 @home.route('/')
 def index():
     sliders = Slider.query.filter_by(enable=True).order_by(Slider.order.asc()).all()
-    advertisement = Advertisement.query.first()
+    floating_ad = Advertisement.query.filter_by(type='漂浮').first()
+    banner_ad = Advertisement.query.filter_by(type='横幅').first()
 
     research_cat = Category.query.filter_by(name='research').one()
     area_label = Label.query.filter_by(name='area').one()
@@ -27,7 +28,10 @@ def index():
     notices = Post.query.filter_by(category_id=news_cat.id, label_id=notice_label.id).order_by(Post.create_date.desc()).limit(current_app.config['INDEX_NEWS_NUM'])
     reports = Post.query.filter_by(category_id=news_cat.id, label_id=report_label.id).order_by(Post.create_date.desc()).limit(current_app.config['INDEX_NEWS_NUM'])
     current_app.logger.info('user visit index, clinet_ip<%s>', get_client_ip())
-    return render_template('index.html', active='index', sliders=sliders, areas=areas, dispatches=dispatches, notices=notices, reports=reports, advertisement=advertisement)
+    return render_template(
+        'index.html', active='index', sliders=sliders, areas=areas, dispatches=dispatches, notices=notices, reports=reports,
+        floating_ad=floating_ad, banner_ad=banner_ad
+    )
     # return render_template('index.html')
 
 

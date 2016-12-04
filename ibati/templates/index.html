@@ -76,9 +76,11 @@
                         </li>
                         {% endfor %}
                     </ul>
+                    {% if banner_ad.enable %}
                     <div>
-                        <img src="http://www.xjtu.edu.cn/images/14/12/11/1tf5znre9c/20161001.jpg" width="100%" height="86px" style="margin-top: 10px;" />
+                        <a href="{{ banner_ad.url }}"><img src="{{ banner_ad.image }}" width="100%" height="86px" style="margin-top: 10px;" /></a>
                     </div>
+                {% endif %}
                 </div>
             </div>
             <!--rig-->
@@ -167,7 +169,7 @@
 
 {% endblock %}
 {% block script %}
-{% if advertisement.enable %}
+{% if floating_ad.enable %}
 <script type="text/javascript" src="{{ url_for('static', filename='js/floatingAd.js') }}"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -181,13 +183,13 @@ $(document).ready(function() {
             //关闭区域背景透明度(0.1-1)
             headFilter: 0.3,
             //图片
-            'img': '{{ advertisement.image }}',
+            'img': '{{ floating_ad.image }}',
             //图片高度
             'imgHeight': 100,
             //图片宽度
             'imgWidth': 200,
             //图片链接
-            'linkUrl': '{{ advertisement.url }}',
+            'linkUrl': '{{ floating_ad.url }}',
             //浮动层级别
             'z-index': 100,
             //标题

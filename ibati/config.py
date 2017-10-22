@@ -11,7 +11,7 @@ class Config(object):
     # 数据库配置
     DB_HOST = 'localhost'
     DB_DATABASE = 'ibati'
-    DB_USERNAME = 'root'
+    DB_USERNAME = 'whypro'
     DB_PASSWORD = 'whypro'
     DB_PORT = 3306
 

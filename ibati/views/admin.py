@@ -49,7 +49,7 @@ def upload():
 @admin.route('/login/', methods=['GET', 'POST'])
 def login():
     # 已登录用户则返回首页
-    if current_user.is_authenticated():
+    if current_user.is_authenticated:
         return redirect(url_for('home.index'))
 
     if request.method == 'POST':

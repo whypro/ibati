@@ -11,7 +11,6 @@ app = create_app(config.Config)
 
 import subprocess
 import os
-import datetime
 import shutil
 
 from flask.ext.script import Manager, Server
@@ -63,7 +62,10 @@ def init():
     # print create_db_sql
     ret = subprocess.call(
         [
-            'mysql', '-u', config.Config.DB_USERNAME,
+            'mysql',
+            '-h', config.Config.DB_HOST,
+            '-P', str(config.Config.DB_PORT),
+            '-u', config.Config.DB_USERNAME,
             '-p{0}'.format(config.Config.DB_PASSWORD),
             '-e', create_db_sql,
         ]
@@ -81,9 +83,19 @@ def init():
     init_post(db.session)
     print '数据初始化成功'
 
+    def clean_dir(dirname):
+        for filename in os.listdir(dirname):
+            path = os.path.join(dirname, filename)
+            if os.path.isfile(path) or os.path.islink(path):
+                os.unlink(path)
+            elif os.path.isdir(path):
+                shutil.rmtree(path)
+
     uploads_dir = config.Config.UPLOADS_DEFAULT_DEST
-    if os.path.exists(uploads_dir):
-        shutil.rmtree(uploads_dir)
+    # if os.path.exists(uploads_dir):
+    #     shutil.rmtree(uploads_dir)
+    clean_dir(uploads_dir)
+
     print '目录初始化成功'
 
 

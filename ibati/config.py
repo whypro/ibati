@@ -9,11 +9,11 @@ class Config(object):
     # JSONIFY_PRETTYPRINT_REGULAR = False
 
     # 数据库配置
-    DB_HOST = 'localhost'
-    DB_DATABASE = 'ibati'
-    DB_USERNAME = 'whypro'
-    DB_PASSWORD = 'whypro'
-    DB_PORT = 3306
+    DB_HOST = os.getenv('DB_HOST', '127.0.0.1')
+    DB_DATABASE = os.getenv('DB_DATABASE', 'ibati')
+    DB_USERNAME = os.getenv('DB_USERNAME', '')
+    DB_PASSWORD = os.getenv('DB_PASSWORD', '')
+    DB_PORT = os.getenv('DB_PORT', 3306)
 
     # FLASK-SQLALCHEMY
     SQLALCHEMY_DATABASE_URI = 'mysql://{username}:{password}@{host}:{port}/{database}?charset=utf8'.format(
@@ -35,3 +35,4 @@ class Config(object):
     INDEX_AREA_NUM = 8     # 首页研究方向个数
 
     APP_DIR = os.path.realpath('.')
+

@@ -46,7 +46,7 @@ def create_app(config=None):
 
 
 def init_app_logger(app):
-    file_handler = FileHandler('flask.log')
+    file_handler = FileHandler('./log/flask.log')
     file_handler.setFormatter(Formatter(
         '%(asctime)s|%(levelname)s|%(pathname)s:%(lineno)d|%(message)s'
     ))

@@ -32,7 +32,10 @@ def backup():
     with open(sql_file, 'w') as f:
         ret = subprocess.call(
             [
-                'mysqldump', '-u', config.Config.DB_USERNAME,
+                'mysqldump',
+                '-h', config.Config.DB_HOST,
+                '-P', str(config.Config.DB_PORT),
+                '-u', config.Config.DB_USERNAME,
                 '-p{0}'.format(config.Config.DB_PASSWORD),
                 config.Config.DB_DATABASE,
             ],
@@ -75,7 +78,10 @@ def restore(date_str):
     with open(sql_file, 'r') as f:
         ret = subprocess.call(
             [
-                'mysql', '-u', config.Config.DB_USERNAME,
+                'mysql',
+                '-h', config.Config.DB_HOST,
+                '-P', str(config.Config.DB_PORT),
+                '-u', config.Config.DB_USERNAME,
                 '-p{0}'.format(config.Config.DB_PASSWORD),
                 config.Config.DB_DATABASE,
             ],
